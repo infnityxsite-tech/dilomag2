@@ -1219,7 +1219,7 @@ const handleAddPartialScore = async (e) => {
                     <div key={submission.id} className="p-4 bg-orange-50/50 rounded-lg border border-orange-200 hover:bg-orange-100/50 transition-colors">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3">
                         <div className="flex-1">
-                          <h3 className="font-medium text-gray-800 mb-1">{submission.projectTitle || 'Untitled Project'}</h3>
+                          <h3 className="font-medium text-gray-800 mb-1">{submission.projectName || 'Untitled Project'}</h3>
                           <p className="text-sm text-gray-600">Student: {submission.studentEmail}</p>
                           <p className="text-xs text-gray-500">Submitted: {submission.submittedAt ? new Date(submission.submittedAt.toDate()).toLocaleString() : 'Unknown'}</p>
                         </div>
