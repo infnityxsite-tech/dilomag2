@@ -1,18 +1,24 @@
 import React, { useState, useRef } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { uploadFileToCloudinary, saveSubmissionToFirestore } from '../lib/submissions';
+import { updateLabStatus } from '../lib/progress';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, UploadCloud, Loader2, FileCheck2, X } from 'lucide-react';
 
 const SubmitProjectPage = () => {
   const { user } = useAuth();
+  const [searchParams] = useSearchParams();
+  const labId = searchParams.get('labId');
+  const labTitle = searchParams.get('labTitle');
+
   const fileInputRef = useRef(null);
-  const [projectName, setProjectName] = useState('');
+  const [projectName, setProjectName] = useState(labTitle || '');
   const [projectFile, setProjectFile] = useState(null);
+  const [notes, setNotes] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -47,14 +53,21 @@ const SubmitProjectPage = () => {
         const submissionDetails = {
           studentEmail: user.email,
           projectName: projectName,
+          notes: notes,
           fileUrl: fileUrl,
+          labId: labId || null,
+          submittedAt: new Date().toISOString()
         };
         const success = await saveSubmissionToFirestore(submissionDetails);
         
         if (success) {
+          if (labId) {
+             await updateLabStatus(user.email, labId, 'Submitted');
+          }
           setMessage('Your project has been submitted successfully!');
           setProjectName('');
           setProjectFile(null);
+          setNotes('');
           // Use the ref to safely clear the file input
           if (fileInputRef.current) {
             fileInputRef.current.value = '';
@@ -103,9 +116,23 @@ const SubmitProjectPage = () => {
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
                   placeholder="e.g., Final AI Model Submission"
-                  disabled={loading}
+                  disabled={loading || labTitle}
+                  readOnly={!!labTitle}
                   className="bg-slate-800/50 border-slate-600 text-white placeholder:text-slate-500 focus:border-green-400 focus:ring-green-400"
                 />
+              </div>
+
+              <div className="space-y-2 animate-in fade-in slide-in-from-bottom-5 duration-500">
+                <label htmlFor="notes" className="font-medium text-slate-300">Description / Notes (Optional)</label>
+                <textarea
+                  id="notes"
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  placeholder="Any additional notes for the reviewer..."
+                  disabled={loading}
+                  rows={3}
+                  className="w-full rounded-md border border-slate-600 bg-slate-800/50 px-3 py-2 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-transparent"
+                ></textarea>
               </div>
 
               <div 

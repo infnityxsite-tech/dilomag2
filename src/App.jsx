@@ -8,6 +8,7 @@ import AdminLogin from './components/AdminLogin';
 import MyEvaluationsPage from './components/MyEvaluationsPage';
 import SubmitProjectPage from './components/SubmitProjectPage'; // New import
 import FeedbackPage from './components/FeedbackPage';
+import MyProgressPage from './components/MyProgressPage';
 import './App.css';
 
 // Protected Route Component for Students
@@ -62,6 +63,14 @@ const AppRoutes = () => {
         } 
       />
       {/* -------------------- */}
+      <Route 
+        path="/my-progress" 
+        element={
+          <ProtectedStudentRoute>
+            <MyProgressPage />
+          </ProtectedStudentRoute>
+        } 
+      />
       <Route 
         path="/admin/login" 
         element={

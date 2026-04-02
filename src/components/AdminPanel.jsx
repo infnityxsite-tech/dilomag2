@@ -16,6 +16,7 @@ import {
   deleteSubmission
 } from '../lib/auth';
 import GoogleDriveSync from './GoogleDriveSync';
+import AdminProgressCampaignTab from './AdminProgressCampaignTab';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -111,7 +112,9 @@ const AdminPanel = () => {
   const [newMaterial, setNewMaterial] = useState({ title: '', description: '', url: '', type: 'PDF' });
   const [newLink, setNewLink] = useState({ title: '', description: '', url: '' });
   const [newNote, setNewNote] = useState({ title: '', content: '', date: '' });
-  const [newHomework, setNewHomework] = useState({ title: '', description: '', url: '', dueDate: '' }); // NEW: Homework form state
+  const [newHomework, setNewHomework] = useState({ title: '', description: '', url: '', dueDate: '', category: 'Python' }); // NEW: Homework form state
+  const [editingHomeworkId, setEditingHomeworkId] = useState(null);
+  const [editHomeworkData, setEditHomeworkData] = useState(null);
   const [newTip, setNewTip] = useState({ title: '', description: '', videoUrl: '' }); // NEW: Tips form state
 
   const fileInputRef = useRef(null); // Ref for the hidden file input
@@ -435,10 +438,45 @@ const handleAddPartialScore = async (e) => {
     const success = await updateDashboardContent(updatedContent);
     if (success) {
       setContent(updatedContent);
-      setNewHomework({ title: '', description: '', url: '', dueDate: '' });
+      setNewHomework({ title: '', description: '', url: '', dueDate: '', category: 'Python' });
       showMessage('Homework added successfully!');
     } else {
       showMessage('Failed to add homework. Please try again.', true);
+    }
+    setLoading(false);
+  };
+
+  const handleBeginEditHomework = (homework) => {
+    setEditingHomeworkId(homework.id);
+    setEditHomeworkData({ ...homework, category: homework.category || 'Python' });
+  };
+
+  const handleCancelEditHomework = () => {
+    setEditingHomeworkId(null);
+    setEditHomeworkData(null);
+  };
+
+  const handleSaveEditHomework = async () => {
+    if (!editHomeworkData.title || !editHomeworkData.description) return;
+    
+    const updatedHomeworks = content.homeworks.map(hw => 
+      hw.id === editingHomeworkId ? editHomeworkData : hw
+    );
+    
+    const updatedContent = {
+      ...content,
+      homeworks: updatedHomeworks
+    };
+    
+    setLoading(true);
+    const success = await updateDashboardContent(updatedContent);
+    if (success) {
+      setContent(updatedContent);
+      setEditingHomeworkId(null);
+      setEditHomeworkData(null);
+      showMessage('Homework updated successfully!');
+    } else {
+      showMessage('Failed to update homework. Please try again.', true);
     }
     setLoading(false);
   };
@@ -1030,6 +1068,20 @@ const handleAddPartialScore = async (e) => {
                     className="border-gray-300 focus:border-amber-500 focus:ring-amber-500"
                     required
                   />
+                  <select
+                    value={newHomework.category}
+                    onChange={(e) => setNewHomework({ ...newHomework, category: e.target.value })}
+                    className="px-3 py-2 border border-gray-300 rounded-md focus:border-amber-500 focus:ring-amber-500"
+                    required
+                  >
+                    <option value="Python">Python</option>
+                    <option value="Data Processing">Data Processing</option>
+                    <option value="Machine Learning">Machine Learning</option>
+                    <option value="Deep Learning">Deep Learning</option>
+                    <option value="Final Project">Final Project</option>
+                  </select>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Input
                     type="date"
                     placeholder="Due date"
@@ -1038,18 +1090,18 @@ const handleAddPartialScore = async (e) => {
                     className="border-gray-300 focus:border-amber-500 focus:ring-amber-500"
                     required
                   />
+                  <Input
+                    placeholder="Assignment URL or file link"
+                    value={newHomework.url}
+                    onChange={(e) => setNewHomework({ ...newHomework, url: e.target.value })}
+                    className="border-gray-300 focus:border-amber-500 focus:ring-amber-500"
+                    required
+                  />
                 </div>
                 <Textarea
                   placeholder="Assignment description"
                   value={newHomework.description}
                   onChange={(e) => setNewHomework({ ...newHomework, description: e.target.value })}
-                  className="border-gray-300 focus:border-amber-500 focus:ring-amber-500"
-                  required
-                />
-                <Input
-                  placeholder="Assignment URL or file link"
-                  value={newHomework.url}
-                  onChange={(e) => setNewHomework({ ...newHomework, url: e.target.value })}
                   className="border-gray-300 focus:border-amber-500 focus:ring-amber-500"
                   required
                 />
@@ -1063,35 +1115,82 @@ const handleAddPartialScore = async (e) => {
                 <h3 className="text-lg font-semibold text-gray-800 mb-3">Existing Homeworks</h3>
                 {content.homeworks && content.homeworks.map((homework) => (
                   <div key={homework.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-amber-50/50 rounded-lg border border-amber-200 hover:bg-amber-100/50 transition-colors">
-                    <div className="flex-1">
-                      <h4 className="font-medium text-gray-800 mb-1">{homework.title}</h4>
-                      <p className="text-sm text-gray-600 mb-2">{homework.description}</p>
-                      <div className="flex items-center space-x-4 text-xs text-gray-500">
-                        <span>Due: {homework.dueDate}</span>
-                        {homework.url && (
-                          <a href={homework.url} target="_blank" rel="noopener noreferrer" className="text-amber-600 hover:text-amber-700">
-                            View Assignment
-                          </a>
-                        )}
+                    {editingHomeworkId === homework.id ? (
+                      <div className="flex-1 w-full space-y-3 pr-4">
+                        <Input
+                          value={editHomeworkData.title}
+                          onChange={(e) => setEditHomeworkData({ ...editHomeworkData, title: e.target.value })}
+                          className="border-gray-300 focus:border-amber-500 focus:ring-amber-500 w-full"
+                          placeholder="Title"
+                        />
+                        <select
+                          value={editHomeworkData.category}
+                          onChange={(e) => setEditHomeworkData({ ...editHomeworkData, category: e.target.value })}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-amber-500 focus:ring-amber-500"
+                        >
+                          <option value="Python">Python</option>
+                          <option value="Data Processing">Data Processing</option>
+                          <option value="Machine Learning">Machine Learning</option>
+                          <option value="Deep Learning">Deep Learning</option>
+                          <option value="Final Project">Final Project</option>
+                        </select>
+                        <Textarea
+                          value={editHomeworkData.description}
+                          onChange={(e) => setEditHomeworkData({ ...editHomeworkData, description: e.target.value })}
+                          className="border-gray-300 focus:border-amber-500 focus:ring-amber-500 w-full"
+                          placeholder="Description"
+                        />
+                        <div className="flex space-x-2">
+                           <Button onClick={handleSaveEditHomework} disabled={loading} size="sm" className="bg-green-600 hover:bg-green-700 text-white flex gap-1"><Save className="w-4 h-4"/> Save</Button>
+                           <Button onClick={handleCancelEditHomework} disabled={loading} size="sm" variant="outline" className="flex gap-1"><X className="w-4 h-4"/> Cancel</Button>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-center space-x-2 mt-3 sm:mt-0">
-                      {homework.url && (
-                        <a href={homework.url} target="_blank" rel="noopener noreferrer">
-                          <Button variant="outline" size="sm">
-                            <ExternalLink className="w-4 h-4" />
+                    ) : (
+                      <>
+                        <div className="flex-1">
+                          <div className="flex items-center space-x-2 mb-1">
+                            <h4 className="font-medium text-gray-800">{homework.title}</h4>
+                            <Badge variant="outline" className="border-amber-300 text-amber-700 text-xs">
+                              {homework.category || 'Python'}
+                            </Badge>
+                          </div>
+                          <p className="text-sm text-gray-600 mb-2">{homework.description}</p>
+                          <div className="flex items-center space-x-4 text-xs text-gray-500">
+                            <span>Due: {homework.dueDate}</span>
+                            {homework.url && (
+                              <a href={homework.url} target="_blank" rel="noopener noreferrer" className="text-amber-600 hover:text-amber-700">
+                                View Assignment
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2 mt-3 sm:mt-0">
+                          <Button
+                            onClick={() => handleBeginEditHomework(homework)}
+                            variant="outline"
+                            size="sm"
+                            disabled={loading || editingHomeworkId !== null}
+                          >
+                            <Edit className="w-4 h-4" />
                           </Button>
-                        </a>
-                      )}
-                      <Button
-                        onClick={() => handleRemoveItem('homeworks', homework.id)}
-                        variant="destructive"
-                        size="sm"
-                        disabled={loading}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
+                          {homework.url && (
+                            <a href={homework.url} target="_blank" rel="noopener noreferrer">
+                              <Button variant="outline" size="sm">
+                                <ExternalLink className="w-4 h-4" />
+                              </Button>
+                            </a>
+                          )}
+                          <Button
+                            onClick={() => handleRemoveItem('homeworks', homework.id)}
+                            variant="destructive"
+                            size="sm"
+                            disabled={loading}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </>
+                    )}
                   </div>
                 ))}
                 {(!content.homeworks || content.homeworks.length === 0) && (
@@ -1199,6 +1298,9 @@ const handleAddPartialScore = async (e) => {
 
       case 'drive-sync':
         return <GoogleDriveSync />;
+
+      case 'progress-campaign':
+        return <AdminProgressCampaignTab />;
 
       case 'submissions':
         return (
@@ -1442,6 +1544,9 @@ const handleAddPartialScore = async (e) => {
           </TabButton>
           <TabButton value="feedback" isActive={activeTab === 'feedback'} onClick={setActiveTab} icon={MessageSquare} colorScheme="cyan">
             Feedback
+          </TabButton>
+          <TabButton value="progress-campaign" isActive={activeTab === 'progress-campaign'} onClick={setActiveTab} icon={Target} colorScheme="indigo">
+            Progress Tracking
           </TabButton>
         </div>
 

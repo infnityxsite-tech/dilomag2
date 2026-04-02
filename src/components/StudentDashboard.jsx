@@ -32,7 +32,8 @@ import {
   Menu,
   MessageSquare,
   Target, // Icon for Homework
-  Lightbulb // NEW: Icon for Tips & Shorts
+  Lightbulb, // NEW: Icon for Tips & Shorts
+  TrendingUp
 } from 'lucide-react';
 
 const StudentDashboard = () => {
@@ -134,6 +135,12 @@ const StudentDashboard = () => {
                     <Link to="/submit-project" className="flex items-center cursor-pointer">
                       <UploadCloud className="mr-2 h-4 w-4" />
                       <span>Submit Project</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/my-progress" className="flex items-center cursor-pointer">
+                      <TrendingUp className="mr-2 h-4 w-4 text-emerald-400" />
+                      <span className="font-medium text-emerald-400">My Progress</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
