@@ -1,5 +1,96 @@
-import { db } from './firebase';
-import { doc, getDoc, collection, getDocs, addDoc, deleteDoc, updateDoc, setDoc, serverTimestamp, writeBatch, runTransaction } from 'firebase/firestore';
+import { db, auth } from './firebase';
+import { doc, getDoc, collection, getDocs, addDoc, deleteDoc, updateDoc, setDoc, serverTimestamp, writeBatch, runTransaction, query, where } from 'firebase/firestore';
+import { GoogleAuthProvider, signInWithPopup, signInWithRedirect } from 'firebase/auth';
+
+export const loginWithGoogle = async () => {
+  try {
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({
+      prompt: 'select_account'
+    });
+    
+    let result;
+    try {
+      result = await signInWithPopup(auth, provider);
+    } catch (popupError) {
+      console.warn("Popup failed, falling back to redirect:", popupError);
+      if (popupError.code === 'auth/popup-blocked' || popupError.code === 'auth/popup-closed-by-user' || popupError.code === 'auth/cross-origin-opener-policy-failed') {
+        await signInWithRedirect(auth, provider);
+        return { success: true, status: 'redirecting' };
+      }
+      throw popupError;
+    }
+    
+    const user = result.user;
+    
+    // Check if email exists in authorizedEmails
+    const authorizedEmailsRef = collection(db, 'authorizedEmails');
+    const q = query(authorizedEmailsRef, where('email', '==', user.email));
+    const snapshot = await getDocs(q);
+    
+    if (!snapshot.empty) {
+      // User is authorized
+      return { success: true, email: user.email, status: 'authorized' };
+    }
+    
+    // Not authorized yet. Add to pendingStudents if not already there.
+    const pendingRef = collection(db, 'pendingStudents');
+    const pq = query(pendingRef, where('email', '==', user.email));
+    const pSnapshot = await getDocs(pq);
+    
+    if (pSnapshot.empty) {
+      await addDoc(pendingRef, {
+        email: user.email,
+        name: user.displayName,
+        createdAt: serverTimestamp(),
+        status: 'Pending Authorization'
+      });
+    }
+    
+    return { success: true, email: user.email, status: 'pending' };
+  } catch (error) {
+    console.error("Google Sign-In Error:", error);
+    return { success: false, error: error.message };
+  }
+};
+
+export const getPendingStudents = async () => {
+  try {
+    const pendingRef = collection(db, 'pendingStudents');
+    const snapshot = await getDocs(pendingRef);
+    const students = [];
+    snapshot.forEach(doc => {
+      students.push({ id: doc.id, ...doc.data() });
+    });
+    return students;
+  } catch (error) {
+    console.error('Error getting pending students:', error);
+    return [];
+  }
+};
+
+export const approvePendingStudent = async (pendingId, email, classIds) => {
+  try {
+    const password = Math.random().toString(36).slice(-8); // Generate random pass
+    await addAuthorizedStudent(email, password, classIds);
+    await deleteDoc(doc(db, 'pendingStudents', pendingId));
+    return true;
+  } catch (error) {
+    console.error('Error approving pending student:', error);
+    return false;
+  }
+};
+
+export const rejectPendingStudent = async (pendingId) => {
+  try {
+    await deleteDoc(doc(db, 'pendingStudents', pendingId));
+    return true;
+  } catch (error) {
+    console.error('Error rejecting pending student:', error);
+    return false;
+  }
+};
+
 
 // Check if email and password match for student access
 export const loginStudent = async (email, password) => {
@@ -51,7 +142,8 @@ export const getAuthorizedEmails = async () => {
       emails.push({ 
         id: doc.id, 
         email: doc.data().email,
-        password: doc.data().password 
+        password: doc.data().password,
+        classIds: doc.data().classIds || []
       });
     });
     
@@ -62,14 +154,56 @@ export const getAuthorizedEmails = async () => {
   }
 };
 
-// Add authorized student with email and password
-export const addAuthorizedStudent = async (email, password) => {
+export const queueNotification = async (email, subject, html) => {
+  try {
+    const queueRef = collection(db, 'notification_queue');
+    await addDoc(queueRef, {
+      email,
+      subject,
+      html,
+      status: 'pending',
+      createdAt: serverTimestamp()
+    });
+    
+    // Asynchronously trigger the processor to ensure instant email delivery
+    // We catch the error to prevent any failure from crashing the frontend UI
+    fetch('/api/process-queue', { method: 'POST' }).catch((err) => {
+      console.error('Failed to trigger queue processor:', err);
+    });
+    
+    return true;
+  } catch (error) {
+    console.error('Error queuing notification:', error);
+    return false;
+  }
+};
+
+// Add authorized student with email, password, and optional class assignments
+export const addAuthorizedStudent = async (email, password, classIds = []) => {
   try {
     const authorizedEmailsRef = collection(db, 'authorizedEmails');
     await addDoc(authorizedEmailsRef, { 
       email: email.toLowerCase(),
-      password: password 
+      password: password,
+      classIds: classIds
     });
+
+    // Queue welcome email
+    const subject = "Welcome to Infinity X EdTech Platform!";
+    const html = `
+      <div style="font-family: sans-serif; padding: 20px;">
+        <h2>Welcome to Infinity X EdTech Platform!</h2>
+        <p>Your account has been approved and created.</p>
+        <p><strong>Your login details:</strong></p>
+        <ul>
+          <li>Email: ${email.toLowerCase()}</li>
+          <li>Password: <strong>${password}</strong></li>
+        </ul>
+        <p>You can now log in and access your assigned diplomas.</p>
+      </div>
+    `;
+    await queueNotification(email.toLowerCase(), subject, html);
+
     return true;
   } catch (error) {
     console.error('Error adding authorized student:', error);
@@ -355,6 +489,39 @@ export const deleteSubmission = async (submissionId) => {
     return true;
   } catch (error) {
     console.error('Error deleting submission:', error);
+    return false;
+  }
+};
+
+// Get class IDs for a student by email
+export const getStudentClasses = async (email) => {
+  try {
+    const authorizedEmailsRef = collection(db, 'authorizedEmails');
+    const snapshot = await getDocs(authorizedEmailsRef);
+    
+    let classIds = [];
+    snapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      if (data.email.toLowerCase() === email.toLowerCase() && data.classIds) {
+        classIds = data.classIds;
+      }
+    });
+    
+    return classIds;
+  } catch (error) {
+    console.error('Error getting student classes:', error);
+    return [];
+  }
+};
+
+// Update class assignments for a student
+export const updateStudentClasses = async (emailDocId, classIds) => {
+  try {
+    const emailRef = doc(db, 'authorizedEmails', emailDocId);
+    await updateDoc(emailRef, { classIds });
+    return true;
+  } catch (error) {
+    console.error('Error updating student classes:', error);
     return false;
   }
 };

@@ -6,9 +6,10 @@ import StudentDashboard from './components/StudentDashboard';
 import AdminPanel from './components/AdminPanel';
 import AdminLogin from './components/AdminLogin';
 import MyEvaluationsPage from './components/MyEvaluationsPage';
-import SubmitProjectPage from './components/SubmitProjectPage'; // New import
+import SubmitProjectPage from './components/SubmitProjectPage';
 import FeedbackPage from './components/FeedbackPage';
 import MyProgressPage from './components/MyProgressPage';
+import LecturePage from './components/LecturePage';
 import './App.css';
 
 // Protected Route Component for Students
@@ -45,6 +46,15 @@ const AppRoutes = () => {
           </ProtectedStudentRoute>
         } 
       />
+      {/* Unified lecture page route */}
+      <Route 
+        path="/dashboard/lecture/:lectureId" 
+        element={
+          <ProtectedStudentRoute>
+            <LecturePage />
+          </ProtectedStudentRoute>
+        } 
+      />
       <Route 
         path="/my-evaluation" 
         element={
@@ -53,7 +63,6 @@ const AppRoutes = () => {
           </ProtectedStudentRoute>
         } 
       />
-      {/* --- ADDED NEW ROUTE --- */}
       <Route 
         path="/submit-project" 
         element={
@@ -62,7 +71,6 @@ const AppRoutes = () => {
           </ProtectedStudentRoute>
         } 
       />
-      {/* -------------------- */}
       <Route 
         path="/my-progress" 
         element={
@@ -94,7 +102,6 @@ const AppRoutes = () => {
         } 
       />
       <Route path="*" element={<Navigate to="/" />} />
-      
     </Routes>
   );
 };

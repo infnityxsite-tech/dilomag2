@@ -3,9 +3,9 @@ import { useAuth } from '../contexts/AuthContext';
 import { authenticateAdmin } from '../lib/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, Shield, ArrowLeft, Lock } from 'lucide-react';
+import { Loader2, Shield, ArrowLeft, Lock, Hexagon, Terminal } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -27,7 +27,6 @@ const AdminLogin = () => {
 
     try {
       const isAuthenticated = await authenticateAdmin(email, password);
-      
       if (isAuthenticated) {
         loginAdmin(email);
       } else {
@@ -37,120 +36,147 @@ const AdminLogin = () => {
       console.error('Admin login error:', error);
       setError('An error occurred. Please try again.');
     }
-
     setLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-red-900 to-slate-900 flex items-center justify-center p-4">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(220,38,38,0.1),transparent_50%)]"></div>
-      </div>
+    <div className="min-h-screen flex bg-[#050505] font-['Inter'] selection:bg-rose-500/30">
       
-      <div className="relative w-full max-w-md">
-        {/* Back to Student Login */}
-        <div className="mb-6">
-          <a
-            href="/"
-            className="inline-flex items-center text-red-200 hover:text-white transition-colors"
-          >
+      {/* Left Panel - Branding & Visuals */}
+      <div className="hidden lg:flex lg:w-1/2 relative flex-col justify-between overflow-hidden p-12 border-r border-white/5">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-rose-900/20 via-[#050505] to-[#050505]"></div>
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+
+        {/* Content Top */}
+        <div className="relative z-10 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-rose-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-rose-500/20">
+              <Hexagon className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-xl font-bold text-white tracking-tight">Infinity X EdTech</span>
+          </div>
+          <a href="/" className="flex items-center text-sm font-medium text-slate-400 hover:text-white transition-colors">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Student Login
+            Back to Student Portal
           </a>
         </div>
 
-        {/* Logo and Branding */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-red-600 to-orange-600 rounded-2xl mb-4 shadow-2xl">
-            <Shield className="w-10 h-10 text-white" />
+        {/* Content Middle */}
+        <div className="relative z-10 max-w-lg">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-400 text-sm font-semibold mb-6">
+              <Shield className="w-4 h-4" />
+              Restricted Access
+            </div>
+            <h1 className="text-5xl font-black text-white leading-[1.1] tracking-tight mb-6">
+              Platform Command Center
+            </h1>
+            <p className="text-lg text-slate-400 font-medium leading-relaxed mb-8">
+              Manage diplomas, orchestrate learning modules, and oversee student progress from a unified professional dashboard.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Content Bottom */}
+        <div className="relative z-10">
+          <p className="text-slate-500 text-sm font-medium">© 2026 Infinity X EdTech Platform. Authorized Personnel Only.</p>
+        </div>
+      </div>
+
+      {/* Right Panel - Login Form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 relative overflow-hidden bg-[#0a0a0b]">
+        {/* Mobile Background */}
+        <div className="absolute inset-0 lg:hidden pointer-events-none">
+          <div className="absolute -top-[20%] -right-[10%] w-[70%] h-[70%] bg-rose-600/10 blur-[120px] rounded-full" />
+        </div>
+
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="w-full max-w-[420px] relative z-10"
+        >
+          {/* Mobile Header */}
+          <div className="flex lg:hidden items-center justify-between mb-10">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-rose-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg shadow-rose-500/20">
+                <Hexagon className="w-6 h-6 text-white" />
+              </div>
+            </div>
+            <a href="/" className="text-sm font-medium text-slate-400 hover:text-white transition-colors">
+              Student Login
+            </a>
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2">
-            Admin Portal
-          </h1>
-          <p className="text-red-200">
-            Administrative Access Only
-          </p>
-        </div>
 
-        {/* Login Card */}
-        <Card className="backdrop-blur-sm bg-white/10 border-white/20 shadow-2xl">
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-white flex items-center justify-center gap-2">
-              <Lock className="w-6 h-6" />
-              Secure Access
-            </CardTitle>
-            <CardDescription className="text-red-200">
-              Enter your administrator credentials
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium text-white">
-                  Admin Email
-                </label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="admin@infinityx.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-white/10 border-white/20 text-white placeholder:text-red-200 focus:border-red-400 focus:ring-red-400"
-                  disabled={loading}
-                />
-              </div>
+          <div className="mb-10">
+            <h2 className="text-3xl font-bold text-white tracking-tight mb-2 flex items-center gap-2">
+              <Terminal className="w-8 h-8 text-rose-500" />
+              Admin Portal
+            </h2>
+            <p className="text-slate-400">Enter your administrator credentials to securely access the platform.</p>
+          </div>
 
-              <div className="space-y-2">
-                <label htmlFor="password" className="text-sm font-medium text-white">
-                  Password
-                </label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="bg-white/10 border-white/20 text-white placeholder:text-red-200 focus:border-red-400 focus:ring-red-400"
-                  disabled={loading}
-                />
-              </div>
-
-              {error && (
-                <Alert className="bg-red-500/10 border-red-500/20 text-red-200">
-                  <AlertDescription>{error}</AlertDescription>
-                </Alert>
-              )}
-
-              <Button
-                type="submit"
-                className="w-full bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-semibold py-3 rounded-lg transition-all duration-200 transform hover:scale-[1.02] shadow-lg"
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="space-y-1.5">
+              <label htmlFor="email" className="text-sm font-semibold text-slate-300 ml-1">
+                Admin Email
+              </label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="admin@infinityx.edu"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="h-12 bg-[#121214] border-white/10 text-white placeholder:text-slate-600 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 rounded-xl transition-all"
                 disabled={loading}
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                    Authenticating...
-                  </>
-                ) : (
-                  'Access Admin Panel'
-                )}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+              />
+            </div>
 
-        {/* Security Notice */}
-        <div className="text-center mt-8 text-red-200 text-sm">
-          <p className="flex items-center justify-center gap-2">
-            <Shield className="w-4 h-4" />
-            Secure administrative access
-          </p>
-        </div>
+            <div className="space-y-1.5">
+              <label htmlFor="password" className="text-sm font-semibold text-slate-300 ml-1">
+                Password
+              </label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="h-12 bg-[#121214] border-white/10 text-white placeholder:text-slate-600 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 rounded-xl transition-all"
+                disabled={loading}
+              />
+            </div>
+
+            {error && (
+              <Alert className="bg-red-500/10 border-red-500/20 text-red-400 rounded-xl">
+                <Shield className="w-4 h-4 mr-2" />
+                <AlertDescription className="text-sm">{error}</AlertDescription>
+              </Alert>
+            )}
+
+            <Button
+              type="submit"
+              className="w-full h-12 mt-4 bg-gradient-to-r from-rose-600 to-orange-600 hover:from-rose-500 hover:to-orange-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-rose-600/20 active:scale-[0.98]"
+              disabled={loading}
+            >
+              {loading ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <>
+                  <Lock className="w-4 h-4 mr-2" /> Authenticate
+                </>
+              )}
+            </Button>
+          </form>
+
+          <div className="mt-12 text-center">
+            <p className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-widest">
+              <Shield className="w-4 h-4" /> Secure Administrative Access
+            </p>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
 };
 
 export default AdminLogin;
-

@@ -13,9 +13,9 @@ import {
 } from 'recharts';
 import { motion } from 'framer-motion';
 
-const AdminProgressCampaignTab = () => {
+const AdminProgressCampaignTab = ({ adminScopeDiplomaId, scopedEmails }) => {
   const [campaigns, setCampaigns] = useState([]);
-  const [studentProgress, setStudentProgress] = useState([]);
+  const [allStudentProgress, setAllStudentProgress] = useState([]);
   const [labs, setLabs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [formLoading, setFormLoading] = useState(false);
@@ -39,7 +39,7 @@ const AdminProgressCampaignTab = () => {
       const labsData = await getHomeworkLabs();
       
       setCampaigns(campData);
-      setStudentProgress(progData);
+      setAllStudentProgress(progData);
       setLabs(labsData);
     } catch (error) {
       console.error("Error loading progress data", error);
@@ -128,6 +128,11 @@ const AdminProgressCampaignTab = () => {
       return { ...prev, selectedLabs: selected };
     });
   };
+
+  // Filter progress based on scopedEmails
+  const studentProgress = adminScopeDiplomaId === 'all' || !scopedEmails
+    ? allStudentProgress
+    : allStudentProgress.filter(s => scopedEmails.some(emailObj => emailObj.email === s.email));
 
   // Dashboard Stats
   const totalStudents = studentProgress.length;
