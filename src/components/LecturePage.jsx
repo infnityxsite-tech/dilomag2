@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getContentForContext } from '../lib/contentService';
+import { getAssetsForLecture } from '../lib/assetService';
 import { useAuth } from '../contexts/AuthContext';
 import { getLectureById } from '../lib/lectureService';
 import { getModuleById } from '../lib/moduleService';
@@ -37,14 +37,14 @@ const LecturePage = () => {
       try {
         const lectureData = await getLectureById(lectureId);
         
-        // Fetch relational assigned content for this lecture
-        const assignedItems = await getContentForContext(lectureId);
+        // Fetch relational assigned content for this lecture from the new assetService
+        const assignedItems = await getAssetsForLecture(lectureId);
         
-        // Merge assigned items with legacy embedded arrays
+        // Merge assigned items with legacy embedded arrays (if they haven't been migrated yet)
         const mergedLecture = { ...lectureData };
         if (assignedItems.length > 0) {
           assignedItems.forEach(item => {
-            const arrName = item.contentType + 's'; // e.g. material -> materials
+            const arrName = item.type + 's'; // e.g. material -> materials, homework -> homeworks
             if (!mergedLecture[arrName]) mergedLecture[arrName] = [];
             mergedLecture[arrName].push(item);
           });
@@ -144,7 +144,7 @@ const LecturePage = () => {
         </motion.div>
 
         {/* Video Section */}
-        {lecture.url && (
+        {(lecture.url || lecture.videoUrl) && (
           <motion.div custom={sectionIndex++} variants={sectionVariants} initial="hidden" animate="visible">
             <Card className="bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden group hover:border-indigo-500/20 transition-colors">
               <CardContent className="p-6">
@@ -154,7 +154,7 @@ const LecturePage = () => {
                   </div>
                   <h2 className="text-lg font-bold text-white">Lecture Recording</h2>
                 </div>
-                <EmbeddedViewer url={lecture.url} title={lecture.title} type="video" />
+                <EmbeddedViewer url={lecture.url || lecture.videoUrl} title={lecture.title} type="video" />
               </CardContent>
             </Card>
           </motion.div>

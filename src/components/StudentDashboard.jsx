@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { getModulesByDiploma } from '../lib/moduleService';
 import { getLecturesByModule } from '../lib/lectureService';
 import { getDiplomaById } from '../lib/diplomaService';
-import { getDashboardContent } from '../lib/auth';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -14,7 +14,7 @@ import {
   LogOut, Video, FileText, ExternalLink, StickyNote, User,
   Calendar, Clock, Play, BookOpen, Brain, Sparkles, Award,
   UploadCloud, Menu, MessageSquare, Target, Lightbulb, TrendingUp,
-  GraduationCap, ChevronRight, Layers, Layout
+  GraduationCap, ChevronRight, Layers, Layout, ArrowRight
 } from 'lucide-react';
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
@@ -36,7 +36,6 @@ const StudentDashboard = () => {
   const [moduleLectures, setModuleLectures] = useState({});
   const [diplomaName, setDiplomaName] = useState('');
   const [loading, setLoading] = useState(true);
-  const [legacyContent, setLegacyContent] = useState(null);
 
   useEffect(() => {
     loadContent();
@@ -55,11 +54,7 @@ const StudentDashboard = () => {
           lectMap[mod.id] = await getLecturesByModule(mod.id);
         }
         setModuleLectures(lectMap);
-        setLegacyContent(null);
       } else {
-        // Fallback to legacy single-course content
-        const content = await getDashboardContent();
-        setLegacyContent(content);
         setModules([]);
         setModuleLectures({});
         setDiplomaName('AI Diploma');
@@ -231,68 +226,47 @@ const StudentDashboard = () => {
               <h3 className="text-2xl font-black text-white flex items-center gap-3 mb-8">
                 <BookOpen className="w-7 h-7 text-indigo-400" /> Curriculum Map
               </h3>
-              <div className="grid gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {modules.map((mod, mIdx) => {
                   const lectures = moduleLectures[mod.id] || [];
                   return (
                     <motion.div key={mod.id} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: mIdx * 0.1 }}>
-                      <Card className="bg-[#121214] border-white/5 hover:border-white/10 shadow-2xl rounded-[32px] overflow-hidden transition-all duration-300 relative group/card">
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500/0 via-indigo-500/50 to-indigo-500/0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"></div>
-                        <CardHeader className="p-6 sm:p-8 border-b border-white/5 bg-white/[0.01]">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-5">
-                              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-violet-500/20 border border-indigo-500/20 flex items-center justify-center shadow-inner">
-                                <span className="text-xl font-black text-indigo-400">{mIdx + 1}</span>
+                      <Link to={`/dashboard/module/${mod.id}`} className="block h-full">
+                        <Card className="h-full bg-[#121214] border-white/5 hover:border-indigo-500/30 hover:bg-white/[0.02] shadow-xl hover:shadow-indigo-500/10 rounded-[32px] overflow-hidden transition-all duration-300 relative group flex flex-col">
+                          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500/0 via-indigo-500/50 to-indigo-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                          
+                          <CardHeader className="p-6 pb-4 flex-1">
+                            <div className="flex items-center justify-between mb-4">
+                              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-violet-500/10 border border-indigo-500/20 flex items-center justify-center group-hover:bg-indigo-500/20 transition-colors">
+                                <Layers className="w-6 h-6 text-indigo-400" />
                               </div>
-                              <div>
-                                <CardTitle className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-1">{mod.name}</CardTitle>
-                                <CardDescription className="text-sm text-slate-400 font-medium">
-                                  {lectures.length} lecture{lectures.length !== 1 ? 's' : ''} inside this module
-                                </CardDescription>
+                              <Badge className="bg-white/5 text-slate-300 border-white/10 group-hover:bg-indigo-500/20 group-hover:text-indigo-300 transition-colors">
+                                {lectures.length} Lectures
+                              </Badge>
+                            </div>
+                            <CardTitle className="text-xl font-bold text-white tracking-tight mb-2 line-clamp-2 group-hover:text-indigo-300 transition-colors">{mod.name}</CardTitle>
+                            {mod.description && (
+                              <CardDescription className="text-sm text-slate-400 font-medium line-clamp-2">
+                                {mod.description}
+                              </CardDescription>
+                            )}
+                          </CardHeader>
+
+                          <CardContent className="p-6 pt-0 mt-auto">
+                            <div className="mb-5 space-y-2">
+                              <div className="flex justify-between text-xs font-semibold">
+                                <span className="text-slate-400">Progress</span>
+                                <span className="text-indigo-400">0%</span>
                               </div>
+                              <Progress value={0} className="h-2 bg-white/5 [&>div]:bg-gradient-to-r [&>div]:from-indigo-500 [&>div]:to-violet-500" />
                             </div>
-                          </div>
-                        </CardHeader>
-                        <CardContent className="p-6 sm:p-8">
-                          {lectures.length > 0 ? (
-                            <div className="grid gap-3">
-                              {lectures.map((lect, lIdx) => (
-                                <Link key={lect.id} to={`/dashboard/lecture/${lect.id}`}
-                                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-white/[0.02] border border-white/[0.04] hover:bg-indigo-500/10 hover:border-indigo-500/20 transition-all duration-300 group/lect shadow-sm">
-                                  
-                                  <div className="flex items-center gap-4 min-w-0">
-                                    <div className="w-10 h-10 rounded-xl bg-white/5 group-hover/lect:bg-indigo-500/20 flex items-center justify-center flex-shrink-0 transition-colors shadow-inner">
-                                      <Play className="w-4 h-4 text-slate-400 group-hover/lect:text-indigo-400 transition-colors group-hover/lect:fill-indigo-400" />
-                                    </div>
-                                    <div className="min-w-0">
-                                      <p className="text-base font-bold text-white truncate group-hover/lect:text-indigo-300 transition-colors mb-1">{lect.title}</p>
-                                      <div className="flex flex-wrap items-center gap-3">
-                                        {lect.duration && <span className="text-xs text-slate-400 flex items-center gap-1.5 font-medium"><Clock className="w-3 h-3" />{lect.duration}</span>}
-                                        {lect.date && <span className="text-xs text-slate-400 flex items-center gap-1.5 font-medium"><Calendar className="w-3 h-3" />{lect.date}</span>}
-                                        {(lect.materials?.length > 0 || lect.homeworks?.length > 0) && (
-                                          <span className="text-xs text-indigo-400/80 flex items-center gap-1.5 font-bold">
-                                            <FileText className="w-3 h-3" />
-                                            {(lect.materials?.length || 0) + (lect.homeworks?.length || 0)} resources
-                                          </span>
-                                        )}
-                                      </div>
-                                    </div>
-                                  </div>
-                                  
-                                  <div className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 text-slate-300 text-sm font-semibold group-hover/lect:bg-indigo-500/20 group-hover/lect:text-indigo-300 transition-colors">
-                                    Access <ChevronRight className="w-4 h-4" />
-                                  </div>
-                                </Link>
-                              ))}
-                            </div>
-                          ) : (
-                            <div className="text-center py-10 bg-white/[0.01] rounded-2xl border border-white/[0.02]">
-                              <Video className="w-10 h-10 text-slate-600 mx-auto mb-3 opacity-50" />
-                              <p className="text-slate-400 text-sm font-medium">No lectures have been published in this module yet.</p>
-                            </div>
-                          )}
-                        </CardContent>
-                      </Card>
+                            
+                            <Button className="w-full bg-white/5 hover:bg-indigo-600 text-white border border-white/10 hover:border-indigo-500 rounded-xl font-bold transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(79,70,229,0.3)]">
+                              Open Module <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                            </Button>
+                          </CardContent>
+                        </Card>
+                      </Link>
                     </motion.div>
                   );
                 })}
@@ -300,13 +274,8 @@ const StudentDashboard = () => {
             </motion.div>
           )}
 
-          {/* Legacy flat content fallback */}
-          {legacyContent && modules.length === 0 && (
-            <LegacyContentView content={legacyContent} />
-          )}
-
           {/* Empty state */}
-          {!legacyContent && modules.length === 0 && (
+          {modules.length === 0 && (
             <motion.div variants={itemVariants} className="text-center py-24 bg-[#121214] rounded-[32px] border border-white/5 shadow-2xl">
               <div className="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center mx-auto mb-6">
                 <GraduationCap className="w-10 h-10 text-slate-500" />
@@ -318,77 +287,6 @@ const StudentDashboard = () => {
         </motion.div>
       </main>
       )}
-    </div>
-  );
-};
-
-// Backward-compatible flat content view for legacy data
-const LegacyContentView = ({ content }) => {
-  const { lectures = [], materials = [], links = [], notes = [], homeworks = [], tips = [] } = content;
-  const sections = [
-    { title: 'Recorded Lectures', icon: Video, items: lectures, color: 'indigo', render: (item, i) => (
-      <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-[#1a1a1d] border border-white/5 hover:border-indigo-500/30 transition-colors">
-        <div className="min-w-0 flex-1"><p className="text-base font-bold text-white truncate">{item.title}</p><p className="text-sm text-slate-400 mt-1 truncate">{item.description}</p></div>
-        {item.url && <a href={item.url} target="_blank" rel="noopener noreferrer"><Button className="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl"><Play className="w-4 h-4 mr-2" />Watch Video</Button></a>}
-      </div>
-    )},
-    { title: 'Materials', icon: FileText, items: materials, color: 'blue', render: (item, i) => (
-      <div key={i} className="flex items-center justify-between p-5 rounded-2xl bg-[#1a1a1d] border border-white/5 hover:border-blue-500/30 transition-colors">
-        <div className="min-w-0 flex-1"><p className="text-base font-bold text-white truncate">{item.title}</p></div>
-        {item.url && <a href={item.url} target="_blank" rel="noopener noreferrer"><Button variant="outline" className="border-white/10 hover:bg-white/10 font-bold rounded-xl"><ExternalLink className="w-4 h-4 mr-2" />Open File</Button></a>}
-      </div>
-    )},
-    { title: 'Homework', icon: Target, items: homeworks, color: 'amber', render: (item, i) => (
-      <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-[#1a1a1d] border border-white/5 hover:border-amber-500/30 transition-colors">
-        <div className="min-w-0 flex-1"><p className="text-base font-bold text-white truncate">{item.title}</p>{item.dueDate && <p className="text-sm font-semibold text-amber-500 mt-1">Deadline: {item.dueDate}</p>}</div>
-        {item.url && <a href={item.url} target="_blank" rel="noopener noreferrer"><Button className="w-full sm:w-auto bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl"><ExternalLink className="w-4 h-4 mr-2" />View Assignment</Button></a>}
-      </div>
-    )},
-    { title: 'Tips & Shorts', icon: Lightbulb, items: tips, color: 'orange', render: (item, i) => (
-      <div key={i} className="flex items-center justify-between p-5 rounded-2xl bg-[#1a1a1d] border border-white/5 hover:border-orange-500/30 transition-colors">
-        <div className="min-w-0 flex-1"><p className="text-base font-bold text-white truncate">{item.title}</p></div>
-        {item.videoUrl && <a href={item.videoUrl} target="_blank" rel="noopener noreferrer"><Button className="bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-xl"><Play className="w-4 h-4 mr-2" />Watch</Button></a>}
-      </div>
-    )},
-    { title: 'Important Links', icon: ExternalLink, items: links, color: 'cyan', render: (item, i) => (
-      <a key={i} href={item.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-5 rounded-2xl bg-[#1a1a1d] border border-white/5 hover:border-cyan-500/30 transition-colors">
-        <div className="w-10 h-10 rounded-xl bg-cyan-500/10 flex items-center justify-center flex-shrink-0">
-          <ExternalLink className="w-5 h-5 text-cyan-400" />
-        </div>
-        <div className="min-w-0 flex-1"><p className="text-base font-bold text-white truncate">{item.title}</p></div>
-      </a>
-    )},
-    { title: 'Instructor Notes', icon: StickyNote, items: notes, color: 'violet', render: (item, i) => (
-      <div key={i} className="p-6 rounded-2xl bg-[#1a1a1d] border border-white/5">
-        <div className="flex justify-between items-center mb-3"><p className="text-lg font-bold text-white">{item.title}</p>{item.date && <span className="px-3 py-1 bg-white/5 rounded-full text-xs font-semibold text-slate-400">{item.date}</span>}</div>
-        <p className="text-base text-slate-300 whitespace-pre-wrap leading-relaxed">{item.content}</p>
-      </div>
-    )},
-  ];
-
-  return (
-    <div className="space-y-8 pt-4">
-      <h3 className="text-2xl font-black text-white flex items-center gap-3 mb-6">
-        <BookOpen className="w-7 h-7 text-indigo-400" /> Legacy Content
-      </h3>
-      {sections.filter(s => s.items.length > 0).map((section, sIdx) => (
-        <Card key={sIdx} className="bg-[#121214] border-white/5 shadow-2xl rounded-[32px] overflow-hidden">
-          <CardHeader className="p-6 sm:p-8 border-b border-white/5 bg-white/[0.01]">
-            <div className="flex items-center gap-4">
-              <div className={`p-3 rounded-2xl bg-${section.color}-500/10 text-${section.color}-400 ring-1 ring-${section.color}-500/20`}>
-                <section.icon className="w-6 h-6" />
-              </div>
-              <CardTitle className="text-xl sm:text-2xl font-bold text-white tracking-tight">{section.title}</CardTitle>
-              <Badge className={`bg-${section.color}-500/10 text-${section.color}-400 border-${section.color}-500/20 text-sm font-bold px-3 py-1 ml-auto`}>
-                {section.items.length} items
-              </Badge>
-            </div>
-          </CardHeader>
-          <CardContent className="p-6 sm:p-8 space-y-3 bg-[#0a0a0b]/50">
-            {section.items.map(section.render)}
-          </CardContent>
-        </Card>
-      ))}
     </div>
   );
 };

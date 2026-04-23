@@ -9,6 +9,7 @@ import MyEvaluationsPage from './components/MyEvaluationsPage';
 import SubmitProjectPage from './components/SubmitProjectPage';
 import FeedbackPage from './components/FeedbackPage';
 import MyProgressPage from './components/MyProgressPage';
+import ModulePage from './components/ModulePage';
 import LecturePage from './components/LecturePage';
 import './App.css';
 
@@ -43,6 +44,14 @@ const AppRoutes = () => {
         element={
           <ProtectedStudentRoute>
             <StudentDashboard />
+          </ProtectedStudentRoute>
+        } 
+      />
+      <Route 
+        path="/dashboard/module/:moduleId" 
+        element={
+          <ProtectedStudentRoute>
+            <ModulePage />
           </ProtectedStudentRoute>
         } 
       />

@@ -22,9 +22,12 @@ import {
 import { getDiplomas, createDiploma, updateDiploma, archiveDiploma, deleteDiplomaSafe } from '../lib/diplomaService';
 import { getModulesByDiploma, createModule, updateModule, deleteModuleSafe } from '../lib/moduleService';
 import { getLecturesByDiploma, createLecture, updateLecture, deleteLectureSafe } from '../lib/lectureService';
+import { getAllAssets, createAsset, deleteAsset, reassignAsset } from '../lib/assetService';
 import { runMigration, isMigrationComplete } from '../lib/migrateLegacyData';
+import { runAssetMigration } from '../lib/assetMigration';
 import { runRedistributionDryRun, applyRedistribution } from '../lib/contentRedistribution';
 import { runInferenceDryRun, applyInference } from '../lib/legacyInference';
+import AdminContentStudio from './AdminContentStudio';
 import GoogleDriveSync from './GoogleDriveSync';
 import ContentLibraryTab from './ContentLibraryTab';
 import AdminProgressCampaignTab from './AdminProgressCampaignTab';
@@ -94,6 +97,7 @@ const AdminPanel = () => {
   const [diplomaLectures, setDiplomaLectures] = useState([]);
   const [newModuleName, setNewModuleName] = useState('');
   const [migrationStatus, setMigrationStatus] = useState(null);
+  const [assetMigrationRunning, setAssetMigrationRunning] = useState(false);
   const [migrationRunning, setMigrationRunning] = useState(false);
   
   // Enhanced evaluation dialog state
@@ -186,6 +190,23 @@ const AdminPanel = () => {
       showMessage('Migration failed: ' + (result.error || 'Unknown error'), true);
     }
     setMigrationRunning(false);
+  };
+
+  const handleRunAssetMigration = async () => {
+    if (!window.confirm('This will migrate all embedded lecture content into the new lectureAssets collection. Continue?')) return;
+    try {
+      setAssetMigrationRunning(true);
+      const result = await runAssetMigration();
+      if (result.success) {
+        showMessage(`Successfully migrated ${result.count} content items to the new lectureAssets structure!`);
+      } else {
+        showMessage('Asset migration failed: ' + result.error, true);
+      }
+    } catch (error) {
+      showMessage('Error running asset migration: ' + error.message, true);
+    } finally {
+      setAssetMigrationRunning(false);
+    }
   };
 
   const loadDiplomas = async () => {
@@ -1200,601 +1221,12 @@ const handleAddPartialScore = async (e) => {
         return <ContentLibraryTab />;
 
       case 'lectures':
-        return (
-          <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-lg">
-            <CardHeader className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-t-lg">
-              <CardTitle className="flex items-center space-x-2 text-gray-800">
-                <Video className="w-5 h-5 text-purple-600" />
-                <span>Lectures</span>
-              </CardTitle>
-              <CardDescription className="text-gray-600">
-                Manage recorded lectures and video content
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              <form onSubmit={handleAddLecture} className="space-y-4 mb-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Input
-                    placeholder="Lecture title"
-                    value={newLecture.title}
-                    onChange={(e) => setNewLecture({ ...newLecture, title: e.target.value })}
-                    className="border-gray-300 focus:border-purple-500 focus:ring-purple-500"
-                    required
-                  />
-                  <Input
-                    placeholder="Duration (e.g., 45 min)"
-                    value={newLecture.duration}
-                    onChange={(e) => setNewLecture({ ...newLecture, duration: e.target.value })}
-                    className="border-gray-300 focus:border-purple-500 focus:ring-purple-500"
-                  />
-                </div>
-                <Textarea
-                  placeholder="Lecture description"
-                  value={newLecture.description}
-                  onChange={(e) => setNewLecture({ ...newLecture, description: e.target.value })}
-                  className="border-gray-300 focus:border-purple-500 focus:ring-purple-500"
-                />
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <select
-                    value={newLecture.videoSource || 'youtube'}
-                    onChange={(e) => setNewLecture({ ...newLecture, videoSource: e.target.value })}
-                    className="px-3 py-2 border border-gray-300 rounded-md focus:border-purple-500 focus:ring-purple-500 text-sm"
-                  >
-                    <option value="youtube">YouTube</option>
-                    <option value="drive">Google Drive</option>
-                    <option value="direct">Direct URL</option>
-                  </select>
-                  <Input
-                    placeholder="Video URL (YouTube, Drive, or direct link)"
-                    value={newLecture.url}
-                    onChange={(e) => setNewLecture({ ...newLecture, url: e.target.value })}
-                    className="border-gray-300 focus:border-purple-500 focus:ring-purple-500 md:col-span-2"
-                  />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Input
-                    type="date"
-                    placeholder="Date"
-                    value={newLecture.date}
-                    onChange={(e) => setNewLecture({ ...newLecture, date: e.target.value })}
-                    className="border-gray-300 focus:border-purple-500 focus:ring-purple-500"
-                  />
-                </div>
-                <Button type="submit" disabled={loading} className="bg-purple-600 hover:bg-purple-700 text-white">
-                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
-                  <span className="ml-2">Add Lecture</span>
-                </Button>
-              </form>
-
-              <div className="space-y-3">
-                {content.lectures && content.lectures.map((lecture) => (
-                  <div key={lecture.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-purple-50/50 rounded-lg border border-purple-200 hover:bg-purple-100/50 transition-colors">
-                    <div className="flex-1">
-                      <h3 className="font-medium text-gray-800 mb-1">{lecture.title}</h3>
-                      <p className="text-sm text-gray-600 mb-2">{lecture.description}</p>
-                      <div className="flex items-center space-x-4 text-xs text-gray-500">
-                        <span>Duration: {lecture.duration || 'N/A'}</span>
-                        <span>Date: {lecture.date || 'N/A'}</span>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2 mt-3 sm:mt-0">
-                      {lecture.url && (
-                        <a href={lecture.url} target="_blank" rel="noopener noreferrer">
-                          <Button variant="outline" size="sm">
-                            <ExternalLink className="w-4 h-4" />
-                          </Button>
-                        </a>
-                      )}
-                      <Button
-                        onClick={() => handleRemoveItem('lectures', lecture.id)}
-                        variant="destructive"
-                        size="sm"
-                        disabled={loading}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                ))}
-                {(!content.lectures || content.lectures.length === 0) && (
-                  <div className="text-center py-12">
-                    <Video className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500 text-lg">No lectures yet</p>
-                    <p className="text-gray-400 text-sm">Add your first lecture above</p>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        );
-
       case 'materials':
-        return (
-          <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-lg">
-            <CardHeader className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-t-lg">
-              <CardTitle className="flex items-center space-x-2 text-gray-800">
-                <FileText className="w-5 h-5 text-green-600" />
-                <span>Materials</span>
-              </CardTitle>
-              <CardDescription className="text-gray-600">
-                Manage course materials and documents
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              <form onSubmit={handleAddMaterial} className="space-y-4 mb-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Input
-                    placeholder="Material title"
-                    value={newMaterial.title}
-                    onChange={(e) => setNewMaterial({ ...newMaterial, title: e.target.value })}
-                    className="border-gray-300 focus:border-green-500 focus:ring-green-500"
-                  />
-                  <select
-                    value={newMaterial.type}
-                    onChange={(e) => setNewMaterial({ ...newMaterial, type: e.target.value })}
-                    className="px-3 py-2 border border-gray-300 rounded-md focus:border-green-500 focus:ring-green-500"
-                  >
-                    <option value="PDF">PDF</option>
-                    <option value="DOC">DOC</option>
-                    <option value="PPT">PPT</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-                <Textarea
-                  placeholder="Material description"
-                  value={newMaterial.description}
-                  onChange={(e) => setNewMaterial({ ...newMaterial, description: e.target.value })}
-                  className="border-gray-300 focus:border-green-500 focus:ring-green-500"
-                />
-                <Input
-                  placeholder="Download URL"
-                  value={newMaterial.url}
-                  onChange={(e) => setNewMaterial({ ...newMaterial, url: e.target.value })}
-                  className="border-gray-300 focus:border-green-500 focus:ring-green-500"
-                />
-                <Button type="submit" disabled={loading} className="bg-green-600 hover:bg-green-700 text-white">
-                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
-                  <span className="ml-2">Add Material</span>
-                </Button>
-              </form>
-
-              <div className="space-y-3">
-                {content.materials && content.materials.map((material) => (
-                  <div key={material.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-green-50/50 rounded-lg border border-green-200 hover:bg-green-100/50 transition-colors">
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-2 mb-1">
-                        <h3 className="font-medium text-gray-800">{material.title}</h3>
-                        <Badge variant="outline" className="border-green-300 text-green-700 text-xs">
-                          {material.type}
-                        </Badge>
-                      </div>
-                      <p className="text-sm text-gray-600">{material.description}</p>
-                    </div>
-                    <div className="flex items-center space-x-2 mt-3 sm:mt-0">
-                      {material.url && (
-                        <a href={material.url} target="_blank" rel="noopener noreferrer">
-                          <Button variant="outline" size="sm">
-                            <ExternalLink className="w-4 h-4" />
-                          </Button>
-                        </a>
-                      )}
-                      <Button
-                        onClick={() => handleRemoveItem('materials', material.id)}
-                        variant="destructive"
-                        size="sm"
-                        disabled={loading}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                ))}
-                {(!content.materials || content.materials.length === 0) && (
-                  <div className="text-center py-12">
-                    <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500 text-lg">No materials yet</p>
-                    <p className="text-gray-400 text-sm">Add your first material above</p>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        );
-
       case 'links':
-        return (
-          <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-lg">
-            <CardHeader className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-t-lg">
-              <CardTitle className="flex items-center space-x-2 text-gray-800">
-                <ExternalLink className="w-5 h-5 text-cyan-600" />
-                <span>Important Links</span>
-              </CardTitle>
-              <CardDescription className="text-gray-600">
-                Manage important links and resources
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              <form onSubmit={handleAddLink} className="space-y-4 mb-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Input
-                    placeholder="Link title"
-                    value={newLink.title}
-                    onChange={(e) => setNewLink({ ...newLink, title: e.target.value })}
-                    className="border-gray-300 focus:border-cyan-500 focus:ring-cyan-500"
-                  />
-                  <Input
-                    placeholder="URL"
-                    value={newLink.url}
-                    onChange={(e) => setNewLink({ ...newLink, url: e.target.value })}
-                    className="border-gray-300 focus:border-cyan-500 focus:ring-cyan-500"
-                  />
-                </div>
-                <Textarea
-                  placeholder="Link description"
-                  value={newLink.description}
-                  onChange={(e) => setNewLink({ ...newLink, description: e.target.value })}
-                  className="border-gray-300 focus:border-cyan-500 focus:ring-cyan-500"
-                />
-                <Button type="submit" disabled={loading} className="bg-cyan-600 hover:bg-cyan-700 text-white">
-                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
-                  <span className="ml-2">Add Link</span>
-                </Button>
-              </form>
-
-              <div className="space-y-3">
-                {content.links && content.links.map((link) => (
-                  <div key={link.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-cyan-50/50 rounded-lg border border-cyan-200 hover:bg-cyan-100/50 transition-colors">
-                    <div className="flex-1">
-                      <h3 className="font-medium text-gray-800 mb-1">{link.title}</h3>
-                      <p className="text-sm text-gray-600 mb-2">{link.description}</p>
-                      <a href={link.url} target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-600 hover:text-cyan-700 break-all">
-                        {link.url}
-                      </a>
-                    </div>
-                    <div className="flex items-center space-x-2 mt-3 sm:mt-0">
-                      <a href={link.url} target="_blank" rel="noopener noreferrer">
-                        <Button variant="outline" size="sm">
-                          <ExternalLink className="w-4 h-4" />
-                        </Button>
-                      </a>
-                      <Button
-                        onClick={() => handleRemoveItem('links', link.id)}
-                        variant="destructive"
-                        size="sm"
-                        disabled={loading}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                ))}
-                {(!content.links || content.links.length === 0) && (
-                  <div className="text-center py-12">
-                    <ExternalLink className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500 text-lg">No links yet</p>
-                    <p className="text-gray-400 text-sm">Add your first link above</p>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        );
-
       case 'notes':
-        return (
-          <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-lg">
-            <CardHeader className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-t-lg">
-              <CardTitle className="flex items-center space-x-2 text-gray-800">
-                <StickyNote className="w-5 h-5 text-indigo-600" />
-                <span>Instructor Notes</span>
-              </CardTitle>
-              <CardDescription className="text-gray-600">
-                Manage instructor notes and announcements
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              <form onSubmit={handleAddNote} className="space-y-4 mb-6">
-                <Input
-                  placeholder="Note title"
-                  value={newNote.title}
-                  onChange={(e) => setNewNote({ ...newNote, title: e.target.value })}
-                  className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
-                />
-                <Textarea
-                  placeholder="Note content"
-                  value={newNote.content}
-                  onChange={(e) => setNewNote({ ...newNote, content: e.target.value })}
-                  className="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
-                  rows={4}
-                />
-                <Button type="submit" disabled={loading} className="bg-indigo-600 hover:bg-indigo-700 text-white">
-                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
-                  <span className="ml-2">Add Note</span>
-                </Button>
-              </form>
-
-              <div className="space-y-3">
-                {content.notes && content.notes.map((note) => (
-                  <div key={note.id} className="p-4 bg-indigo-50/50 rounded-lg border border-indigo-200 hover:bg-indigo-100/50 transition-colors">
-                    <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-3">
-                      <div className="flex-1">
-                        <h3 className="font-medium text-gray-800 mb-1">{note.title}</h3>
-                        <p className="text-xs text-gray-500 mb-2">Posted: {note.date}</p>
-                      </div>
-                      <Button
-                        onClick={() => handleRemoveItem('notes', note.id)}
-                        variant="destructive"
-                        size="sm"
-                        disabled={loading}
-                        className="mt-2 sm:mt-0"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                    <p className="text-sm text-gray-600 whitespace-pre-wrap">{note.content}</p>
-                  </div>
-                ))}
-                {(!content.notes || content.notes.length === 0) && (
-                  <div className="text-center py-12">
-                    <StickyNote className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500 text-lg">No notes yet</p>
-                    <p className="text-gray-400 text-sm">Add your first note above</p>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        );
-
       case 'homework':
-        return (
-          <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-lg">
-            <CardHeader className="bg-gradient-to-r from-amber-50 to-yellow-50 rounded-t-lg">
-              <CardTitle className="flex items-center space-x-2 text-gray-800">
-                <BookOpen className="w-5 h-5 text-amber-600" />
-                <span>Homework Assignments</span>
-              </CardTitle>
-              <CardDescription className="text-gray-600">
-                Manage homework assignments and due dates
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              <form onSubmit={handleAddHomework} className="space-y-4 mb-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Input
-                    placeholder="Assignment title"
-                    value={newHomework.title}
-                    onChange={(e) => setNewHomework({ ...newHomework, title: e.target.value })}
-                    className="border-gray-300 focus:border-amber-500 focus:ring-amber-500"
-                    required
-                  />
-                  <select
-                    value={newHomework.category}
-                    onChange={(e) => setNewHomework({ ...newHomework, category: e.target.value })}
-                    className="px-3 py-2 border border-gray-300 rounded-md focus:border-amber-500 focus:ring-amber-500"
-                    required
-                  >
-                    <option value="Python">Python</option>
-                    <option value="Data Processing">Data Processing</option>
-                    <option value="Machine Learning">Machine Learning</option>
-                    <option value="Deep Learning">Deep Learning</option>
-                    <option value="Final Project">Final Project</option>
-                  </select>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Input
-                    type="date"
-                    placeholder="Due date"
-                    value={newHomework.dueDate}
-                    onChange={(e) => setNewHomework({ ...newHomework, dueDate: e.target.value })}
-                    className="border-gray-300 focus:border-amber-500 focus:ring-amber-500"
-                    required
-                  />
-                  <Input
-                    placeholder="Assignment URL or file link"
-                    value={newHomework.url}
-                    onChange={(e) => setNewHomework({ ...newHomework, url: e.target.value })}
-                    className="border-gray-300 focus:border-amber-500 focus:ring-amber-500"
-                    required
-                  />
-                </div>
-                <Textarea
-                  placeholder="Assignment description"
-                  value={newHomework.description}
-                  onChange={(e) => setNewHomework({ ...newHomework, description: e.target.value })}
-                  className="border-gray-300 focus:border-amber-500 focus:ring-amber-500"
-                  required
-                />
-                <Button type="submit" disabled={loading} className="bg-amber-600 hover:bg-amber-700 text-white">
-                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
-                  <span className="ml-2">Add Homework</span>
-                </Button>
-              </form>
-
-              <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-gray-800 mb-3">Existing Homeworks</h3>
-                {content.homeworks && content.homeworks.map((homework) => (
-                  <div key={homework.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-amber-50/50 rounded-lg border border-amber-200 hover:bg-amber-100/50 transition-colors">
-                    {editingHomeworkId === homework.id ? (
-                      <div className="flex-1 w-full space-y-3 pr-4">
-                        <Input
-                          value={editHomeworkData.title}
-                          onChange={(e) => setEditHomeworkData({ ...editHomeworkData, title: e.target.value })}
-                          className="border-gray-300 focus:border-amber-500 focus:ring-amber-500 w-full"
-                          placeholder="Title"
-                        />
-                        <select
-                          value={editHomeworkData.category}
-                          onChange={(e) => setEditHomeworkData({ ...editHomeworkData, category: e.target.value })}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:border-amber-500 focus:ring-amber-500"
-                        >
-                          <option value="Python">Python</option>
-                          <option value="Data Processing">Data Processing</option>
-                          <option value="Machine Learning">Machine Learning</option>
-                          <option value="Deep Learning">Deep Learning</option>
-                          <option value="Final Project">Final Project</option>
-                        </select>
-                        <Textarea
-                          value={editHomeworkData.description}
-                          onChange={(e) => setEditHomeworkData({ ...editHomeworkData, description: e.target.value })}
-                          className="border-gray-300 focus:border-amber-500 focus:ring-amber-500 w-full"
-                          placeholder="Description"
-                        />
-                        <div className="flex space-x-2">
-                           <Button onClick={handleSaveEditHomework} disabled={loading} size="sm" className="bg-green-600 hover:bg-green-700 text-white flex gap-1"><Save className="w-4 h-4"/> Save</Button>
-                           <Button onClick={handleCancelEditHomework} disabled={loading} size="sm" variant="outline" className="flex gap-1"><X className="w-4 h-4"/> Cancel</Button>
-                        </div>
-                      </div>
-                    ) : (
-                      <>
-                        <div className="flex-1">
-                          <div className="flex items-center space-x-2 mb-1">
-                            <h4 className="font-medium text-gray-800">{homework.title}</h4>
-                            <Badge variant="outline" className="border-amber-300 text-amber-700 text-xs">
-                              {homework.category || 'Python'}
-                            </Badge>
-                          </div>
-                          <p className="text-sm text-gray-600 mb-2">{homework.description}</p>
-                          <div className="flex items-center space-x-4 text-xs text-gray-500">
-                            <span>Due: {homework.dueDate}</span>
-                            {homework.url && (
-                              <a href={homework.url} target="_blank" rel="noopener noreferrer" className="text-amber-600 hover:text-amber-700">
-                                View Assignment
-                              </a>
-                            )}
-                          </div>
-                        </div>
-                        <div className="flex items-center space-x-2 mt-3 sm:mt-0">
-                          <Button
-                            onClick={() => handleBeginEditHomework(homework)}
-                            variant="outline"
-                            size="sm"
-                            disabled={loading || editingHomeworkId !== null}
-                          >
-                            <Edit className="w-4 h-4" />
-                          </Button>
-                          {homework.url && (
-                            <a href={homework.url} target="_blank" rel="noopener noreferrer">
-                              <Button variant="outline" size="sm">
-                                <ExternalLink className="w-4 h-4" />
-                              </Button>
-                            </a>
-                          )}
-                          <Button
-                            onClick={() => handleRemoveItem('homeworks', homework.id)}
-                            variant="destructive"
-                            size="sm"
-                            disabled={loading}
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                ))}
-                {(!content.homeworks || content.homeworks.length === 0) && (
-                  <div className="text-center py-12">
-                    <BookOpen className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500 text-lg">No homework assignments yet</p>
-                    <p className="text-gray-400 text-sm">Add your first homework assignment above</p>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        );
-
-      // NEW: Tips & Shorts Tab
       case 'tips':
-        return (
-          <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-lg">
-            <CardHeader className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-t-lg">
-              <CardTitle className="flex items-center space-x-2 text-gray-800">
-                <Lightbulb className="w-5 h-5 text-orange-600" />
-                <span>Tips & Shorts</span>
-              </CardTitle>
-              <CardDescription className="text-gray-600">
-                Manage quick tips and short video content
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-6">
-              {/* Add New Tip Form */}
-              <form onSubmit={handleAddTip} className="space-y-4 mb-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-3">Add New Tip</h3>
-                <Input
-                  placeholder="Tip title (e.g., Quick Tip: Solving the Python Loop Problem)"
-                  value={newTip.title}
-                  onChange={(e) => setNewTip({ ...newTip, title: e.target.value })}
-                  className="border-gray-300 focus:border-orange-500 focus:ring-orange-500"
-                  required
-                />
-                <Textarea
-                  placeholder="Tip description (e.g., A 2-minute video explaining a common error in for-loops.)"
-                  value={newTip.description}
-                  onChange={(e) => setNewTip({ ...newTip, description: e.target.value })}
-                  className="border-gray-300 focus:border-orange-500 focus:ring-orange-500"
-                  required
-                />
-                <Input
-                  placeholder="Video URL (e.g., https://youtube.com/shorts/your-video-id)"
-                  value={newTip.videoUrl}
-                  onChange={(e) => setNewTip({ ...newTip, videoUrl: e.target.value })}
-                  className="border-gray-300 focus:border-orange-500 focus:ring-orange-500"
-                  required
-                />
-                <Button type="submit" disabled={loading} className="bg-orange-600 hover:bg-orange-700 text-white">
-                  {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
-                  <span className="ml-2">Add Tip</span>
-                </Button>
-              </form>
-
-              <Separator className="my-6" />
-
-              {/* Existing Tips List */}
-              <div className="space-y-3">
-                <h3 className="text-lg font-semibold text-gray-800 mb-3">Existing Tips</h3>
-                {content.tips && content.tips.map((tip) => (
-                  <div key={tip.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-orange-50/50 rounded-lg border border-orange-200 hover:bg-orange-100/50 transition-colors">
-                    <div className="flex-1">
-                      <h4 className="font-medium text-gray-800 mb-1">{tip.title}</h4>
-                      <p className="text-sm text-gray-600 mb-2">{tip.description}</p>
-                      {tip.videoUrl && (
-                        <a href={tip.videoUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-orange-600 hover:text-orange-700 break-all">
-                          {tip.videoUrl}
-                        </a>
-                      )}
-                    </div>
-                    <div className="flex items-center space-x-2 mt-3 sm:mt-0">
-                      {tip.videoUrl && (
-                        <a href={tip.videoUrl} target="_blank" rel="noopener noreferrer">
-                          <Button variant="outline" size="sm">
-                            <ExternalLink className="w-4 h-4" />
-                          </Button>
-                        </a>
-                      )}
-                      <Button
-                        onClick={() => handleRemoveItem('tips', tip.id)}
-                        variant="destructive"
-                        size="sm"
-                        disabled={loading}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                ))}
-                {(!content.tips || content.tips.length === 0) && (
-                  <div className="text-center py-12">
-                    <Lightbulb className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500 text-lg">No tips yet</p>
-                    <p className="text-gray-400 text-sm">Add your first tip above</p>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        );
+        return <AdminContentStudio activeTab={activeTab} diplomas={diplomas} modules={diplomaModules} lectures={diplomaLectures} onLectureChange={loadData} />;
 
       case 'drive-sync':
         return <GoogleDriveSync />;
@@ -2008,6 +1440,17 @@ const handleAddPartialScore = async (e) => {
             </CardHeader>
             <CardContent className="p-6 space-y-6">
               {/* Migration Banner */}
+              {migrationStatus === 'pending' && (
+                <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-between">
+                  <div>
+                    <h4 className="font-semibold text-amber-800">Legacy Content Migration Needed</h4>
+                    <p className="text-sm text-amber-600">Migrate existing embedded content to the new high-performance architecture.</p>
+                  </div>
+                  <Button onClick={handleRunAssetMigration} disabled={assetMigrationRunning} className="bg-amber-600 hover:bg-amber-700 text-white">
+                    {assetMigrationRunning ? <><Loader2 className="w-4 h-4 animate-spin mr-2" />Migrating...</> : 'Migrate Assets'}
+                  </Button>
+                </div>
+              )}
               {migrationStatus === 'pending' && (
                 <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-between">
                   <div>
@@ -2341,7 +1784,7 @@ const handleAddPartialScore = async (e) => {
             Tips & Shorts
           </TabButton>
           <TabButton value="content-library" isActive={activeTab === 'content-library'} onClick={setActiveTab} icon={Database} colorScheme="violet">
-            Content Library
+            Diagnostics & Audit
           </TabButton>
           <TabButton value="drive-sync" isActive={activeTab === 'drive-sync'} onClick={setActiveTab} icon={Cloud} colorScheme="teal">
             Drive Sync
