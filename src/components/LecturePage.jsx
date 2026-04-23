@@ -97,9 +97,9 @@ const LecturePage = () => {
   let sectionIndex = 0;
 
   return (
-    <div className="min-h-screen bg-[#0a0a0b] text-slate-50 selection:bg-indigo-500/30">
+    <div className="min-h-screen bg-[#0a0a0b] text-slate-50 selection:bg-indigo-500/30 overflow-x-hidden">
       {/* Ambient background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600/8 blur-[120px] rounded-full" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-purple-600/8 blur-[120px] rounded-full" />
       </div>
@@ -107,22 +107,22 @@ const LecturePage = () => {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#0a0a0b]/80 backdrop-blur-xl border-b border-white/[0.05]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-4 h-16">
+          <div className="flex items-center gap-3 sm:gap-4 h-14 sm:h-16">
             <Link to="/dashboard">
-              <Button variant="ghost" size="icon" className="w-9 h-9 rounded-full text-slate-400 hover:text-white hover:bg-white/10">
+              <Button variant="ghost" size="icon" className="w-9 h-9 rounded-full text-slate-400 hover:text-white hover:bg-white/10 flex-shrink-0">
                 <ArrowLeft className="w-5 h-5" />
               </Button>
             </Link>
-            <div className="flex items-center gap-2 text-sm text-slate-400 min-w-0 overflow-hidden">
-              <span className="truncate">{moduleName}</span>
-              <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />
+            <div className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-slate-400 min-w-0 overflow-hidden">
+              <span className="truncate max-w-[80px] sm:max-w-none">{moduleName}</span>
+              <ChevronRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0" />
               <span className="text-white font-medium truncate">{lecture.title}</span>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10 space-y-8">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-8 relative z-10 space-y-5 sm:space-y-8">
         {/* Lecture Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
           <div className="flex flex-wrap items-center gap-3">
@@ -137,9 +137,9 @@ const LecturePage = () => {
               </Badge>
             )}
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-white leading-tight">{lecture.title}</h1>
+          <h1 className="text-xl sm:text-4xl font-black tracking-tight text-white leading-tight">{lecture.title}</h1>
           {lecture.description && (
-            <p className="text-slate-400 text-base sm:text-lg leading-relaxed max-w-3xl">{lecture.description}</p>
+            <p className="text-slate-400 text-sm sm:text-lg leading-relaxed max-w-3xl">{lecture.description}</p>
           )}
         </motion.div>
 
@@ -147,7 +147,7 @@ const LecturePage = () => {
         {(lecture.url || lecture.videoUrl) && (
           <motion.div custom={sectionIndex++} variants={sectionVariants} initial="hidden" animate="visible">
             <Card className="bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden group hover:border-indigo-500/20 transition-colors">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-400">
                     <Video className="w-5 h-5" />
@@ -164,7 +164,7 @@ const LecturePage = () => {
         {hasContent(lecture.materials) && (
           <motion.div custom={sectionIndex++} variants={sectionVariants} initial="hidden" animate="visible">
             <Card className="bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-400">
                     <FileText className="w-5 h-5" />
@@ -204,7 +204,7 @@ const LecturePage = () => {
         {hasContent(lecture.homeworks) && (
           <motion.div custom={sectionIndex++} variants={sectionVariants} initial="hidden" animate="visible">
             <Card className="bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden border-l-4 border-l-amber-500/50">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-400">
                     <Target className="w-5 h-5" />
@@ -250,7 +250,7 @@ const LecturePage = () => {
         {hasContent(lecture.links) && (
           <motion.div custom={sectionIndex++} variants={sectionVariants} initial="hidden" animate="visible">
             <Card className="bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400">
                     <Link2 className="w-5 h-5" />
@@ -279,7 +279,7 @@ const LecturePage = () => {
         {hasContent(lecture.tips) && (
           <motion.div custom={sectionIndex++} variants={sectionVariants} initial="hidden" animate="visible">
             <Card className="bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="p-2.5 rounded-xl bg-orange-500/10 text-orange-400">
                     <Lightbulb className="w-5 h-5" />
@@ -313,7 +313,7 @@ const LecturePage = () => {
         {hasContent(lecture.notes) && (
           <motion.div custom={sectionIndex++} variants={sectionVariants} initial="hidden" animate="visible">
             <Card className="bg-white/[0.02] border-white/[0.06] backdrop-blur-sm rounded-2xl overflow-hidden">
-              <CardContent className="p-6">
+              <CardContent className="p-4 sm:p-6">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-400">
                     <StickyNote className="w-5 h-5" />

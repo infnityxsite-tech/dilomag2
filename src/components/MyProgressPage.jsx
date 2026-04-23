@@ -124,8 +124,8 @@ const MyProgressPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0b] text-slate-50 pb-20 relative selection:bg-indigo-500/30">
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+    <div className="min-h-screen bg-[#0a0a0b] text-slate-50 pb-20 relative selection:bg-indigo-500/30 overflow-x-hidden">
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-600/10 blur-[120px] rounded-full mix-blend-screen"></div>
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/10 blur-[120px] rounded-full mix-blend-screen"></div>
         <div className="absolute top-[40%] left-[20%] w-[60%] h-[60%] bg-blue-900/5 blur-[150px] rounded-full pointer-events-none"></div>
@@ -133,8 +133,8 @@ const MyProgressPage = () => {
 
       <header className="sticky top-0 z-50 bg-[#0a0a0b]/80 backdrop-blur-xl border-b border-white/[0.05] shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center gap-6">
+          <div className="flex justify-between items-center h-14 sm:h-20">
+            <div className="flex items-center gap-3 sm:gap-6">
               <Link to="/dashboard">
                 <Button variant="ghost" size="icon" className="w-10 h-10 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-all">
                   <ArrowLeft className="w-5 h-5" />
@@ -146,18 +146,18 @@ const MyProgressPage = () => {
                     <TrendingUp className="w-5 h-5 text-indigo-400" />
                   </div>
                 </div>
-                <h1 className="text-xl font-bold tracking-tight text-white">Performance Dashboard</h1>
+                <h1 className="text-base sm:text-xl font-bold tracking-tight text-white">Performance Dashboard</h1>
               </div>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative z-10">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 relative z-10">
         
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-8">
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             <motion.div variants={itemVariants}>
               <Card className="bg-white/[0.02] border-white/[0.05] backdrop-blur-xl shadow-2xl hover:bg-white/[0.04] transition-colors rounded-2xl overflow-hidden group relative">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-blue-500 opacity-50 group-hover:opacity-100 transition-opacity"></div>
@@ -171,7 +171,7 @@ const MyProgressPage = () => {
                 </CardHeader>
                 <CardContent className="p-6 pt-4">
                   <div className="flex items-baseline justify-between mb-4">
-                    <h3 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-slate-400 tracking-tight">
+                    <h3 className="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white to-slate-400 tracking-tight">
                       {progressData?.progressPercent || 0}%
                     </h3>
                     <p className="text-slate-400 text-sm font-medium">{progressData?.completedCount || 0} / {getTotalLabsCount()} Modules</p>
@@ -232,7 +232,7 @@ const MyProgressPage = () => {
             </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pt-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 pt-2 sm:pt-4">
             
             <motion.div variants={itemVariants} className="lg:col-span-2 space-y-6">
               <div className="flex items-center justify-between">
@@ -249,7 +249,7 @@ const MyProgressPage = () => {
                  </div>
               ) : (
                 <Tabs defaultValue="active" className="w-full">
-                  <TabsList className="bg-white/[0.03] border border-white/[0.05] p-1.5 rounded-xl mb-6 w-full flex flex-wrap h-auto gap-1">
+                  <TabsList className="bg-white/[0.03] border border-white/[0.05] p-1 sm:p-1.5 rounded-xl mb-4 sm:mb-6 w-full flex flex-wrap h-auto gap-1">
                      <TabsTrigger value="active" className="rounded-lg data-[state=active]:bg-white/10 data-[state=active]:text-white data-[state=active]:shadow-xl py-2 flex-1 min-w-[120px] whitespace-nowrap">
                        Current Campaigns
                      </TabsTrigger>

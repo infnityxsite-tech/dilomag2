@@ -248,7 +248,7 @@ const MyEvaluationsPage = () => {
   }
 
   return (
-    <div style={aiBackgroundStyle} className="min-h-screen text-slate-50 p-4 sm:p-6 lg:p-8">
+    <div style={aiBackgroundStyle} className="min-h-screen text-slate-50 p-4 sm:p-6 lg:p-8 overflow-x-hidden">
       <div className="max-w-6xl mx-auto animate-in fade-in duration-500">
         <Link to="/dashboard" className="inline-flex items-center text-slate-400 hover:text-white mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -256,7 +256,7 @@ const MyEvaluationsPage = () => {
         </Link>
 
         <header className="mb-8">
-            <h1 className="text-4xl font-bold text-white flex items-center gap-3">
+            <h1 className="text-2xl sm:text-4xl font-bold text-white flex items-center gap-2 sm:gap-3">
                 <Award className="w-8 h-8 text-indigo-400" />
                 My Performance Evaluation
             </h1>
@@ -264,7 +264,7 @@ const MyEvaluationsPage = () => {
         </header>
 
         {evaluation ? (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8">
             {/* Total Score Visualization */}
             <div className="lg:col-span-1 animate-in fade-in slide-in-from-left-8 duration-700">
               <Card className="bg-slate-900/50 border border-slate-700/50 h-full">
