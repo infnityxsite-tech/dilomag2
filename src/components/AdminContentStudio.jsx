@@ -136,7 +136,7 @@ const AdminContentStudio = ({ activeTab, diplomas = [], modules = [], onLectureC
     if (isLecture && !editData.url && editData.videoUrl) {
       editData.url = editData.videoUrl;
     }
-    setEditingItem(item);
+    setEditingItem(editData);
     setEditForm(editData);
   };
 
@@ -373,28 +373,6 @@ const AdminContentStudio = ({ activeTab, diplomas = [], modules = [], onLectureC
                        <Button variant="destructive" size="sm" onClick={async () => { await deleteLectureSafe(l.id); setRefreshKey(k => k + 1); if (onLectureChange) onLectureChange(); }}><Trash2 className="w-4 h-4" /></Button>
                     </div>
                   </div>
-                  {lectureVideoUrl && (() => {
-                    // Extract YouTube embed URL
-                    const url = lectureVideoUrl;
-                    let embedUrl = null;
-                    const ytMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|live\/))([\w-]+)/);
-                    if (ytMatch) {
-                      embedUrl = `https://www.youtube.com/embed/${ytMatch[1]}`;
-                    } else if (url.includes('drive.google.com')) {
-                      const driveMatch = url.match(/\/d\/([\w-]+)/);
-                      if (driveMatch) embedUrl = `https://drive.google.com/file/d/${driveMatch[1]}/preview`;
-                    }
-                    return embedUrl ? (
-                      <div className="mt-3 rounded-lg overflow-hidden border border-gray-200 bg-gray-50" style={{ aspectRatio: '16/9', maxHeight: '220px' }}>
-                        <iframe src={embedUrl} title={l.title} className="w-full h-full" allowFullScreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" />
-                      </div>
-                    ) : (
-                      <div className="mt-3 p-3 rounded-lg bg-purple-50 border border-purple-200 text-sm text-purple-700 flex items-center gap-2">
-                        <Video className="w-4 h-4" />
-                        <a href={url} target="_blank" rel="noreferrer" className="underline hover:text-purple-900 truncate">{url}</a>
-                      </div>
-                    );
-                  })()}
                 </div>
               )})}
             </div>

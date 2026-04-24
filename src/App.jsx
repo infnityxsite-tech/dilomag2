@@ -11,6 +11,7 @@ import FeedbackPage from './components/FeedbackPage';
 import MyProgressPage from './components/MyProgressPage';
 import ModulePage from './components/ModulePage';
 import LecturePage from './components/LecturePage';
+
 import './App.css';
 
 // Protected Route Component for Students
@@ -110,6 +111,7 @@ const AppRoutes = () => {
           </ProtectedStudentRoute>
         } 
       />
+
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

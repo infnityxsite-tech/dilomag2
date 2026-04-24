@@ -3,6 +3,8 @@ import { useAuth } from '../contexts/AuthContext';
 import { getModulesByDiploma } from '../lib/moduleService';
 import { getLecturesByModule } from '../lib/lectureService';
 import { getDiplomaById } from '../lib/diplomaService';
+import { isLegacyDiploma, getLegacyLectures, getLegacyMaterials, getLegacyHomework } from '../lib/legacyDiplomaService';
+import LegacyDiplomaView from './LegacyDiplomaView';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -38,6 +40,12 @@ const StudentDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Legacy mode state
+  const [legacyMode, setLegacyMode] = useState(false);
+  const [legacyLectures, setLegacyLectures] = useState([]);
+  const [legacyMaterials, setLegacyMaterials] = useState([]);
+  const [legacyHomework, setLegacyHomework] = useState([]);
+
   useEffect(() => {
     loadContent();
   }, [activeDiplomaId]);
@@ -48,16 +56,40 @@ const StudentDashboard = () => {
       if (activeDiplomaId) {
         const diploma = await getDiplomaById(activeDiplomaId);
         setDiplomaName(diploma?.name || 'My Diploma');
-        const mods = await getModulesByDiploma(activeDiplomaId);
-        setModules(mods);
-        const lectMap = {};
-        for (const mod of mods) {
-          lectMap[mod.id] = await getLecturesByModule(mod.id);
+
+        // Check if this is the legacy special-case diploma
+        const isLegacy = await isLegacyDiploma(activeDiplomaId);
+        setLegacyMode(isLegacy);
+
+        if (isLegacy) {
+          // Legacy flat mode — bypass modules
+          const [lects, mats, hws] = await Promise.all([
+            getLegacyLectures(activeDiplomaId),
+            getLegacyMaterials(activeDiplomaId),
+            getLegacyHomework(activeDiplomaId),
+          ]);
+          setLegacyLectures(lects);
+          setLegacyMaterials(mats);
+          setLegacyHomework(hws);
+          setModules([]);
+          setModuleLectures({});
+        } else {
+          // Normal module-based flow
+          setLegacyLectures([]);
+          setLegacyMaterials([]);
+          setLegacyHomework([]);
+          const mods = await getModulesByDiploma(activeDiplomaId);
+          setModules(mods);
+          const lectMap = {};
+          for (const mod of mods) {
+            lectMap[mod.id] = await getLecturesByModule(mod.id);
+          }
+          setModuleLectures(lectMap);
         }
-        setModuleLectures(lectMap);
       } else {
         setModules([]);
         setModuleLectures({});
+        setLegacyMode(false);
         setDiplomaName('AI Diploma');
       }
     } catch (error) {
@@ -67,7 +99,7 @@ const StudentDashboard = () => {
     }
   };
 
-  const totalLectures = Object.values(moduleLectures).reduce((acc, arr) => acc + arr.length, 0);
+  const totalLectures = legacyMode ? legacyLectures.length : Object.values(moduleLectures).reduce((acc, arr) => acc + arr.length, 0);
 
   if (loading) {
     return (
@@ -242,12 +274,17 @@ const StudentDashboard = () => {
 
           {/* ── Quick Stats Grid ── */}
           <motion.div variants={itemVariants} className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6">
-            {[
+            {(legacyMode ? [
+              { label: 'Total Lectures', value: legacyLectures.length, icon: Video, color: 'indigo' },
+              { label: 'Materials', value: legacyMaterials.length, icon: FileText, color: 'violet' },
+              { label: 'My Progress', value: 'View Stats', link: '/my-progress', icon: TrendingUp, color: 'emerald' },
+              { label: 'Evaluation', value: 'View Grades', link: '/my-evaluation', icon: Award, color: 'amber' },
+            ] : [
               { label: 'Total Modules', value: modules.length, icon: Layers, color: 'indigo' },
               { label: 'Total Lectures', value: totalLectures, icon: Video, color: 'violet' },
               { label: 'My Progress', value: 'View Stats', link: '/my-progress', icon: TrendingUp, color: 'emerald' },
               { label: 'Evaluation', value: 'View Grades', link: '/my-evaluation', icon: Award, color: 'amber' },
-            ].map((stat, i) => (
+            ]).map((stat, i) => (
               <div key={i} className="relative group p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#121214] border border-white/5 hover:border-white/10 hover:bg-white/[0.02] transition-all duration-300 overflow-hidden shadow-xl">
                 <div className={`absolute -right-8 -top-8 w-32 h-32 bg-${stat.color}-500/10 blur-[40px] rounded-full group-hover:bg-${stat.color}-500/20 transition-all duration-500`} />
                 <div className="relative z-10 flex flex-col h-full justify-between">
@@ -269,8 +306,22 @@ const StudentDashboard = () => {
             ))}
           </motion.div>
 
-          {/* ── Curriculum Map (Module Cards) ── */}
-          {modules.length > 0 && (
+          {/* ── Legacy Mode: Flat Tabs ── */}
+          {legacyMode && (
+            <motion.div variants={itemVariants} className="pt-2 sm:pt-4">
+              <h3 className="text-xl sm:text-2xl font-black text-white flex items-center gap-3 mb-4 sm:mb-8">
+                <BookOpen className="w-6 h-6 sm:w-7 sm:h-7 text-indigo-400" /> Course Content
+              </h3>
+              <LegacyDiplomaView
+                lectures={legacyLectures}
+                materials={legacyMaterials}
+                homework={legacyHomework}
+              />
+            </motion.div>
+          )}
+
+          {/* ── Curriculum Map (Module Cards) — only for non-legacy diplomas ── */}
+          {!legacyMode && modules.length > 0 && (
             <motion.div variants={itemVariants} className="space-y-4 sm:space-y-6 pt-2 sm:pt-4">
               <h3 className="text-xl sm:text-2xl font-black text-white flex items-center gap-3 mb-4 sm:mb-8">
                 <BookOpen className="w-6 h-6 sm:w-7 sm:h-7 text-indigo-400" /> Curriculum Map
@@ -324,8 +375,8 @@ const StudentDashboard = () => {
             </motion.div>
           )}
 
-          {/* Empty state */}
-          {modules.length === 0 && (
+          {/* Empty state — only for non-legacy diplomas with 0 modules */}
+          {!legacyMode && modules.length === 0 && (
             <motion.div variants={itemVariants} className="text-center py-16 sm:py-24 bg-[#121214] rounded-2xl sm:rounded-[32px] border border-white/5 shadow-2xl">
               <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/5 rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto mb-4 sm:mb-6">
                 <GraduationCap className="w-8 h-8 sm:w-10 sm:h-10 text-slate-500" />

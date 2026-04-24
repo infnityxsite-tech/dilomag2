@@ -1,0 +1,340 @@
+{
+  "program_name": "AI Mastery Group 2",
+  "modules": [
+    {
+      "module_name": "Python Foundations",
+      "lectures": [
+        {
+          "lecture": "Master Python Basics: Variables, Math & Logic in One Lesson! 🐍",
+          "materials": [
+            "Python Programming Basic to Advanced (Full Course Material)"
+          ],
+          "homework": [
+            "Python Practical Labs: 20 Hands-on Tasks"
+          ]
+        },
+        {
+          "lecture": "Python Data Structures: Lists, Dictionaries & Advanced Looping",
+          "materials": [
+            "Python Programming Basic to Advanced (Full Course Material)"
+          ],
+          "homework": [
+            "Python Data Structures & Loops: 20 Practical Challenges"
+          ]
+        },
+        {
+          "lecture": "Python Functions Essentials: From Basics to Advanced Scope",
+          "materials": [
+            "Python Programming Basic to Advanced (Full Course Material)"
+          ],
+          "homework": [
+            "OOP & FUNCTION (LIGHT)"
+          ]
+        },
+        {
+          "lecture": "OOP in Python Part 2",
+          "materials": [
+            "Mastering OOP in Python: The Complete Source Code & Guide"
+          ],
+          "homework": [
+            "Python Functions Masterclass: 30 Practical Challenges"
+          ]
+        },
+        {
+          "lecture": "OOP in Python Part 3 + Final Project",
+          "materials": [
+            "Library Management System (OOP Tutorial) Final Project"
+          ],
+          "homework": []
+        }
+      ]
+    },
+    {
+      "module_name": "Mathematics & Data Analysis",
+      "lectures": [
+        {
+          "lecture": "Mathematics for Data Science P1",
+          "materials": [
+            "Numpy & Pandas (Complete Tutorial)"
+          ],
+          "homework": []
+        },
+        {
+          "lecture": "Mathematics for Data Science P2 + Numpy",
+          "materials": [
+            "Numpy & Pandas (Complete Tutorial)"
+          ],
+          "homework": []
+        },
+        {
+          "lecture": "Pandas: Python's Foundation for Data Manipulation",
+          "materials": [
+            "Pandas Advanced",
+            "Data File (Pokemon Data)"
+          ],
+          "homework": [
+            "Pandas Homework"
+          ]
+        },
+        {
+          "lecture": "Master Data Visualization with Matplotlib & Seaborn | Beginner to Pro",
+          "materials": [
+            "Visualization Notes (Matplotlib & Seaborn)",
+            "Master Data Visualization with Matplotlib & Seaborn | Beginner to Pro"
+          ],
+          "homework": []
+        },
+        {
+          "lecture": "Master Data Visualization with Matplotlib & Seaborn | Beginner to Pro 2",
+          "materials": [
+            "Visualization Notes (Matplotlib & Seaborn)",
+            "Master Data Visualization with Matplotlib & Seaborn | Beginner to Pro"
+          ],
+          "homework": []
+        },
+        {
+          "lecture": "📊 Capstone Project: Data Analysis with NumPy, Pandas, Matplotlib & Seaborn",
+          "materials": [
+            "📊 Capstone Project: Data Analysis with NumPy, Pandas, Matplotlib & Seaborn"
+          ],
+          "homework": [
+            "Capstone Project Lab 1",
+            "Capstone Project Lab 2",
+            "Capstone Project Lab 3",
+            "Capstone Project Lab 4"
+          ]
+        }
+      ]
+    },
+    {
+      "module_name": "Data Preprocessing",
+      "lectures": [
+        {
+          "lecture": "Data Preprocessing P1",
+          "materials": [
+            "Data Preprocessing P1 Notebook"
+          ],
+          "homework": []
+        },
+        {
+          "lecture": "Data Preprocessing P2",
+          "materials": [
+            "Comprehensive Guide to Data Preprocessing in Machine Learning"
+          ],
+          "homework": []
+        },
+        {
+          "lecture": "Data Preprocessing P3",
+          "materials": [
+            "Comprehensive Guide to Data Preprocessing in Machine Learning"
+          ],
+          "homework": []
+        },
+        {
+          "lecture": "Data Preprocessing P4",
+          "materials": [
+            "Comprehensive Guide to Data Preprocessing in Machine Learning"
+          ],
+          "homework": []
+        },
+        {
+          "lecture": "Data Preprocessing P5",
+          "materials": [
+            "Feature Engineering"
+          ],
+          "homework": []
+        }
+      ]
+    },
+    {
+      "module_name": "Machine Learning",
+      "lectures": [
+        {
+          "lecture": "Regression Analysis in Machine Learning: From Basics to Applications P1",
+          "materials": [
+            "Regression Analysis Notebook"
+          ],
+          "homework": [
+            "Lap 1"
+          ]
+        },
+        {
+          "lecture": "Classification Models in Machine Learning A Deep Dive",
+          "materials": [
+            "Classification Models in Machine Learning 4 A Deep Dive (Notebook)"
+          ],
+          "homework": [
+            "Lap 2"
+          ]
+        },
+        {
+          "lecture": "SVM Model and Applicaton",
+          "materials": [
+            "Classification Models in Machine Learning"
+          ],
+          "homework": [
+            "Lap 3"
+          ]
+        },
+        {
+          "lecture": "State-of-the-Art Boosting Algorithms AProfessional Guide to Modern Ensemble Learning",
+          "materials": [
+            "State-of-the-Art Boosting Algorithms AProfessional Guide to Modern Ensemble Learning"
+          ],
+          "homework": [
+            "Lap 4"
+          ]
+        },
+        {
+          "lecture": "ML Applicattion",
+          "materials": [
+            "Unsupervised Machine Learning (K-Means, PCA, etc.)"
+          ],
+          "homework": [
+            "Lap 5"
+          ]
+        },
+        {
+          "lecture": "Unsupervised Machine Learning Practical Understanding A clear, intuitive guide beyond classification and regression.",
+          "materials": [
+            "Unsupervised Machine Learning (K-Means, PCA, etc.)"
+          ],
+          "homework": []
+        }
+      ]
+    },
+    {
+      "module_name": "Deep Learning",
+      "lectures": [
+        {
+          "lecture": "Deep Learning Part1",
+          "materials": [
+            "Deep Learning Notebook Part1",
+            "Deep Learning Part1"
+          ],
+          "homework": [
+            "DL Lab 1",
+            "DL Lab 2"
+          ]
+        },
+        {
+          "lecture": "Deep Learning Part 2",
+          "materials": [
+            "Deep Learning Part 2 Notebook"
+          ],
+          "homework": [
+            "DL Lab 3",
+            "DL Lab 4",
+            "DL Lab 5"
+          ]
+        },
+        {
+          "lecture": "Deep Learning Part 3",
+          "materials": [
+            "Deep Learning Part 3 Notebook"
+          ],
+          "homework": [
+            "DL Lab 6",
+            "DL Lab 7"
+          ]
+        },
+        {
+          "lecture": "Deep Learning Part 4",
+          "materials": [
+            "Deep Learning Part 4 Notebook"
+          ],
+          "homework": [
+            "DL Lab 8",
+            "DL Lab 9",
+            "DL Lab 10"
+          ]
+        }
+      ]
+    },
+    {
+      "module_name": "Computer Vision",
+      "lectures": [
+        {
+          "lecture": "Computer Vision Object Detection Yolo Basics",
+          "materials": [
+            "Computer Vision Object Detection Yolo Basics"
+          ],
+          "homework": []
+        },
+        {
+          "lecture": "YOLO Application",
+          "materials": [
+            "CNN Application"
+          ],
+          "homework": []
+        },
+        {
+          "lecture": "Computer Vision Image Segmentation U net",
+          "materials": [
+            "CNN Fundamental"
+          ],
+          "homework": []
+        },
+        {
+          "lecture": "Transfer learning Application",
+          "materials": [
+            "CNN Exercise Notebook"
+          ],
+          "homework": []
+        },
+        {
+          "lecture": "RCNN LSTM",
+          "materials": [
+            "RNN Notebook (RCNN LSTM)"
+          ],
+          "homework": []
+        }
+      ]
+    },
+    {
+      "module_name": "Final Project",
+      "lectures": [
+        {
+          "lecture": "Full Machine learning Project 1",
+          "materials": [
+            "Full Machine learning Project Data 1"
+          ],
+          "homework": [
+            "Final Project Lab 1",
+            "Final Project Lab 2",
+            "Final Project Lab 3",
+            "Final Project Lab 4",
+            "Final Project Lab 5",
+            "Final Project Lab 6",
+            "Final Project Lab 7",
+            "Final Project Lab 8"
+          ]
+        }
+      ]
+    },
+    {
+      "module_name": "Advanced Sequence Models",
+      "lectures": [
+        {
+          "lecture": "Transformers",
+          "materials": [
+            "Sequence Model (Transformers)"
+          ],
+          "homework": [
+            "Sequence model Lab"
+          ]
+        }
+      ]
+    }
+  ],
+  "rules": [
+    "Each lecture must contain its own materials and homework",
+    "Materials may repeat across lectures",
+    "If no lab exists use empty homework array",
+    "Lap1-5 belong only to Machine Learning",
+    "Final Project Labs belong only to Full Machine learning Project",
+    "Sequence model Lab belongs only to Transformers",
+    "Capstone Project Labs belong only to Capstone Project lecture",
+    "DL Labs belong only to Deep Learning lectures in order"
+  ]
+}
