@@ -11,7 +11,7 @@ import { queueNotification } from './auth';
  * @param {string} contentType - The type of content (e.g., 'lecture', 'material', 'homework').
  * @param {string} actionUrl - URL where the student can view the content.
  */
-export const notifyStudentsForContent = async (diplomaIds, contentTitle, contentType, actionUrl = 'https://infinityx.edu') => {
+export const notifyStudentsForContent = async (diplomaIds, contentTitle, contentType, actionUrl = 'https://academy.infx.space/dashboard') => {
   if (!diplomaIds || diplomaIds.length === 0) {
     console.warn('notifyStudentsForContent: No diploma IDs provided. Skipping notifications to prevent global spam.');
     return;

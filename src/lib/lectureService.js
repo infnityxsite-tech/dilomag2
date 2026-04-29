@@ -27,8 +27,9 @@ export const createLecture = async (lectureData, { diplomaIds = [], moduleIds = 
     
     // Notify students enrolled in these diplomas
     if (diplomaIds.length > 0 && lectureData.title) {
+      const lectureUrl = `https://academy.infx.space/dashboard/lecture/${docRef.id}`;
       // Fire and forget
-      notifyStudentsForContent(diplomaIds, lectureData.title, 'Lecture').catch(console.error);
+      notifyStudentsForContent(diplomaIds, lectureData.title, 'Lecture', lectureUrl).catch(console.error);
     }
     
     return docRef.id;
@@ -147,8 +148,9 @@ export const updateLecture = async (id, data) => {
     if (data.diplomaIds !== undefined) {
       const newDiplomas = data.diplomaIds.filter(did => !oldDiplomaIds.includes(did));
       if (newDiplomas.length > 0 && (data.title || oldData.title)) {
+        const lectureUrl = `https://academy.infx.space/dashboard/lecture/${id}`;
         // Notify ONLY the new diplomas
-        notifyStudentsForContent(newDiplomas, data.title || oldData.title, 'Lecture').catch(console.error);
+        notifyStudentsForContent(newDiplomas, data.title || oldData.title, 'Lecture', lectureUrl).catch(console.error);
       }
     }
     
