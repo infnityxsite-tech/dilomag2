@@ -9,11 +9,48 @@ import {
   getDocs, 
   query, 
   where, 
-  serverTimestamp 
+  serverTimestamp,
+  arrayUnion,
+  arrayRemove
 } from 'firebase/firestore';
 import { notifyStudentsForContent } from './notificationService';
 
 const COLLECTION_NAME = 'lectureAssets';
+
+/**
+ * Add or remove specific IDs from asset N:M relationship arrays using arrayUnion/arrayRemove.
+ * Safe: never overwrites the full array, only appends or removes specific IDs.
+ * @param {string} id - Asset document ID
+ * @param {{ add?: {diplomaIds?,moduleIds?,lectureIds?}, remove?: {diplomaIds?,moduleIds?,lectureIds?} }} diff
+ */
+export const updateAssetAssignments = async (id, { add = {}, remove = {} } = {}) => {
+  try {
+    const assetRef = doc(db, COLLECTION_NAME, id);
+    const addUpdates = {};
+    const removeUpdates = {};
+
+    if (add.diplomaIds?.length) addUpdates.diplomaIds = arrayUnion(...add.diplomaIds);
+    if (add.moduleIds?.length)  addUpdates.moduleIds  = arrayUnion(...add.moduleIds);
+    if (add.lectureIds?.length) addUpdates.lectureIds = arrayUnion(...add.lectureIds);
+
+    if (remove.diplomaIds?.length) removeUpdates.diplomaIds = arrayRemove(...remove.diplomaIds);
+    if (remove.moduleIds?.length)  removeUpdates.moduleIds  = arrayRemove(...remove.moduleIds);
+    if (remove.lectureIds?.length) removeUpdates.lectureIds = arrayRemove(...remove.lectureIds);
+
+    // Apply adds first, then removes (separate writes to avoid conflicting ops on same field)
+    if (Object.keys(addUpdates).length > 0) {
+      await updateDoc(assetRef, { ...addUpdates, updatedAt: serverTimestamp() });
+    }
+    if (Object.keys(removeUpdates).length > 0) {
+      await updateDoc(assetRef, { ...removeUpdates, updatedAt: serverTimestamp() });
+    }
+    return { success: true };
+  } catch (error) {
+    console.error('Error updating asset assignments:', error);
+    return { success: false, error: error.message };
+  }
+};
+
 
 /**
  * Create a new asset and optionally trigger notifications
@@ -173,3 +210,40 @@ export const getAllAssets = async () => {
     return [];
   }
 };
+
+/**
+ * Get all assets for a diploma (scoped, any type).
+ */
+export const getAssetsForDiploma = async (diplomaId) => {
+  try {
+    const assetsRef = collection(db, COLLECTION_NAME);
+    const q = query(assetsRef, where('diplomaIds', 'array-contains', diplomaId));
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  } catch (error) {
+    console.error('Error getting assets for diploma:', error);
+    return [];
+  }
+};
+
+/**
+ * Resolve an asset by ID, transparently following canonicalId
+ * if the document has been archived (status: "merged").
+ * Returns the canonical document or null.
+ */
+export const getCanonicalAsset = async (id) => {
+  try {
+    const snap = await getDoc(doc(db, COLLECTION_NAME, id));
+    if (!snap.exists()) return null;
+    const data = { id: snap.id, ...snap.data() };
+    if (data.status === 'merged' && data.canonicalId) {
+      const canonSnap = await getDoc(doc(db, COLLECTION_NAME, data.canonicalId));
+      if (canonSnap.exists()) return { id: canonSnap.id, ...canonSnap.data() };
+    }
+    return data;
+  } catch (error) {
+    console.error('Error resolving canonical asset:', error);
+    return null;
+  }
+};
+

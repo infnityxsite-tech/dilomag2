@@ -11,6 +11,7 @@ import FeedbackPage from './components/FeedbackPage';
 import MyProgressPage from './components/MyProgressPage';
 import ModulePage from './components/ModulePage';
 import LecturePage from './components/LecturePage';
+import LearningSheetPage from './components/LearningSheetPage';
 
 import './App.css';
 
@@ -86,6 +87,14 @@ const AppRoutes = () => {
         element={
           <ProtectedStudentRoute>
             <MyProgressPage />
+          </ProtectedStudentRoute>
+        } 
+      />
+      <Route 
+        path="/my-learning-sheet" 
+        element={
+          <ProtectedStudentRoute>
+            <LearningSheetPage />
           </ProtectedStudentRoute>
         } 
       />

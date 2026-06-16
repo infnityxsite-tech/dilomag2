@@ -27,10 +27,11 @@ import { runMigration, isMigrationComplete } from '../lib/migrateLegacyData';
 import { runAssetMigration } from '../lib/assetMigration';
 import { runRedistributionDryRun, applyRedistribution } from '../lib/contentRedistribution';
 import { runInferenceDryRun, applyInference } from '../lib/legacyInference';
+import { STRICT_PLAN } from '../lib/strictCurriculumPlan';
 import AdminContentStudio from './AdminContentStudio';
 import GoogleDriveSync from './GoogleDriveSync';
 import ContentLibraryTab from './ContentLibraryTab';
-import AdminProgressCampaignTab from './AdminProgressCampaignTab';
+import AdminLearningSheet from './AdminLearningSheet';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -1231,8 +1232,8 @@ const handleAddPartialScore = async (e) => {
       case 'drive-sync':
         return <GoogleDriveSync />;
 
-      case 'progress-campaign':
-        return <AdminProgressCampaignTab adminScopeDiplomaId={adminScopeDiplomaId} scopedEmails={scopedEmails} />;
+      case 'learning-sheet':
+        return <AdminLearningSheet adminScopeDiplomaId={adminScopeDiplomaId} diplomas={diplomas} scopedEmails={scopedEmails} />;
 
       case 'submissions':
         const scopedSubmissions = adminScopeDiplomaId === 'all'
@@ -1535,9 +1536,39 @@ const handleAddPartialScore = async (e) => {
                       <Plus className="w-4 h-4 mr-1" /> Add Module
                     </Button>
                   </form>
-                  {diplomaModules.length > 0 ? diplomaModules.map((mod, idx) => {
-                    const modLectures = diplomaLectures.filter(l => l.moduleId === mod.id);
-                    return (
+                  {(() => {
+                    // Build N:M-aware lecture counts using moduleIds[] with old moduleId as fallback
+                    // Build the set of authoritative module names for this diploma (if covered by STRICT_PLAN)
+                    const selectedDiplomaName = diplomas.find(d => d.id === selectedDiplomaId)?.name;
+                    const planModNames = selectedDiplomaName === STRICT_PLAN.programName
+                      ? new Set(STRICT_PLAN.modules.map(m => m.name.trim().toLowerCase()))
+                      : null; // null = no name filter, show all populated
+
+                    const populatedModules = diplomaModules
+                      .map(mod => ({
+                        mod,
+                        // Only count lectures linked via the new moduleIds[] array.
+                        // Lectures still carrying ONLY the old single moduleId field
+                        // belong to legacy (pre-migration) modules that should be hidden.
+                        modLectures: diplomaLectures.filter(l =>
+                          l.moduleIds?.includes(mod.id)
+                        ),
+                      }))
+                      .filter(({ mod, modLectures }) => {
+                        // Must have at least 1 lecture
+                        if (modLectures.length === 0) return false;
+                        // If this diploma is covered by STRICT_PLAN, only show plan modules
+                        if (planModNames) {
+                          return planModNames.has(mod.name?.trim().toLowerCase());
+                        }
+                        return true;
+                      });
+
+                    if (populatedModules.length === 0) {
+                      return <p className="text-sm text-gray-400 text-center py-4">No populated modules found. Create lectures and assign them to modules.</p>;
+                    }
+
+                    return populatedModules.map(({ mod, modLectures }, idx) => (
                       <div key={mod.id} className="p-3 bg-white rounded-lg border border-gray-200">
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
@@ -1554,30 +1585,26 @@ const handleAddPartialScore = async (e) => {
                             </Button>
                           </div>
                         </div>
-                        {modLectures.length > 0 && (
-                          <div className="ml-6 space-y-1">
-                            {modLectures.map(lect => (
-                              <div key={lect.id} className="flex items-center gap-2 text-sm text-gray-600 py-1">
-                                <Play className="w-3 h-3 text-gray-400" />
-                                <div className="flex-1 flex items-center gap-2">
-                                  <span>{lect.title}</span>
-                                  <span className="text-xs text-gray-400">{lect.duration}</span>
-                                </div>
-                                <Button
-                                  variant="ghost" size="sm" className="h-5 w-5 p-0 text-red-400 hover:text-red-600 hover:bg-red-50"
-                                  onClick={(e) => handleDeleteLecture(lect.id, lect.title, e)}
-                                >
-                                  <Trash2 className="w-3 h-3" />
-                                </Button>
+                        <div className="ml-6 space-y-1">
+                          {modLectures.map(lect => (
+                            <div key={lect.id} className="flex items-center gap-2 text-sm text-gray-600 py-1">
+                              <Play className="w-3 h-3 text-gray-400" />
+                              <div className="flex-1 flex items-center gap-2">
+                                <span>{lect.title}</span>
+                                <span className="text-xs text-gray-400">{lect.duration}</span>
                               </div>
-                            ))}
-                          </div>
-                        )}
+                              <Button
+                                variant="ghost" size="sm" className="h-5 w-5 p-0 text-red-400 hover:text-red-600 hover:bg-red-50"
+                                onClick={(e) => handleDeleteLecture(lect.id, lect.title, e)}
+                              >
+                                <Trash2 className="w-3 h-3" />
+                              </Button>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    );
-                  }) : (
-                    <p className="text-sm text-gray-400 text-center py-4">No modules yet.</p>
-                  )}
+                    ));
+                  })()}
                 </div>
               )}
 
@@ -1795,8 +1822,8 @@ const handleAddPartialScore = async (e) => {
           <TabButton value="feedback" isActive={activeTab === 'feedback'} onClick={setActiveTab} icon={MessageSquare} colorScheme="cyan">
             Feedback
           </TabButton>
-          <TabButton value="progress-campaign" isActive={activeTab === 'progress-campaign'} onClick={setActiveTab} icon={Target} colorScheme="indigo">
-            Progress Tracking
+          <TabButton value="learning-sheet" isActive={activeTab === 'learning-sheet'} onClick={setActiveTab} icon={BookOpen} colorScheme="teal">
+            Learning Sheet
           </TabButton>
         </div>
 

@@ -1,0 +1,3341 @@
+{
+  "generated": "2026-06-16T06:34:45.798Z",
+  "diplomaId": "zCD76Wrqrzw0f8tF4oLp",
+  "verdict": "SAFE_TO_APPLY",
+  "blockers": {
+    "reviewRequired": 0,
+    "notFound": 0
+  },
+  "summary": {
+    "modulesToCreate": 0,
+    "modulesExist": 5,
+    "lecturesTotal": 35,
+    "found": 35,
+    "notFound": 0,
+    "reviewRequired": 0,
+    "materialsTotal": 40,
+    "matFound": 40,
+    "matMissing": 0,
+    "hwTotal": 22,
+    "hwFound": 22,
+    "hwMissing": 0,
+    "relToAdd": 21,
+    "relExist": 41,
+    "lectureOnlyMoves": 1,
+    "dbLectures": 47,
+    "dbAssets": 71,
+    "dbModules": 13,
+    "unmatchedLectures": 12
+  },
+  "unmatchedLectures": [
+    {
+      "id": "5lUKEyEjoHg1sVhJ8RLD",
+      "title": "Data Preprocessing P5",
+      "moduleIds": [
+        "8RKnHh6WoJ21SKp65h76",
+        "4slgZ0S9gfEbdzyZwSO0"
+      ],
+      "createdAt": "2026-04-24T00:48:16.100Z"
+    },
+    {
+      "id": "99x6D1iWn5gT70kzhXkr",
+      "title": "Mathematics & Visualization Quick Revision Session",
+      "moduleIds": [
+        "ty5nIeeeCD0lIIRN12ox"
+      ],
+      "createdAt": "2026-04-23T05:20:43.154Z"
+    },
+    {
+      "id": "Bp9PosvehHRfUlYjqZVV",
+      "title": "Old Material (Data Preprocessing P2)",
+      "moduleIds": [
+        "ty5nIeeeCD0lIIRN12ox"
+      ],
+      "createdAt": "2026-04-23T05:20:41.822Z"
+    },
+    {
+      "id": "KseDhGrSwt1jjF3AmyYP",
+      "title": "Mathematics & Visualization Quick Revision Session",
+      "moduleIds": [
+        "YABhnwsFe1kn1ksQ1sax"
+      ],
+      "createdAt": "2026-04-23T03:07:54.542Z"
+    },
+    {
+      "id": "LmCVcel7eulfnRh0cCoh",
+      "title": "Master Data Visualization with Matplotlib & Seaborn | Beginner to Pro 2",
+      "moduleIds": [
+        "YABhnwsFe1kn1ksQ1sax",
+        "R1Up5vkSc1TkhSXxBhKh"
+      ],
+      "createdAt": "2026-04-23T03:07:50.515Z"
+    },
+    {
+      "id": "XLQsaTPNeqplEguEnmYt",
+      "title": "Old Material (Intro to Data Preprocessing) ",
+      "moduleIds": [
+        "YABhnwsFe1kn1ksQ1sax"
+      ],
+      "createdAt": "2026-04-23T03:07:51.811Z"
+    },
+    {
+      "id": "rZzfeQ8dX0CWFC5g3TMn",
+      "title": "Old Material (Data Preprocessing P1)",
+      "moduleIds": [
+        "ty5nIeeeCD0lIIRN12ox"
+      ],
+      "createdAt": "2026-04-23T05:20:41.512Z"
+    },
+    {
+      "id": "regc15WvtLOY4TFUDyrr",
+      "title": "CNN App",
+      "moduleIds": [],
+      "createdAt": "2026-04-23T14:33:26.878Z"
+    },
+    {
+      "id": "sYvqz1uU6792GGKRwQ9U",
+      "title": "Old Material (Data Preprocessing P3)",
+      "moduleIds": [],
+      "createdAt": "2026-04-23T14:33:26.878Z"
+    },
+    {
+      "id": "tcOGEqoEZsjx1Kokz2n0",
+      "title": "Old Material (Data Preprocessing P5)",
+      "moduleIds": [],
+      "createdAt": "2026-04-23T14:33:26.878Z"
+    },
+    {
+      "id": "uqeXm7mV4vixofqHV2ad",
+      "title": "Mathematics & Visualization Quick Revision Session",
+      "moduleIds": [],
+      "createdAt": "2026-04-23T14:33:26.878Z"
+    },
+    {
+      "id": "xGHASanwo6chO6lLVHVi",
+      "title": "Old Material (Data Preprocessing P4)",
+      "moduleIds": [
+        "ty5nIeeeCD0lIIRN12ox"
+      ],
+      "createdAt": "2026-04-23T05:20:42.325Z"
+    }
+  ],
+  "modules": [
+    {
+      "name": "Python Foundations",
+      "order": 1,
+      "status": "EXISTS",
+      "dbId": "HrsiVRAPbJBDvEGjqW4s",
+      "dbName": "Python Foundations",
+      "lectures": [
+        {
+          "targetTitle": "Master Python Basics: Variables, Math & Logic in One Lesson",
+          "exactDBTitle": null,
+          "order": 1,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "8qhHgZ8re0myEitg1zJF",
+          "dbTitle": "Master Python Basics: Variables, Math & Logic in One Lesson! 🐍",
+          "currentModule": "Python Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Python Fundamentals: Lecture Notes & Examples",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "4uBLcZhGD0DyoJWmy7qp",
+              "dbTitle": "Python Fundamentals: Lecture Notes & Examples",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "WILL_LINK"
+            }
+          ],
+          "homework": [
+            {
+              "target": "Python Practical Labs: 20 Hands-on Tasks",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "EBFhk2CT5Xw2pjUX1Er7",
+              "dbTitle": "Python Practical Labs: 20 Hands-on Tasks",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB",
+                "8qhHgZ8re0myEitg1zJF"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ]
+        },
+        {
+          "targetTitle": "Python Data Structures: Lists, Dictionaries & Advanced Looping",
+          "exactDBTitle": null,
+          "order": 2,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "ICzjdBNZyGz2HoglBpyZ",
+          "dbTitle": "Python Data Structures: Lists, Dictionaries & Advanced Looping",
+          "currentModule": "Python Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Python Fundamentals: Lecture Notes & Examples",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "4uBLcZhGD0DyoJWmy7qp",
+              "dbTitle": "Python Fundamentals: Lecture Notes & Examples",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "WILL_LINK"
+            }
+          ],
+          "homework": [
+            {
+              "target": "Python Practical Labs: 20 Hands-on Tasks",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "EBFhk2CT5Xw2pjUX1Er7",
+              "dbTitle": "Python Practical Labs: 20 Hands-on Tasks",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB",
+                "8qhHgZ8re0myEitg1zJF"
+              ],
+              "action": "WILL_LINK"
+            },
+            {
+              "target": "Python Data Structures & Loops: 20 Practical Challenges",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "1UzOZMbf8Zn0pHEu36MV",
+              "dbTitle": "Python Data Structures & Loops: 20 Practical Challenges",
+              "currentLectureIds": [
+                "l3i6oLjV6XW5IdfIDYtR",
+                "ICzjdBNZyGz2HoglBpyZ"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ]
+        },
+        {
+          "targetTitle": "Python Functions Essentials: From Basics to Advanced Scope",
+          "exactDBTitle": null,
+          "order": 3,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "yWtiq1yRRFIUyf3ifYNV",
+          "dbTitle": "Python Functions Essentials: From Basics to Advanced Scope",
+          "currentModule": "Python Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Source Code: Python Functions & Modular Programming",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "2SNNoqBUQnHzFAP6odaD",
+              "dbTitle": "Source Code: Python Functions & Modular Programming",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "WILL_LINK"
+            }
+          ],
+          "homework": [
+            {
+              "target": "Python Functions Masterclass: 30 Practical Challenges",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "SYSvgqb52jE28WhRjWC0",
+              "dbTitle": "Python Functions Masterclass: 30 Practical Challenges",
+              "currentLectureIds": [
+                "oOatUO9GSkh1IxhZtISZ",
+                "lIj15gLUZbCTsiYe4HA0"
+              ],
+              "action": "WILL_LINK"
+            },
+            {
+              "target": "OOP & FUNCTION (LIGHT)",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "0NUFVT3ge0KfqPbLHpsZ",
+              "dbTitle": "OOP & FUNCTION (LIGHT)",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB",
+                "yWtiq1yRRFIUyf3ifYNV"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ]
+        },
+        {
+          "targetTitle": "From Functions to Objects: Smart Student Project & OOP Basics",
+          "exactDBTitle": null,
+          "order": 4,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "Z0wweFhjmBzevMe8OGya",
+          "dbTitle": "From Functions to Objects: Smart Student Project & OOP Basics",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "REASSIGN",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [],
+          "homework": []
+        },
+        {
+          "targetTitle": "OOP in Python Part 2",
+          "exactDBTitle": null,
+          "order": 5,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "lIj15gLUZbCTsiYe4HA0",
+          "dbTitle": "OOP in Python Part 2 ",
+          "currentModule": "Python Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Mastering OOP in Python: The Complete Source Code & Guide",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "aYLhNP3WSmXSpNKU7myR",
+              "dbTitle": "Mastering OOP in Python: The Complete Source Code & Guide",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB",
+                "lIj15gLUZbCTsiYe4HA0"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": [
+            {
+              "target": "Python Functions Masterclass: 30 Practical Challenges",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "SYSvgqb52jE28WhRjWC0",
+              "dbTitle": "Python Functions Masterclass: 30 Practical Challenges",
+              "currentLectureIds": [
+                "oOatUO9GSkh1IxhZtISZ",
+                "lIj15gLUZbCTsiYe4HA0"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ]
+        },
+        {
+          "targetTitle": "OOP in Python Part 3 + Final Project",
+          "exactDBTitle": null,
+          "order": 6,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "5OumelkH1IhpRl1tTHy0",
+          "dbTitle": "OOP in Python Part 3 + Final Project",
+          "currentModule": "Python Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Library Management System (OOP Tutorial) Final Project",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "q2eu9zJKOel5isbkf4HP",
+              "dbTitle": "Library Management System (OOP Tutorial) Final Project",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB",
+                "5OumelkH1IhpRl1tTHy0"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": []
+        }
+      ]
+    },
+    {
+      "name": "Mathematics & Data Analysis",
+      "order": 2,
+      "status": "EXISTS",
+      "dbId": "R1Up5vkSc1TkhSXxBhKh",
+      "dbName": "Mathematics & Data Analysis",
+      "lectures": [
+        {
+          "targetTitle": "Mathematics for Data Science P1",
+          "exactDBTitle": null,
+          "order": 1,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "3l2tr7EcVzGhjMIQtal4",
+          "dbTitle": "Mathematics for Data Science P1",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Mathematics for Data Science Book",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "NoqJtNAwFNrdbsA7Bc3K",
+              "dbTitle": "Mathematics for Data Science Book",
+              "currentLectureIds": [
+                "3l2tr7EcVzGhjMIQtal4"
+              ],
+              "action": "ALREADY_LINKED"
+            },
+            {
+              "target": "Numpy & Pandas (Complete Tutorial)",
+              "status": "FOUND",
+              "method": "CONTAINS",
+              "score": 0.9,
+              "dbId": "Qn16xXFGAbxmz1htqzph",
+              "dbTitle": "Pandas",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "WILL_LINK"
+            }
+          ],
+          "homework": []
+        },
+        {
+          "targetTitle": "Mathematics for Data Science P2 + NumPy",
+          "exactDBTitle": null,
+          "order": 2,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "n82KqCV03He4DbXV0mx3",
+          "dbTitle": "Mathematics for Data Science P2 + Numpy",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Mathematics for Data Science Book",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "NoqJtNAwFNrdbsA7Bc3K",
+              "dbTitle": "Mathematics for Data Science Book",
+              "currentLectureIds": [
+                "3l2tr7EcVzGhjMIQtal4"
+              ],
+              "action": "WILL_LINK"
+            },
+            {
+              "target": "Numpy & Pandas (Complete Tutorial)",
+              "status": "FOUND",
+              "method": "CONTAINS",
+              "score": 0.9,
+              "dbId": "Qn16xXFGAbxmz1htqzph",
+              "dbTitle": "Pandas",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "WILL_LINK"
+            }
+          ],
+          "homework": []
+        },
+        {
+          "targetTitle": "Pandas: Python's Foundation for Data Manipulation",
+          "exactDBTitle": null,
+          "order": 3,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "PGhpoKvFdHvIm0LUEbh4",
+          "dbTitle": "Pandas: Python's Foundation for Data Manipulation",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Pandas",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "Qn16xXFGAbxmz1htqzph",
+              "dbTitle": "Pandas",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "WILL_LINK"
+            },
+            {
+              "target": "Pandas Advanced",
+              "status": "FOUND",
+              "method": "CONTAINS",
+              "score": 0.9,
+              "dbId": "Qn16xXFGAbxmz1htqzph",
+              "dbTitle": "Pandas",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "WILL_LINK"
+            },
+            {
+              "target": "Data File (Pokemon Data)",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "9Ulvg2zdTUDkQd83q2wa",
+              "dbTitle": "Data File (Pokemon Data)",
+              "currentLectureIds": [
+                "xTWDakEaOiDxjRdbFb1d",
+                "PGhpoKvFdHvIm0LUEbh4"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": [
+            {
+              "target": "Pandas Homework",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "SIDsj9cDz3KLFdDw5kms",
+              "dbTitle": "Pandas Homework",
+              "currentLectureIds": [
+                "PGhpoKvFdHvIm0LUEbh4",
+                "LmCVcel7eulfnRh0cCoh"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ]
+        },
+        {
+          "targetTitle": "Master Data Visualization with Matplotlib & Seaborn | Beginner to Pro",
+          "exactDBTitle": null,
+          "order": 4,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "jkhBEL37sg8ACnGGUqWS",
+          "dbTitle": "Master Data Visualization with Matplotlib & Seaborn | Beginner to Pro",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Master Data Visualization with Matplotlib & Seaborn | Beginner to Pro",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "uBm01lwht5yWVqUtsR48",
+              "dbTitle": "Master Data Visualization with Matplotlib & Seaborn | Beginner to Pro",
+              "currentLectureIds": [
+                "jkhBEL37sg8ACnGGUqWS",
+                "LmCVcel7eulfnRh0cCoh"
+              ],
+              "action": "ALREADY_LINKED"
+            },
+            {
+              "target": "Mathematic & Visualization Quick Revision Session",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "DOEzv1NAzCkq6ytJN4HQ",
+              "dbTitle": "Mathematic & Visualization Quick Revision Session",
+              "currentLectureIds": [
+                "KseDhGrSwt1jjF3AmyYP"
+              ],
+              "action": "WILL_LINK"
+            },
+            {
+              "target": "📊 Capstone Project: Data Analysis with NumPy, Pandas, Matplotlib & Seaborn",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "LFcUt6Ilntiaykw2JOGe",
+              "dbTitle": "📊 Capstone Project: Data Analysis with NumPy, Pandas, Matplotlib & Seaborn",
+              "currentLectureIds": [
+                "riAVKvktpe9yxpOuHLMD"
+              ],
+              "action": "WILL_LINK"
+            }
+          ],
+          "homework": []
+        },
+        {
+          "targetTitle": "Capstone Project: Data Analysis with NumPy, Pandas, Matplotlib & Seaborn",
+          "exactDBTitle": null,
+          "order": 5,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "riAVKvktpe9yxpOuHLMD",
+          "dbTitle": "📊 Capstone Project: Data Analysis with NumPy, Pandas, Matplotlib & Seaborn",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Capstone Project: Data Analysis with NumPy, Pandas, Matplotlib & Seaborn",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "LFcUt6Ilntiaykw2JOGe",
+              "dbTitle": "📊 Capstone Project: Data Analysis with NumPy, Pandas, Matplotlib & Seaborn",
+              "currentLectureIds": [
+                "riAVKvktpe9yxpOuHLMD"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": []
+        }
+      ]
+    },
+    {
+      "name": "Data Preprocessing",
+      "order": 3,
+      "status": "EXISTS",
+      "dbId": "4slgZ0S9gfEbdzyZwSO0",
+      "dbName": "Data Preprocessing",
+      "lectures": [
+        {
+          "targetTitle": "Data Preprocessing P1",
+          "exactDBTitle": null,
+          "order": 1,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "A8V6TXSQwyNboq6wY87W",
+          "dbTitle": "Data Preprocessing P1",
+          "currentModule": "Data Preprocessing",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": true,
+          "materials": [
+            {
+              "target": "Data Preprocessing P1 Notebook",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "0NjL4laObY0jk0jf24x9",
+              "dbTitle": "Data Preprocessing P1 Notebook",
+              "currentLectureIds": [
+                "xTWDakEaOiDxjRdbFb1d",
+                "A8V6TXSQwyNboq6wY87W"
+              ],
+              "action": "ALREADY_LINKED"
+            },
+            {
+              "target": "Comprehensive Guide to Data Preprocessing in Machine Learning",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "0YQgo98ikDjCbOtUFGfB",
+              "dbTitle": "Comprehensive Guide to Data Preprocessing in Machine Learning",
+              "currentLectureIds": [
+                "9gcSLdlXhYbq35dCiSNz",
+                "0YwZWsl6ehkjsRBABr3S",
+                "PCQxIFcEAEe0tFsSh1ZF",
+                "xC2uhb2lVwCPr8yzunPB",
+                "EonyD6HciDv9bTCzczaQ"
+              ],
+              "action": "WILL_LINK"
+            }
+          ],
+          "homework": []
+        },
+        {
+          "targetTitle": "Data Preprocessing P2",
+          "exactDBTitle": null,
+          "order": 2,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "9gcSLdlXhYbq35dCiSNz",
+          "dbTitle": "Data Preprocessing P2",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": true,
+          "materials": [
+            {
+              "target": "Comprehensive Guide to Data Preprocessing in Machine Learning",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "0YQgo98ikDjCbOtUFGfB",
+              "dbTitle": "Comprehensive Guide to Data Preprocessing in Machine Learning",
+              "currentLectureIds": [
+                "9gcSLdlXhYbq35dCiSNz",
+                "0YwZWsl6ehkjsRBABr3S",
+                "PCQxIFcEAEe0tFsSh1ZF",
+                "xC2uhb2lVwCPr8yzunPB",
+                "EonyD6HciDv9bTCzczaQ"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": []
+        },
+        {
+          "targetTitle": "Data Preprocessing P3",
+          "exactDBTitle": null,
+          "order": 3,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "0YwZWsl6ehkjsRBABr3S",
+          "dbTitle": "Data Preprocessing P3",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": true,
+          "materials": [
+            {
+              "target": "Comprehensive Guide to Data Preprocessing in Machine Learning",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "0YQgo98ikDjCbOtUFGfB",
+              "dbTitle": "Comprehensive Guide to Data Preprocessing in Machine Learning",
+              "currentLectureIds": [
+                "9gcSLdlXhYbq35dCiSNz",
+                "0YwZWsl6ehkjsRBABr3S",
+                "PCQxIFcEAEe0tFsSh1ZF",
+                "xC2uhb2lVwCPr8yzunPB",
+                "EonyD6HciDv9bTCzczaQ"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": []
+        },
+        {
+          "targetTitle": "Data Preprocessing P4",
+          "exactDBTitle": null,
+          "order": 4,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "EonyD6HciDv9bTCzczaQ",
+          "dbTitle": "Data Preprocessing P4",
+          "currentModule": "Data Preprocessing",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": true,
+          "materials": [
+            {
+              "target": "Comprehensive Guide to Data Preprocessing in Machine Learning",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "0YQgo98ikDjCbOtUFGfB",
+              "dbTitle": "Comprehensive Guide to Data Preprocessing in Machine Learning",
+              "currentLectureIds": [
+                "9gcSLdlXhYbq35dCiSNz",
+                "0YwZWsl6ehkjsRBABr3S",
+                "PCQxIFcEAEe0tFsSh1ZF",
+                "xC2uhb2lVwCPr8yzunPB",
+                "EonyD6HciDv9bTCzczaQ"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": []
+        }
+      ]
+    },
+    {
+      "name": "Machine Learning",
+      "order": 4,
+      "status": "EXISTS",
+      "dbId": "8RKnHh6WoJ21SKp65h76",
+      "dbName": "Machine Learning",
+      "lectures": [
+        {
+          "targetTitle": "Regression Analysis in Machine Learning: From Basics to Applications P1",
+          "exactDBTitle": null,
+          "order": 1,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "HdhaxOzFFHSeoRu9LdpA",
+          "dbTitle": "Regression Analysis in Machine Learning: From Basics to Applications P1",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Regression Analysis in Machine Learning: NoteBook - Data - Slides",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "vh2GnnKTMMfGzCO0LmNV",
+              "dbTitle": "Regression Analysis in Machine Learning: NoteBook - Data - Slides",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "WILL_LINK"
+            }
+          ],
+          "homework": [
+            {
+              "target": "Lap 1",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "0QrqneLrGm2gBpC5BHe6",
+              "dbTitle": "Lap 1",
+              "currentLectureIds": [
+                "HdhaxOzFFHSeoRu9LdpA",
+                "talZdvqvmIsfV6RwXite"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ]
+        },
+        {
+          "targetTitle": "Classification Models in Machine Learning: A Deep Dive",
+          "exactDBTitle": null,
+          "order": 2,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "n0ftozww9D4W4PGPeuXv",
+          "dbTitle": "Classification Models in Machine Learning  A Deep Dive",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Classification Models in Machine Learning 4 A Deep Dive (Notebook)",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "071BaIQ9Edsf8gaw9IR6",
+              "dbTitle": "Classification Models in Machine Learning 4 A Deep Dive (Notebook)",
+              "currentLectureIds": [
+                "n0ftozww9D4W4PGPeuXv",
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": [
+            {
+              "target": "Lap 2",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "MwSvC0MFW90WF3NhCX0Y",
+              "dbTitle": "Lap 2",
+              "currentLectureIds": [
+                "oRN2Zmwk1sw10P5XqRee",
+                "n0ftozww9D4W4PGPeuXv"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ]
+        },
+        {
+          "targetTitle": "SVM Model and Application",
+          "exactDBTitle": null,
+          "order": 3,
+          "status": "FOUND",
+          "matchMethod": "ALT_EXACT",
+          "matchScore": 0.98,
+          "dbId": "MtrEziftUcK8j4F5A8OZ",
+          "dbTitle": "SVM Model and Applicaton",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Classification Models in Machine Learning",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "3YGjnkROgyXC1GJ4s9DM",
+              "dbTitle": "Classification Models in Machine Learning",
+              "currentLectureIds": [
+                "MtrEziftUcK8j4F5A8OZ",
+                "n0ftozww9D4W4PGPeuXv"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": [
+            {
+              "target": "Lap 3",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "3xgGxYjk216o2wm1MrYw",
+              "dbTitle": "Lap 3",
+              "currentLectureIds": [
+                "uKFRz9Wsc9oRh22SztoC",
+                "MtrEziftUcK8j4F5A8OZ"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ]
+        },
+        {
+          "targetTitle": "State-of-the-Art Boosting Algorithms: A Professional Guide to Modern Ensemble Learning",
+          "exactDBTitle": null,
+          "order": 4,
+          "status": "FOUND",
+          "matchMethod": "ALT_EXACT",
+          "matchScore": 0.98,
+          "dbId": "7X9QBBinFUzdF0QyjnuP",
+          "dbTitle": "State-of-the-Art Boosting Algorithms AProfessional Guide to Modern Ensemble Learning",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "State-of-the-Art Boosting Algorithms AProfessional Guide to Modern Ensemble Learning",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "6fszyK5H6c5aX3KZkygq",
+              "dbTitle": "State-of-the-Art Boosting Algorithms AProfessional Guide to Modern Ensemble Learning",
+              "currentLectureIds": [
+                "7X9QBBinFUzdF0QyjnuP"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": [
+            {
+              "target": "Lap 4",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "dqk5kGoiSZIEFpOPNCRM",
+              "dbTitle": "Lap 4 ",
+              "currentLectureIds": [
+                "7X9QBBinFUzdF0QyjnuP",
+                "nRrt0d7HwPEcK04fwIMV"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ]
+        },
+        {
+          "targetTitle": "ML Application",
+          "exactDBTitle": null,
+          "order": 5,
+          "status": "FOUND",
+          "matchMethod": "ALT_EXACT",
+          "matchScore": 0.98,
+          "dbId": "P1uTVHq0C3wYdZsm6PO6",
+          "dbTitle": "ML Applicattion",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Unsupervised Machine Learning Notebook",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "oqQUI3CX9K92rrBNOnMr",
+              "dbTitle": "Unsupervised Machine Learning Notebook",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "WILL_LINK"
+            }
+          ],
+          "homework": [
+            {
+              "target": "Lap 5",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "SD91g1fhdWKwxTbbZsgg",
+              "dbTitle": "Lap 5",
+              "currentLectureIds": [
+                "5WK17Lg1Kw7D6sDUKqZT",
+                "P1uTVHq0C3wYdZsm6PO6"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ]
+        },
+        {
+          "targetTitle": "Unsupervised Machine Learning: Practical Understanding beyond Classification",
+          "exactDBTitle": "Unsupervised Machine Learning Practical Understanding A clear, intuitive guide beyond classification and regression.",
+          "order": 6,
+          "status": "FOUND",
+          "matchMethod": "EXACT_DB_CONFIRMED",
+          "matchScore": 1,
+          "dbId": "WgY6tkPdU0JM9GDsPdZE",
+          "dbTitle": "Unsupervised Machine Learning Practical Understanding A clear, intuitive guide beyond classification and regression.",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Unsupervised Machine Learning Notebook",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "oqQUI3CX9K92rrBNOnMr",
+              "dbTitle": "Unsupervised Machine Learning Notebook",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "WILL_LINK"
+            },
+            {
+              "target": "Unsupervised Machine Learning Practical Understanding A clear, intuitive guide beyond classification and regression.",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "2N5MQ6Fs5iOsRPBp5xqM",
+              "dbTitle": "Unsupervised Machine Learning Practical Understanding A clear, intuitive guide beyond classification and regression.",
+              "currentLectureIds": [
+                "WgY6tkPdU0JM9GDsPdZE"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": []
+        },
+        {
+          "targetTitle": "Full Machine Learning Project 1",
+          "exactDBTitle": null,
+          "order": 7,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "talZdvqvmIsfV6RwXite",
+          "dbTitle": "Full Machine learning Project 1",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "REASSIGN",
+          "lectureOnlyMove": true,
+          "preserveExisting": false,
+          "materials": [],
+          "homework": []
+        }
+      ]
+    },
+    {
+      "name": "Deep Learning",
+      "order": 5,
+      "status": "EXISTS",
+      "dbId": "TTvajPDQJCHXnHV7hlBW",
+      "dbName": "Deep Learning",
+      "lectures": [
+        {
+          "targetTitle": "Deep Learning Part 1",
+          "exactDBTitle": null,
+          "order": 1,
+          "status": "FOUND",
+          "matchMethod": "ALT_EXACT",
+          "matchScore": 0.98,
+          "dbId": "tsj1UL3Aee6wIaI8F8iI",
+          "dbTitle": "Deep Learning Part1",
+          "currentModule": "Deep Learning",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Deep Learning Notebook Part1",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "TWEc4m9r4YFBmqyHH2mj",
+              "dbTitle": "Deep Learning Notebook Part1",
+              "currentLectureIds": [
+                "tsj1UL3Aee6wIaI8F8iI",
+                "Y67yjEkyK8GrE1E4jzAl"
+              ],
+              "action": "ALREADY_LINKED"
+            },
+            {
+              "target": "Deep Learning Part1",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "WbF4txmjGEc6iaz7dD9Z",
+              "dbTitle": "Deep Learning Part1",
+              "currentLectureIds": [
+                "Y67yjEkyK8GrE1E4jzAl",
+                "tsj1UL3Aee6wIaI8F8iI"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": [
+            {
+              "target": "DL Lab 1",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "PrrrFMZ5U6wmkMILboIj",
+              "dbTitle": "DL Lab 1",
+              "currentLectureIds": [
+                "talZdvqvmIsfV6RwXite",
+                "tsj1UL3Aee6wIaI8F8iI"
+              ],
+              "action": "ALREADY_LINKED"
+            },
+            {
+              "target": "DL Lab 2",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "AAoWdlzJqKTayFR1qu2x",
+              "dbTitle": "DL Lab 2",
+              "currentLectureIds": [
+                "oRN2Zmwk1sw10P5XqRee",
+                "tsj1UL3Aee6wIaI8F8iI"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ]
+        },
+        {
+          "targetTitle": "Deep Learning Part 2",
+          "exactDBTitle": null,
+          "order": 2,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "1lelnnGGmDGW29KhVpxf",
+          "dbTitle": "Deep Learning Part 2 ",
+          "currentModule": "Deep Learning",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [],
+          "homework": [
+            {
+              "target": "DL Lab 3",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "F6qU7nhfWltNv4peRxh4",
+              "dbTitle": "DL Lab 3",
+              "currentLectureIds": [
+                "uKFRz9Wsc9oRh22SztoC",
+                "1lelnnGGmDGW29KhVpxf"
+              ],
+              "action": "ALREADY_LINKED"
+            },
+            {
+              "target": "DL Lab 4",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "YFZNgHXf037wlYddsADL",
+              "dbTitle": "DL Lab 4",
+              "currentLectureIds": [
+                "1lelnnGGmDGW29KhVpxf",
+                "nRrt0d7HwPEcK04fwIMV"
+              ],
+              "action": "ALREADY_LINKED"
+            },
+            {
+              "target": "DL Lab 5",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "p2j6ILlqoCNSLAENrmUY",
+              "dbTitle": "DL Lab 5",
+              "currentLectureIds": [
+                "5WK17Lg1Kw7D6sDUKqZT",
+                "1lelnnGGmDGW29KhVpxf"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ]
+        },
+        {
+          "targetTitle": "Deep Learning Part 4",
+          "exactDBTitle": null,
+          "order": 4,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "DFmsk79kF0MKgWJA9B27",
+          "dbTitle": "Deep Learning Part 4",
+          "currentModule": "Deep Learning",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Deep Learning Part 4 Notebook",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "2MQ9i7xFGJ6rnIZhqGbo",
+              "dbTitle": "Deep Learning Part 4 Notebook",
+              "currentLectureIds": [
+                "DFmsk79kF0MKgWJA9B27",
+                "nRrt0d7HwPEcK04fwIMV"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": [
+            {
+              "target": "DL Lab 8",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "NuNVYMNWgWW3OxVDYd6b",
+              "dbTitle": "DL Lab 8",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB",
+                "DFmsk79kF0MKgWJA9B27"
+              ],
+              "action": "ALREADY_LINKED"
+            },
+            {
+              "target": "DL Lab 9",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "KvLCqG56PrPFGIJn7UXs",
+              "dbTitle": "DL Lab 9",
+              "currentLectureIds": [
+                "DFmsk79kF0MKgWJA9B27",
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "ALREADY_LINKED"
+            },
+            {
+              "target": "DL Lab 10",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "695vCWmHJfhupqygO5W4",
+              "dbTitle": "DL Lab 10",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB",
+                "DFmsk79kF0MKgWJA9B27"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ]
+        },
+        {
+          "targetTitle": "Transfer Learning: Fine-Tuning Pretrained Models",
+          "exactDBTitle": "Transfer Learning, Fine-Tuning Pretrained Models Fine-tune ResNet/VGG on data Custom dataset tuning Part 1",
+          "order": 5,
+          "status": "FOUND",
+          "matchMethod": "EXACT_DB_CONFIRMED",
+          "matchScore": 1,
+          "dbId": "CFBebTQoziCLvv0OHDYZ",
+          "dbTitle": "Transfer Learning, Fine-Tuning Pretrained Models Fine-tune ResNet /VGG on data Custom dataset tuning Part 1",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "REASSIGN",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [],
+          "homework": []
+        },
+        {
+          "targetTitle": "Transfer Learning Application",
+          "exactDBTitle": "Transfer learning Application",
+          "order": 6,
+          "status": "FOUND",
+          "matchMethod": "EXACT_DB_CONFIRMED",
+          "matchScore": 1,
+          "dbId": "oP4gHYNEJtK8sXRPNSSf",
+          "dbTitle": "Transfer learning Application ",
+          "currentModule": "Computer Vision",
+          "moduleAction": "REASSIGN",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "CNN Exercise Notebook",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "S597ABeFVLreLFhNFwx0",
+              "dbTitle": "CNN Exercise Notebook",
+              "currentLectureIds": [
+                "oP4gHYNEJtK8sXRPNSSf",
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": []
+        },
+        {
+          "targetTitle": "Image Fundamentals: Preprocessing, Convolution, Filters & Exercises",
+          "exactDBTitle": "Image Fundamentals, Preprocessing, Convolution & Filters Image processing & filter application Convolution exercises",
+          "order": 7,
+          "status": "FOUND",
+          "matchMethod": "EXACT_DB_CONFIRMED",
+          "matchScore": 1,
+          "dbId": "AAg6YbJSLsCBhhjvll0J",
+          "dbTitle": " Image Fundamentals, Preprocessing, Convolution & Filters Image processing & filter application Convolution exercises",
+          "currentModule": "Module 1 — Foundations",
+          "moduleAction": "REASSIGN",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "CNN Fundamental",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "7qZTmr5ddfsUgG0Lnrta",
+              "dbTitle": "CNN Fundamental",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB",
+                "V6poZXAURgJkRQWb2fxZ"
+              ],
+              "action": "WILL_LINK"
+            }
+          ],
+          "homework": []
+        },
+        {
+          "targetTitle": "Computer Vision Object Detection: YOLO Basics",
+          "exactDBTitle": null,
+          "order": 8,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "6tStuV4Ty1iHYwQUEham",
+          "dbTitle": "Computer Vision Object Detection Yolo Basics",
+          "currentModule": "Computer Vision",
+          "moduleAction": "REASSIGN",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Computer Vision Object Detection Yolo Basics",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "hSPtkeu6JsldFceAPUbt",
+              "dbTitle": "Computer Vision Object Detection Yolo Basics",
+              "currentLectureIds": [
+                "6tStuV4Ty1iHYwQUEham"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": []
+        },
+        {
+          "targetTitle": "YOLO Application",
+          "exactDBTitle": null,
+          "order": 9,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "izdVBv0Rx9hqBo7fcb11",
+          "dbTitle": "YOLO Application ",
+          "currentModule": "Computer Vision",
+          "moduleAction": "REASSIGN",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "CNN Application",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "F72Nv9Qn8vTweNyDOQXu",
+              "dbTitle": "CNN Application ",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB",
+                "izdVBv0Rx9hqBo7fcb11"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": []
+        },
+        {
+          "targetTitle": "Computer Vision Image Segmentation U-Net",
+          "exactDBTitle": null,
+          "order": 10,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "V6poZXAURgJkRQWb2fxZ",
+          "dbTitle": "Computer Vision Image Segmentation U net",
+          "currentModule": "Computer Vision",
+          "moduleAction": "REASSIGN",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "CNN Fundamental",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "7qZTmr5ddfsUgG0Lnrta",
+              "dbTitle": "CNN Fundamental",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB",
+                "V6poZXAURgJkRQWb2fxZ"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ],
+          "homework": []
+        },
+        {
+          "targetTitle": "CNN App",
+          "exactDBTitle": "CNN App",
+          "order": 11,
+          "status": "FOUND",
+          "matchMethod": "EXACT_DB_CONFIRMED",
+          "matchScore": 1,
+          "dbId": "W5Ja9MPCqUMZqzZmJlVq",
+          "dbTitle": "CNN App",
+          "currentModule": "Deep Learning",
+          "moduleAction": "CORRECT",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "CNN Application",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "F72Nv9Qn8vTweNyDOQXu",
+              "dbTitle": "CNN Application ",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB",
+                "izdVBv0Rx9hqBo7fcb11"
+              ],
+              "action": "WILL_LINK"
+            }
+          ],
+          "homework": []
+        },
+        {
+          "targetTitle": "Transformers",
+          "exactDBTitle": "Transformers",
+          "order": 12,
+          "status": "FOUND",
+          "matchMethod": "EXACT_DB_CONFIRMED",
+          "matchScore": 1,
+          "dbId": "Nwtc4DKHxVl0uKOJswEK",
+          "dbTitle": "Transformers",
+          "currentModule": "Advanced Sequence Models",
+          "moduleAction": "REASSIGN",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [],
+          "homework": [
+            {
+              "target": "Sequence Model Lab",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "0qQZayYdtzvWO88iSijU",
+              "dbTitle": "Sequence model Lab",
+              "currentLectureIds": [
+                "Nwtc4DKHxVl0uKOJswEK",
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "ALREADY_LINKED"
+            },
+            {
+              "target": "Sequence model Lab",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "0qQZayYdtzvWO88iSijU",
+              "dbTitle": "Sequence model Lab",
+              "currentLectureIds": [
+                "Nwtc4DKHxVl0uKOJswEK",
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "ALREADY_LINKED"
+            }
+          ]
+        },
+        {
+          "targetTitle": "Vision Transformers Lecture",
+          "exactDBTitle": "vison transformers lecture",
+          "order": 13,
+          "status": "FOUND",
+          "matchMethod": "EXACT_DB_CONFIRMED",
+          "matchScore": 1,
+          "dbId": "KkxNwNIf4BUMXKK4k2Wb",
+          "dbTitle": "vison transformers lecture ",
+          "currentModule": null,
+          "moduleAction": "ASSIGN",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "Hugging face pdf",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "ixv2paOj0WfgL8scZI2O",
+              "dbTitle": "Hugging face pdf ",
+              "currentLectureIds": [],
+              "action": "WILL_LINK"
+            },
+            {
+              "target": "vison transformers  code",
+              "status": "FOUND",
+              "method": "EXACT",
+              "score": 1,
+              "dbId": "hWqjiGonq2KZm1Kx2EXQ",
+              "dbTitle": "vison transformers  code",
+              "currentLectureIds": [],
+              "action": "WILL_LINK"
+            }
+          ],
+          "homework": []
+        },
+        {
+          "targetTitle": "RCNN LSTM",
+          "exactDBTitle": null,
+          "order": 14,
+          "status": "FOUND",
+          "matchMethod": "EXACT",
+          "matchScore": 1,
+          "dbId": "4hXBQEq62JDXCKpqBJJk",
+          "dbTitle": "RCNN LSTM ",
+          "currentModule": "Computer Vision",
+          "moduleAction": "REASSIGN",
+          "lectureOnlyMove": false,
+          "preserveExisting": false,
+          "materials": [
+            {
+              "target": "RNN Notebook (RCNN LSTM)",
+              "status": "FOUND",
+              "method": "CONTAINS",
+              "score": 0.9,
+              "dbId": "ajQQc4m0XLwEVIAah9xQ",
+              "dbTitle": "RNN ",
+              "currentLectureIds": [
+                "xC2uhb2lVwCPr8yzunPB"
+              ],
+              "action": "WILL_LINK"
+            }
+          ],
+          "homework": []
+        }
+      ]
+    }
+  ],
+  "_raw": {
+    "lectures": [
+      {
+        "id": "0YwZWsl6ehkjsRBABr3S",
+        "title": "Data Preprocessing P3",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "4slgZ0S9gfEbdzyZwSO0"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 3,
+        "createdAt": "2026-04-23T03:07:51.569Z"
+      },
+      {
+        "id": "1lelnnGGmDGW29KhVpxf",
+        "title": "Deep Learning Part 2 ",
+        "moduleIds": [
+          "TTvajPDQJCHXnHV7hlBW"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 2,
+        "createdAt": "2026-04-23T05:21:12.124Z"
+      },
+      {
+        "id": "3l2tr7EcVzGhjMIQtal4",
+        "title": "Mathematics for Data Science P1",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "R1Up5vkSc1TkhSXxBhKh"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 1,
+        "createdAt": "2026-04-23T03:07:49.398Z"
+      },
+      {
+        "id": "4hXBQEq62JDXCKpqBJJk",
+        "title": "RCNN LSTM ",
+        "moduleIds": [
+          "Whw3lRTN3ve3G9a8NX8X"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 5,
+        "createdAt": "2026-04-23T03:07:58.994Z"
+      },
+      {
+        "id": "5OumelkH1IhpRl1tTHy0",
+        "title": "OOP in Python Part 3 + Final Project",
+        "moduleIds": [
+          "HrsiVRAPbJBDvEGjqW4s"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 5,
+        "createdAt": "2026-04-23T05:20:50.926Z"
+      },
+      {
+        "id": "5lUKEyEjoHg1sVhJ8RLD",
+        "title": "Data Preprocessing P5",
+        "moduleIds": [
+          "8RKnHh6WoJ21SKp65h76",
+          "4slgZ0S9gfEbdzyZwSO0"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 5,
+        "createdAt": "2026-04-24T00:48:16.100Z"
+      },
+      {
+        "id": "6tStuV4Ty1iHYwQUEham",
+        "title": "Computer Vision Object Detection Yolo Basics",
+        "moduleIds": [
+          "Whw3lRTN3ve3G9a8NX8X"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 1,
+        "createdAt": "2026-04-23T03:07:58.178Z"
+      },
+      {
+        "id": "7X9QBBinFUzdF0QyjnuP",
+        "title": "State-of-the-Art Boosting Algorithms AProfessional Guide to Modern Ensemble Learning",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "8RKnHh6WoJ21SKp65h76"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 4,
+        "createdAt": "2026-04-23T03:07:54.290Z"
+      },
+      {
+        "id": "8qhHgZ8re0myEitg1zJF",
+        "title": "Master Python Basics: Variables, Math & Logic in One Lesson! 🐍",
+        "moduleIds": [
+          "HrsiVRAPbJBDvEGjqW4s"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 1,
+        "createdAt": "2026-04-23T05:20:49.671Z"
+      },
+      {
+        "id": "99x6D1iWn5gT70kzhXkr",
+        "title": "Mathematics & Visualization Quick Revision Session",
+        "moduleIds": [
+          "ty5nIeeeCD0lIIRN12ox"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 15,
+        "createdAt": "2026-04-23T05:20:43.154Z"
+      },
+      {
+        "id": "9gcSLdlXhYbq35dCiSNz",
+        "title": "Data Preprocessing P2",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "4slgZ0S9gfEbdzyZwSO0"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 2,
+        "createdAt": "2026-04-23T03:07:51.302Z"
+      },
+      {
+        "id": "A8V6TXSQwyNboq6wY87W",
+        "title": "Data Preprocessing P1",
+        "moduleIds": [
+          "4slgZ0S9gfEbdzyZwSO0"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 1,
+        "createdAt": "2026-05-12T21:52:41.939Z"
+      },
+      {
+        "id": "AAg6YbJSLsCBhhjvll0J",
+        "title": " Image Fundamentals, Preprocessing, Convolution & Filters Image processing & filter application Convolution exercises",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 35,
+        "createdAt": "2026-04-23T03:07:56.884Z"
+      },
+      {
+        "id": "Bp9PosvehHRfUlYjqZVV",
+        "title": "Old Material (Data Preprocessing P2)",
+        "moduleIds": [
+          "ty5nIeeeCD0lIIRN12ox"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 10,
+        "createdAt": "2026-04-23T05:20:41.822Z"
+      },
+      {
+        "id": "CFBebTQoziCLvv0OHDYZ",
+        "title": "Transfer Learning, Fine-Tuning Pretrained Models Fine-tune ResNet /VGG on data Custom dataset tuning Part 1",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 37,
+        "createdAt": "2026-04-23T03:07:57.411Z"
+      },
+      {
+        "id": "DFmsk79kF0MKgWJA9B27",
+        "title": "Deep Learning Part 4",
+        "moduleIds": [
+          "TTvajPDQJCHXnHV7hlBW"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 4,
+        "createdAt": "2026-04-23T05:21:12.659Z"
+      },
+      {
+        "id": "EonyD6HciDv9bTCzczaQ",
+        "title": "Data Preprocessing P4",
+        "moduleIds": [
+          "4slgZ0S9gfEbdzyZwSO0"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 1,
+        "createdAt": "2026-05-12T21:57:53.538Z"
+      },
+      {
+        "id": "HdhaxOzFFHSeoRu9LdpA",
+        "title": "Regression Analysis in Machine Learning: From Basics to Applications P1",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "8RKnHh6WoJ21SKp65h76"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 1,
+        "createdAt": "2026-04-23T03:07:53.720Z"
+      },
+      {
+        "id": "ICzjdBNZyGz2HoglBpyZ",
+        "title": "Python Data Structures: Lists, Dictionaries & Advanced Looping",
+        "moduleIds": [
+          "HrsiVRAPbJBDvEGjqW4s"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 2,
+        "createdAt": "2026-04-23T05:20:49.921Z"
+      },
+      {
+        "id": "KkxNwNIf4BUMXKK4k2Wb",
+        "title": "vison transformers lecture ",
+        "moduleIds": [],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 1,
+        "createdAt": "2026-04-24T21:36:21.136Z"
+      },
+      {
+        "id": "KseDhGrSwt1jjF3AmyYP",
+        "title": "Mathematics & Visualization Quick Revision Session",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 26,
+        "createdAt": "2026-04-23T03:07:54.542Z"
+      },
+      {
+        "id": "LmCVcel7eulfnRh0cCoh",
+        "title": "Master Data Visualization with Matplotlib & Seaborn | Beginner to Pro 2",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "R1Up5vkSc1TkhSXxBhKh"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 5,
+        "createdAt": "2026-04-23T03:07:50.515Z"
+      },
+      {
+        "id": "MtrEziftUcK8j4F5A8OZ",
+        "title": "SVM Model and Applicaton",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "8RKnHh6WoJ21SKp65h76"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 3,
+        "createdAt": "2026-04-23T03:07:54.798Z"
+      },
+      {
+        "id": "Nwtc4DKHxVl0uKOJswEK",
+        "title": "Transformers",
+        "moduleIds": [
+          "o7ClXEEcfHwcEwaIgLmu"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 1,
+        "createdAt": "2026-04-23T14:33:26.879Z"
+      },
+      {
+        "id": "P1uTVHq0C3wYdZsm6PO6",
+        "title": "ML Applicattion",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "8RKnHh6WoJ21SKp65h76"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 5,
+        "createdAt": "2026-04-23T03:07:55.063Z"
+      },
+      {
+        "id": "PGhpoKvFdHvIm0LUEbh4",
+        "title": "Pandas: Python's Foundation for Data Manipulation",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "R1Up5vkSc1TkhSXxBhKh"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 3,
+        "createdAt": "2026-04-23T03:07:49.955Z"
+      },
+      {
+        "id": "V6poZXAURgJkRQWb2fxZ",
+        "title": "Computer Vision Image Segmentation U net",
+        "moduleIds": [
+          "Whw3lRTN3ve3G9a8NX8X"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 3,
+        "createdAt": "2026-04-23T05:21:23.106Z"
+      },
+      {
+        "id": "W5Ja9MPCqUMZqzZmJlVq",
+        "title": "CNN App",
+        "moduleIds": [
+          "TTvajPDQJCHXnHV7hlBW"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 5,
+        "createdAt": "2026-04-23T05:21:12.912Z"
+      },
+      {
+        "id": "WgY6tkPdU0JM9GDsPdZE",
+        "title": "Unsupervised Machine Learning Practical Understanding A clear, intuitive guide beyond classification and regression.",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "8RKnHh6WoJ21SKp65h76"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 6,
+        "createdAt": "2026-04-23T03:07:55.331Z"
+      },
+      {
+        "id": "XLQsaTPNeqplEguEnmYt",
+        "title": "Old Material (Intro to Data Preprocessing) ",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 16,
+        "createdAt": "2026-04-23T03:07:51.811Z"
+      },
+      {
+        "id": "Z0wweFhjmBzevMe8OGya",
+        "title": "From Functions to Objects: Smart Student Project & OOP Basics",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 4,
+        "createdAt": "2026-04-23T03:07:48.573Z"
+      },
+      {
+        "id": "izdVBv0Rx9hqBo7fcb11",
+        "title": "YOLO Application ",
+        "moduleIds": [
+          "Whw3lRTN3ve3G9a8NX8X"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 2,
+        "createdAt": "2026-04-23T05:21:22.835Z"
+      },
+      {
+        "id": "jkhBEL37sg8ACnGGUqWS",
+        "title": "Master Data Visualization with Matplotlib & Seaborn | Beginner to Pro",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "R1Up5vkSc1TkhSXxBhKh"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 4,
+        "createdAt": "2026-04-23T03:07:50.242Z"
+      },
+      {
+        "id": "lIj15gLUZbCTsiYe4HA0",
+        "title": "OOP in Python Part 2 ",
+        "moduleIds": [
+          "HrsiVRAPbJBDvEGjqW4s"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 4,
+        "createdAt": "2026-04-23T05:20:50.687Z"
+      },
+      {
+        "id": "n0ftozww9D4W4PGPeuXv",
+        "title": "Classification Models in Machine Learning  A Deep Dive",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "8RKnHh6WoJ21SKp65h76"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 2,
+        "createdAt": "2026-04-23T03:07:54.008Z"
+      },
+      {
+        "id": "n82KqCV03He4DbXV0mx3",
+        "title": "Mathematics for Data Science P2 + Numpy",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "R1Up5vkSc1TkhSXxBhKh"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 2,
+        "createdAt": "2026-04-23T03:07:49.662Z"
+      },
+      {
+        "id": "oP4gHYNEJtK8sXRPNSSf",
+        "title": "Transfer learning Application ",
+        "moduleIds": [
+          "Whw3lRTN3ve3G9a8NX8X"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 4,
+        "createdAt": "2026-04-23T05:21:22.589Z"
+      },
+      {
+        "id": "rZzfeQ8dX0CWFC5g3TMn",
+        "title": "Old Material (Data Preprocessing P1)",
+        "moduleIds": [
+          "ty5nIeeeCD0lIIRN12ox"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 9,
+        "createdAt": "2026-04-23T05:20:41.512Z"
+      },
+      {
+        "id": "regc15WvtLOY4TFUDyrr",
+        "title": "CNN App",
+        "moduleIds": [],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": null,
+        "createdAt": "2026-04-23T14:33:26.878Z"
+      },
+      {
+        "id": "riAVKvktpe9yxpOuHLMD",
+        "title": "📊 Capstone Project: Data Analysis with NumPy, Pandas, Matplotlib & Seaborn",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "R1Up5vkSc1TkhSXxBhKh"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 6,
+        "createdAt": "2026-04-23T03:07:50.765Z"
+      },
+      {
+        "id": "sYvqz1uU6792GGKRwQ9U",
+        "title": "Old Material (Data Preprocessing P3)",
+        "moduleIds": [],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": null,
+        "createdAt": "2026-04-23T14:33:26.878Z"
+      },
+      {
+        "id": "talZdvqvmIsfV6RwXite",
+        "title": "Full Machine learning Project 1",
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "XLhBQtXquE9EFUBeF4UH"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 1,
+        "createdAt": "2026-04-23T03:07:55.602Z"
+      },
+      {
+        "id": "tcOGEqoEZsjx1Kokz2n0",
+        "title": "Old Material (Data Preprocessing P5)",
+        "moduleIds": [],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": null,
+        "createdAt": "2026-04-23T14:33:26.878Z"
+      },
+      {
+        "id": "tsj1UL3Aee6wIaI8F8iI",
+        "title": "Deep Learning Part1",
+        "moduleIds": [
+          "TTvajPDQJCHXnHV7hlBW"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 1,
+        "createdAt": "2026-04-23T05:21:11.843Z"
+      },
+      {
+        "id": "uqeXm7mV4vixofqHV2ad",
+        "title": "Mathematics & Visualization Quick Revision Session",
+        "moduleIds": [],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": null,
+        "createdAt": "2026-04-23T14:33:26.878Z"
+      },
+      {
+        "id": "xGHASanwo6chO6lLVHVi",
+        "title": "Old Material (Data Preprocessing P4)",
+        "moduleIds": [
+          "ty5nIeeeCD0lIIRN12ox"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 12,
+        "createdAt": "2026-04-23T05:20:42.325Z"
+      },
+      {
+        "id": "yWtiq1yRRFIUyf3ifYNV",
+        "title": "Python Functions Essentials: From Basics to Advanced Scope",
+        "moduleIds": [
+          "HrsiVRAPbJBDvEGjqW4s"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "order": 3,
+        "createdAt": "2026-04-23T05:20:50.176Z"
+      }
+    ],
+    "assets": [
+      {
+        "id": "071BaIQ9Edsf8gaw9IR6",
+        "title": "Classification Models in Machine Learning 4 A Deep Dive (Notebook)",
+        "type": "material",
+        "lectureIds": [
+          "n0ftozww9D4W4PGPeuXv",
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "0NUFVT3ge0KfqPbLHpsZ",
+        "title": "OOP & FUNCTION (LIGHT)",
+        "type": "homework",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB",
+          "yWtiq1yRRFIUyf3ifYNV"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "0NjL4laObY0jk0jf24x9",
+        "title": "Data Preprocessing P1 Notebook",
+        "type": "material",
+        "lectureIds": [
+          "xTWDakEaOiDxjRdbFb1d",
+          "A8V6TXSQwyNboq6wY87W"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "4slgZ0S9gfEbdzyZwSO0"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "0QrqneLrGm2gBpC5BHe6",
+        "title": "Lap 1",
+        "type": "homework",
+        "lectureIds": [
+          "HdhaxOzFFHSeoRu9LdpA",
+          "talZdvqvmIsfV6RwXite"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "0YQgo98ikDjCbOtUFGfB",
+        "title": "Comprehensive Guide to Data Preprocessing in Machine Learning",
+        "type": "material",
+        "lectureIds": [
+          "9gcSLdlXhYbq35dCiSNz",
+          "0YwZWsl6ehkjsRBABr3S",
+          "PCQxIFcEAEe0tFsSh1ZF",
+          "xC2uhb2lVwCPr8yzunPB",
+          "EonyD6HciDv9bTCzczaQ"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "4slgZ0S9gfEbdzyZwSO0"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "0qQZayYdtzvWO88iSijU",
+        "title": "Sequence model Lab",
+        "type": "homework",
+        "lectureIds": [
+          "Nwtc4DKHxVl0uKOJswEK",
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "1UzOZMbf8Zn0pHEu36MV",
+        "title": "Python Data Structures & Loops: 20 Practical Challenges",
+        "type": "homework",
+        "lectureIds": [
+          "l3i6oLjV6XW5IdfIDYtR",
+          "ICzjdBNZyGz2HoglBpyZ"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "2MQ9i7xFGJ6rnIZhqGbo",
+        "title": "Deep Learning Part 4 Notebook",
+        "type": "material",
+        "lectureIds": [
+          "DFmsk79kF0MKgWJA9B27",
+          "nRrt0d7HwPEcK04fwIMV"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "2N5MQ6Fs5iOsRPBp5xqM",
+        "title": "Unsupervised Machine Learning Practical Understanding A clear, intuitive guide beyond classification and regression.",
+        "type": "material",
+        "lectureIds": [
+          "WgY6tkPdU0JM9GDsPdZE"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "2SNNoqBUQnHzFAP6odaD",
+        "title": "Source Code: Python Functions & Modular Programming",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "2bsyGOCJ4KgS0cB0b2pf",
+        "title": "ML Application",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "3AR7CPNlg9sBnfOTqjaV",
+        "title": "Final Project Lab 3",
+        "type": "homework",
+        "lectureIds": [
+          "YBVTgf9wH88cbcd3SVm9",
+          "talZdvqvmIsfV6RwXite"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "3YGjnkROgyXC1GJ4s9DM",
+        "title": "Classification Models in Machine Learning",
+        "type": "material",
+        "lectureIds": [
+          "MtrEziftUcK8j4F5A8OZ",
+          "n0ftozww9D4W4PGPeuXv"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "3xgGxYjk216o2wm1MrYw",
+        "title": "Lap 3",
+        "type": "homework",
+        "lectureIds": [
+          "uKFRz9Wsc9oRh22SztoC",
+          "MtrEziftUcK8j4F5A8OZ"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "4uBLcZhGD0DyoJWmy7qp",
+        "title": "Python Fundamentals: Lecture Notes & Examples",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "695vCWmHJfhupqygO5W4",
+        "title": "DL Lab 10",
+        "type": "homework",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB",
+          "DFmsk79kF0MKgWJA9B27"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "6fszyK5H6c5aX3KZkygq",
+        "title": "State-of-the-Art Boosting Algorithms AProfessional Guide to Modern Ensemble Learning",
+        "type": "material",
+        "lectureIds": [
+          "7X9QBBinFUzdF0QyjnuP"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "7qZTmr5ddfsUgG0Lnrta",
+        "title": "CNN Fundamental",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB",
+          "V6poZXAURgJkRQWb2fxZ"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "9Ulvg2zdTUDkQd83q2wa",
+        "title": "Data File (Pokemon Data)",
+        "type": "material",
+        "lectureIds": [
+          "xTWDakEaOiDxjRdbFb1d",
+          "PGhpoKvFdHvIm0LUEbh4"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "AAoWdlzJqKTayFR1qu2x",
+        "title": "DL Lab 2",
+        "type": "homework",
+        "lectureIds": [
+          "oRN2Zmwk1sw10P5XqRee",
+          "tsj1UL3Aee6wIaI8F8iI"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "Af2cE0XSRE5Q4YJ9FCZm",
+        "title": "Yolo segmentation notebook ",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "BsIcNwVvtjj8NUa9I2Ow",
+        "title": "Final Project Lab 1",
+        "type": "homework",
+        "lectureIds": [
+          "talZdvqvmIsfV6RwXite"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "DOEzv1NAzCkq6ytJN4HQ",
+        "title": "Mathematic & Visualization Quick Revision Session",
+        "type": "material",
+        "lectureIds": [
+          "KseDhGrSwt1jjF3AmyYP"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "EBFhk2CT5Xw2pjUX1Er7",
+        "title": "Python Practical Labs: 20 Hands-on Tasks",
+        "type": "homework",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB",
+          "8qhHgZ8re0myEitg1zJF"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "F6qU7nhfWltNv4peRxh4",
+        "title": "DL Lab 3",
+        "type": "homework",
+        "lectureIds": [
+          "uKFRz9Wsc9oRh22SztoC",
+          "1lelnnGGmDGW29KhVpxf"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "F72Nv9Qn8vTweNyDOQXu",
+        "title": "CNN Application ",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB",
+          "izdVBv0Rx9hqBo7fcb11"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "IIykwISJI9MqKxXF0SxI",
+        "title": "Final Project Lab 8",
+        "type": "homework",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB",
+          "talZdvqvmIsfV6RwXite"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "Jjcl0RodfrQzx584ox4N",
+        "title": "DL Lab 7",
+        "type": "homework",
+        "lectureIds": [
+          "KP6dpYBO7kLEb7tHNWLh",
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "KvLCqG56PrPFGIJn7UXs",
+        "title": "DL Lab 9",
+        "type": "homework",
+        "lectureIds": [
+          "DFmsk79kF0MKgWJA9B27",
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "LFcUt6Ilntiaykw2JOGe",
+        "title": "📊 Capstone Project: Data Analysis with NumPy, Pandas, Matplotlib & Seaborn",
+        "type": "material",
+        "lectureIds": [
+          "riAVKvktpe9yxpOuHLMD"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "M38T5BkbQFm5ouHqTVht",
+        "title": "Numpy Guide ",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "M6Si108jxmeXPpIj3xMT",
+        "title": "Quiz 1 [Python + Numpy]",
+        "type": "link",
+        "lectureIds": [
+          "talZdvqvmIsfV6RwXite"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "MwSvC0MFW90WF3NhCX0Y",
+        "title": "Lap 2",
+        "type": "homework",
+        "lectureIds": [
+          "oRN2Zmwk1sw10P5XqRee",
+          "n0ftozww9D4W4PGPeuXv"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "NoqJtNAwFNrdbsA7Bc3K",
+        "title": "Mathematics for Data Science Book",
+        "type": "material",
+        "lectureIds": [
+          "3l2tr7EcVzGhjMIQtal4"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "NuNVYMNWgWW3OxVDYd6b",
+        "title": "DL Lab 8",
+        "type": "homework",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB",
+          "DFmsk79kF0MKgWJA9B27"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "PrrrFMZ5U6wmkMILboIj",
+        "title": "DL Lab 1",
+        "type": "homework",
+        "lectureIds": [
+          "talZdvqvmIsfV6RwXite",
+          "tsj1UL3Aee6wIaI8F8iI"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "QQZKYlLFUjuRPBWiPJi9",
+        "title": "Final Project Lab 5",
+        "type": "homework",
+        "lectureIds": [
+          "talZdvqvmIsfV6RwXite",
+          "5WK17Lg1Kw7D6sDUKqZT"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "QbimuihSh45EDmwvbcZV",
+        "title": "MACHINE LEARNING Real World Projects Bundle",
+        "type": "homework",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "Qn16xXFGAbxmz1htqzph",
+        "title": "Pandas",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "RSqd8qwDqHm4lmpn9Gi3",
+        "title": "Transfer learning Application ",
+        "type": "material",
+        "lectureIds": [
+          "PgJFdGXrsA4Rrbz4W5L1"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "RcULXNJHMdzhASs2XRO5",
+        "title": "Guide Book to solve ML Labs",
+        "type": "link",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "S597ABeFVLreLFhNFwx0",
+        "title": "CNN Exercise Notebook",
+        "type": "material",
+        "lectureIds": [
+          "oP4gHYNEJtK8sXRPNSSf",
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "SD91g1fhdWKwxTbbZsgg",
+        "title": "Lap 5",
+        "type": "homework",
+        "lectureIds": [
+          "5WK17Lg1Kw7D6sDUKqZT",
+          "P1uTVHq0C3wYdZsm6PO6"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "SIDsj9cDz3KLFdDw5kms",
+        "title": "Pandas Homework",
+        "type": "homework",
+        "lectureIds": [
+          "PGhpoKvFdHvIm0LUEbh4",
+          "LmCVcel7eulfnRh0cCoh"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "SYSvgqb52jE28WhRjWC0",
+        "title": "Python Functions Masterclass: 30 Practical Challenges",
+        "type": "homework",
+        "lectureIds": [
+          "oOatUO9GSkh1IxhZtISZ",
+          "lIj15gLUZbCTsiYe4HA0"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "TWEc4m9r4YFBmqyHH2mj",
+        "title": "Deep Learning Notebook Part1",
+        "type": "material",
+        "lectureIds": [
+          "tsj1UL3Aee6wIaI8F8iI",
+          "Y67yjEkyK8GrE1E4jzAl"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "WbF4txmjGEc6iaz7dD9Z",
+        "title": "Deep Learning Part1",
+        "type": "material",
+        "lectureIds": [
+          "Y67yjEkyK8GrE1E4jzAl",
+          "tsj1UL3Aee6wIaI8F8iI"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "YFZNgHXf037wlYddsADL",
+        "title": "DL Lab 4",
+        "type": "homework",
+        "lectureIds": [
+          "1lelnnGGmDGW29KhVpxf",
+          "nRrt0d7HwPEcK04fwIMV"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "Zrfdw5ILffEyZImtxLo5",
+        "title": "Final Project Lab 4",
+        "type": "homework",
+        "lectureIds": [
+          "talZdvqvmIsfV6RwXite",
+          "nRrt0d7HwPEcK04fwIMV"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "aYLhNP3WSmXSpNKU7myR",
+        "title": "Mastering OOP in Python: The Complete Source Code & Guide",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB",
+          "lIj15gLUZbCTsiYe4HA0"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "ajQQc4m0XLwEVIAah9xQ",
+        "title": "RNN ",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "bhKIRfmlLGOqvY7pKQch",
+        "title": "Old Material (Data Preprocessing) The Notebook file",
+        "type": "material",
+        "lectureIds": [
+          "zZ2yjxtywnkLKRIdcg4L"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "dqk5kGoiSZIEFpOPNCRM",
+        "title": "Lap 4 ",
+        "type": "homework",
+        "lectureIds": [
+          "7X9QBBinFUzdF0QyjnuP",
+          "nRrt0d7HwPEcK04fwIMV"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "gsEgnxkAPZBXxW2Jk8IN",
+        "title": "Final Project Lab 7",
+        "type": "homework",
+        "lectureIds": [
+          "talZdvqvmIsfV6RwXite",
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "h2GWDb0HZb0KISdAGyw4",
+        "title": "Full Machine learning Project Data 1",
+        "type": "material",
+        "lectureIds": [
+          "talZdvqvmIsfV6RwXite"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "hSPtkeu6JsldFceAPUbt",
+        "title": "Computer Vision Object Detection Yolo Basics",
+        "type": "material",
+        "lectureIds": [
+          "6tStuV4Ty1iHYwQUEham"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "hWqjiGonq2KZm1Kx2EXQ",
+        "title": "vison transformers  code",
+        "type": "material",
+        "lectureIds": [],
+        "moduleIds": [],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "iu61JGinUUAX6chv09MP",
+        "title": "DL Lab 6",
+        "type": "homework",
+        "lectureIds": [
+          "KP6dpYBO7kLEb7tHNWLh",
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "ixv2paOj0WfgL8scZI2O",
+        "title": "Hugging face pdf ",
+        "type": "material",
+        "lectureIds": [],
+        "moduleIds": [],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "j0dbIIzBaBaNUycrmYZO",
+        "title": "YOLOv8 GPU Setup & Deployment  Guide",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "kLlRX10qXy2fwU2mpg83",
+        "title": "Final Project Lab 2",
+        "type": "homework",
+        "lectureIds": [
+          "oRN2Zmwk1sw10P5XqRee",
+          "talZdvqvmIsfV6RwXite"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "kVogSjGHgdd4YsuonZNI",
+        "title": "Understanding U-Net Architecture",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "oeC9zuGYyn34nO1vsmOP",
+        "title": "Final Project Lab 6",
+        "type": "homework",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB",
+          "talZdvqvmIsfV6RwXite"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "oqQUI3CX9K92rrBNOnMr",
+        "title": "Unsupervised Machine Learning Notebook",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "p2j6ILlqoCNSLAENrmUY",
+        "title": "DL Lab 5",
+        "type": "homework",
+        "lectureIds": [
+          "5WK17Lg1Kw7D6sDUKqZT",
+          "1lelnnGGmDGW29KhVpxf"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "pnKdOSSDwM1AQ4ytPFO9",
+        "title": "Feature Engineering",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB",
+          "5lUKEyEjoHg1sVhJ8RLD"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax",
+          "4slgZ0S9gfEbdzyZwSO0"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "q2eu9zJKOel5isbkf4HP",
+        "title": "Library Management System (OOP Tutorial) Final Project",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB",
+          "5OumelkH1IhpRl1tTHy0"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "tgY5CnkkIAkCMkGcWqFv",
+        "title": "YOLOv8 Notebook",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "uBm01lwht5yWVqUtsR48",
+        "title": "Master Data Visualization with Matplotlib & Seaborn | Beginner to Pro",
+        "type": "material",
+        "lectureIds": [
+          "jkhBEL37sg8ACnGGUqWS",
+          "LmCVcel7eulfnRh0cCoh"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "vh2GnnKTMMfGzCO0LmNV",
+        "title": "Regression Analysis in Machine Learning: NoteBook - Data - Slides",
+        "type": "material",
+        "lectureIds": [
+          "xC2uhb2lVwCPr8yzunPB"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      },
+      {
+        "id": "ytltjNuL6YKMTPzdONFs",
+        "title": "Old Material (Data Preprocessing) The Data file ",
+        "type": "material",
+        "lectureIds": [
+          "zZ2yjxtywnkLKRIdcg4L"
+        ],
+        "moduleIds": [
+          "YABhnwsFe1kn1ksQ1sax"
+        ],
+        "diplomaIds": [
+          "zCD76Wrqrzw0f8tF4oLp"
+        ],
+        "status": null
+      }
+    ],
+    "modules": [
+      {
+        "id": "4slgZ0S9gfEbdzyZwSO0",
+        "name": "Data Preprocessing",
+        "order": 3,
+        "diplomaId": "zCD76Wrqrzw0f8tF4oLp",
+        "source": null
+      },
+      {
+        "id": "8RKnHh6WoJ21SKp65h76",
+        "name": "Machine Learning",
+        "order": 4,
+        "diplomaId": "zCD76Wrqrzw0f8tF4oLp",
+        "source": null
+      },
+      {
+        "id": "HrsiVRAPbJBDvEGjqW4s",
+        "name": "Python Foundations",
+        "order": 1,
+        "diplomaId": "zCD76Wrqrzw0f8tF4oLp",
+        "source": null
+      },
+      {
+        "id": "Mrdy9avOuKXCvOmTAwrE",
+        "name": "General / Uncategorized",
+        "order": 3,
+        "diplomaId": "zCD76Wrqrzw0f8tF4oLp",
+        "source": null
+      },
+      {
+        "id": "R1Up5vkSc1TkhSXxBhKh",
+        "name": "Mathematics & Data Analysis",
+        "order": 2,
+        "diplomaId": "zCD76Wrqrzw0f8tF4oLp",
+        "source": null
+      },
+      {
+        "id": "TTvajPDQJCHXnHV7hlBW",
+        "name": "Deep Learning",
+        "order": 5,
+        "diplomaId": "zCD76Wrqrzw0f8tF4oLp",
+        "source": null
+      },
+      {
+        "id": "Whw3lRTN3ve3G9a8NX8X",
+        "name": "Computer Vision",
+        "order": 6,
+        "diplomaId": "zCD76Wrqrzw0f8tF4oLp",
+        "source": null
+      },
+      {
+        "id": "XLhBQtXquE9EFUBeF4UH",
+        "name": "Final Project",
+        "order": 7,
+        "diplomaId": "zCD76Wrqrzw0f8tF4oLp",
+        "source": null
+      },
+      {
+        "id": "YABhnwsFe1kn1ksQ1sax",
+        "name": "Module 1 — Foundations",
+        "order": 1,
+        "diplomaId": "zCD76Wrqrzw0f8tF4oLp",
+        "source": null
+      },
+      {
+        "id": "k9qC9ZsUgzyJlij1ONip",
+        "name": "Machine Learning Fundamentals",
+        "order": 5,
+        "diplomaId": "zCD76Wrqrzw0f8tF4oLp",
+        "source": null
+      },
+      {
+        "id": "o7ClXEEcfHwcEwaIgLmu",
+        "name": "Advanced Sequence Models",
+        "order": 8,
+        "diplomaId": "zCD76Wrqrzw0f8tF4oLp",
+        "source": null
+      },
+      {
+        "id": "ty5nIeeeCD0lIIRN12ox",
+        "name": "Data Analysis & Preprocessing",
+        "order": 1,
+        "diplomaId": "zCD76Wrqrzw0f8tF4oLp",
+        "source": null
+      },
+      {
+        "id": "yzor2UHBCk1bZrsGzMdV",
+        "name": "Projects & Capstone",
+        "order": 7,
+        "diplomaId": "zCD76Wrqrzw0f8tF4oLp",
+        "source": null
+      }
+    ]
+  }
+}

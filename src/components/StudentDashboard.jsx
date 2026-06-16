@@ -3,8 +3,9 @@ import { useAuth } from '../contexts/AuthContext';
 import { getModulesByDiploma } from '../lib/moduleService';
 import { getLecturesByModule } from '../lib/lectureService';
 import { getDiplomaById } from '../lib/diplomaService';
-import { isLegacyDiploma, getLegacyLectures, getLegacyMaterials, getLegacyHomework } from '../lib/legacyDiplomaService';
+import { isLegacyDiploma, isModuleAwareLegacy, getLegacyLectures, getLegacyMaterials, getLegacyHomework } from '../lib/legacyDiplomaService';
 import LegacyDiplomaView from './LegacyDiplomaView';
+import { STRICT_PLAN } from '../lib/strictCurriculumPlan.js';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -59,20 +60,56 @@ const StudentDashboard = () => {
 
         // Check if this is the legacy special-case diploma
         const isLegacy = await isLegacyDiploma(activeDiplomaId);
-        setLegacyMode(isLegacy);
 
         if (isLegacy) {
-          // Legacy flat mode — bypass modules
-          const [lects, mats, hws] = await Promise.all([
-            getLegacyLectures(activeDiplomaId),
-            getLegacyMaterials(activeDiplomaId),
-            getLegacyHomework(activeDiplomaId),
-          ]);
-          setLegacyLectures(lects);
-          setLegacyMaterials(mats);
-          setLegacyHomework(hws);
-          setModules([]);
-          setModuleLectures({});
+          // Check if the legacy diploma has been upgraded to module-aware
+          // (i.e. strict migration ran and created real modules)
+          const isModuleAware = await isModuleAwareLegacy(activeDiplomaId);
+
+          if (isModuleAware) {
+            // ── UPGRADED PATH: render module cards, same as non-legacy ──
+            // No flat view. No DB writes. Pure routing switch.
+            setLegacyMode(false);
+            setLegacyLectures([]);
+            setLegacyMaterials([]);
+            setLegacyHomework([]);
+            const allMods = await getModulesByDiploma(activeDiplomaId);
+
+            // Filter to ONLY the 5 plan modules (by name) so old pre-migration
+            // modules don't appear. STRICT_PLAN is the authoritative source.
+            const planModNames = new Set(
+              STRICT_PLAN.modules.map(m => m.name.trim().toLowerCase())
+            );
+            const planModOrder = Object.fromEntries(
+              STRICT_PLAN.modules.map(m => [m.name.trim().toLowerCase(), m.order])
+            );
+            const mods = allMods
+              .filter(m => planModNames.has((m.name || '').trim().toLowerCase()))
+              .sort((a, b) =>
+                (planModOrder[(a.name || '').trim().toLowerCase()] || 99) -
+                (planModOrder[(b.name || '').trim().toLowerCase()] || 99)
+              );
+
+            setModules(mods);
+            const lectMap = {};
+            for (const mod of mods) {
+              lectMap[mod.id] = await getLecturesByModule(mod.id);
+            }
+            setModuleLectures(lectMap);
+          } else {
+            // ── LEGACY FLAT PATH: original flat tab view ──
+            setLegacyMode(true);
+            const [lects, mats, hws] = await Promise.all([
+              getLegacyLectures(activeDiplomaId),
+              getLegacyMaterials(activeDiplomaId),
+              getLegacyHomework(activeDiplomaId),
+            ]);
+            setLegacyLectures(lects);
+            setLegacyMaterials(mats);
+            setLegacyHomework(hws);
+            setModules([]);
+            setModuleLectures({});
+          }
         } else {
           // Normal module-based flow
           setLegacyLectures([]);
@@ -114,8 +151,8 @@ const StudentDashboard = () => {
 
   /* ─── Navigation menu items (shared between Sheet and desktop) ─── */
   const navItems = [
+    { to: '/my-learning-sheet', label: 'Learning Sheet', icon: BookOpen, accent: 'violet' },
     { to: '/submit-project', label: 'Submit Project', icon: UploadCloud, accent: 'indigo' },
-    { to: '/my-progress', label: 'My Progress', icon: TrendingUp, accent: 'emerald' },
     { to: '/my-evaluation', label: 'My Evaluation', icon: Award, accent: 'amber' },
     { to: '/feedback', label: 'Submit Feedback', icon: MessageSquare, accent: 'slate' },
   ];
@@ -277,12 +314,12 @@ const StudentDashboard = () => {
             {(legacyMode ? [
               { label: 'Total Lectures', value: legacyLectures.length, icon: Video, color: 'indigo' },
               { label: 'Materials', value: legacyMaterials.length, icon: FileText, color: 'violet' },
-              { label: 'My Progress', value: 'View Stats', link: '/my-progress', icon: TrendingUp, color: 'emerald' },
+              { label: 'Learning Sheet', value: 'Open Plan', link: '/my-learning-sheet', icon: BookOpen, color: 'violet' },
               { label: 'Evaluation', value: 'View Grades', link: '/my-evaluation', icon: Award, color: 'amber' },
             ] : [
               { label: 'Total Modules', value: modules.length, icon: Layers, color: 'indigo' },
               { label: 'Total Lectures', value: totalLectures, icon: Video, color: 'violet' },
-              { label: 'My Progress', value: 'View Stats', link: '/my-progress', icon: TrendingUp, color: 'emerald' },
+              { label: 'Learning Sheet', value: 'Open Plan', link: '/my-learning-sheet', icon: BookOpen, color: 'violet' },
               { label: 'Evaluation', value: 'View Grades', link: '/my-evaluation', icon: Award, color: 'amber' },
             ]).map((stat, i) => (
               <div key={i} className="relative group p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[#121214] border border-white/5 hover:border-white/10 hover:bg-white/[0.02] transition-all duration-300 overflow-hidden shadow-xl">

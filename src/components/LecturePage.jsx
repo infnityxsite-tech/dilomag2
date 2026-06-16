@@ -24,6 +24,29 @@ const sectionVariants = {
   })
 };
 
+const sortItemsByDate = (items) => {
+  return [...items].sort((a, b) => {
+    const getMs = (item) => {
+      let d = null;
+      if (item.date) d = item.date;
+      else if (item.createdAt) d = item.createdAt;
+      
+      if (!d) return Infinity;
+      
+      try {
+        const parsedDate = d.toDate ? d.toDate() :
+                  (typeof d === 'string' ? new Date(d) :
+                  (d.seconds ? new Date(d.seconds * 1000) : new Date(d)));
+        const time = parsedDate.getTime();
+        return isNaN(time) ? Infinity : time;
+      } catch {
+        return Infinity;
+      }
+    };
+    return getMs(a) - getMs(b);
+  });
+};
+
 const LecturePage = () => {
   const { lectureId } = useParams();
   const { user } = useAuth();
@@ -48,6 +71,10 @@ const LecturePage = () => {
             if (!mergedLecture[arrName]) mergedLecture[arrName] = [];
             mergedLecture[arrName].push(item);
           });
+        }
+        
+        if (mergedLecture.materials) {
+            mergedLecture.materials = sortItemsByDate(mergedLecture.materials);
         }
         
         setLecture(mergedLecture);

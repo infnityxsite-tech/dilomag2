@@ -1,5 +1,5 @@
 import { db } from './firebase';
-import { doc, collection, getDocs, getDoc, addDoc, updateDoc, deleteDoc, serverTimestamp, query, where } from 'firebase/firestore';
+import { doc, collection, getDocs, getDocsFromServer, getDoc, addDoc, updateDoc, deleteDoc, serverTimestamp, query, where } from 'firebase/firestore';
 import { notifyStudentsForContent } from './notificationService';
 
 /**
@@ -45,14 +45,15 @@ export const createLecture = async (lectureData, { diplomaIds = [], moduleIds = 
 export const getLecturesByModule = async (moduleId) => {
   try {
     const lecturesRef = collection(db, 'lectures');
-    // Using array-contains for N:M mapping
+    // Use getDocsFromServer to bypass offline IndexedDB cache —
+    // ensures order/date changes made server-side are immediately visible.
     const q = query(lecturesRef, where('moduleIds', 'array-contains', moduleId));
-    const snapshot = await getDocs(q);
+    const snapshot = await getDocsFromServer(q);
     const lectures = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     
     // Fallback: Also query primaryModuleId/moduleId for unmigrated legacy lectures
     const legacyQ = query(lecturesRef, where('moduleId', '==', moduleId));
-    const legacySnapshot = await getDocs(legacyQ);
+    const legacySnapshot = await getDocsFromServer(legacyQ);
     const legacyLectures = legacySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     
     // Merge and deduplicate

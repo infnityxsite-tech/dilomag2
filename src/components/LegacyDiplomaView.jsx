@@ -41,8 +41,32 @@ const getDisplayDate = (item) => {
   return '';
 };
 
+const sortItemsByDate = (items) => {
+  return [...items].sort((a, b) => {
+    const getMs = (item) => {
+      let d = null;
+      if (item.date) d = item.date;
+      else if (item.createdAt) d = item.createdAt;
+      
+      if (!d) return Infinity;
+      
+      try {
+        const parsedDate = d.toDate ? d.toDate() :
+                  (typeof d === 'string' ? new Date(d) :
+                  (d.seconds ? new Date(d.seconds * 1000) : new Date(d)));
+        const time = parsedDate.getTime();
+        return isNaN(time) ? Infinity : time;
+      } catch {
+        return Infinity;
+      }
+    };
+    return getMs(a) - getMs(b);
+  });
+};
+
 const LegacyDiplomaView = ({ lectures = [], materials = [], homework = [] }) => {
   const [activeTab, setActiveTab] = useState('lectures');
+  const sortedMaterials = sortItemsByDate(materials);
 
   return (
     <div className="space-y-4 sm:space-y-6">
@@ -117,31 +141,35 @@ const LegacyDiplomaView = ({ lectures = [], materials = [], homework = [] }) => 
       {/* Materials Tab */}
       {activeTab === 'materials' && (
         <motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid gap-2 sm:gap-3">
-          {materials.length === 0 ? (
+          {sortedMaterials.length === 0 ? (
             <EmptyState icon={FileText} text="No materials available yet." />
           ) : (
-            materials.map((mat) => (
+            sortedMaterials.map((mat) => (
               <motion.div key={mat.id} variants={itemVariants}>
-                <div className="flex items-center gap-2.5 sm:gap-4 p-3 sm:p-4 rounded-xl bg-[#121214] border border-white/5 hover:bg-blue-500/5 hover:border-blue-500/15 transition-all duration-200 group">
-                  {/* Icon */}
-                  <div className="p-2 sm:p-2.5 rounded-lg bg-blue-500/10 text-blue-400 flex-shrink-0">
-                    <BookOpen className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  </div>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-[#121214] border border-white/5 hover:bg-blue-500/5 hover:border-blue-500/15 transition-all duration-200 group">
+                  <div className="flex items-start sm:items-center gap-2.5 sm:gap-4 min-w-0 w-full sm:flex-1 sm:w-auto">
+                    {/* Icon */}
+                    <div className="p-2 sm:p-2.5 rounded-lg bg-blue-500/10 text-blue-400 flex-shrink-0 mt-0.5 sm:mt-0">
+                      <BookOpen className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    </div>
 
-                  {/* Content */}
-                  <div className="min-w-0 flex-1">
-                    <p className="text-[13px] sm:text-sm font-semibold text-white leading-snug break-words line-clamp-2">{mat.title}</p>
-                    {mat.description && <p className="text-[10px] sm:text-xs text-slate-400 mt-0.5 line-clamp-2 leading-relaxed">{mat.description}</p>}
-                    {getDisplayDate(mat) && <p className="text-[9px] sm:text-[10px] text-slate-500 mt-0.5">{getDisplayDate(mat)}</p>}
+                    {/* Content */}
+                    <div className="min-w-0 flex-1">
+                      <p className="text-[13px] sm:text-sm font-semibold text-white leading-snug break-words line-clamp-2">{mat.title}</p>
+                      {mat.description && <p className="text-[10px] sm:text-xs text-slate-400 mt-0.5 line-clamp-2 leading-relaxed">{mat.description}</p>}
+                      {getDisplayDate(mat) && <p className="text-[9px] sm:text-[10px] text-slate-500 mt-0.5">{getDisplayDate(mat)}</p>}
+                    </div>
                   </div>
 
                   {/* Action */}
                   {mat.url && (
-                    <a href={mat.url} target="_blank" rel="noopener noreferrer" className="flex-shrink-0">
-                      <Button size="sm" variant="outline" className="h-7 sm:h-8 px-2 sm:px-3 text-[10px] sm:text-xs bg-white/[0.03] border-white/[0.08] hover:bg-white/[0.1] text-slate-300">
-                        <Download className="w-3 h-3 sm:mr-1" /><span className="hidden sm:inline">Open</span>
-                      </Button>
-                    </a>
+                    <div className="w-full sm:w-auto mt-2 sm:mt-0 flex-shrink-0">
+                      <a href={mat.url} target="_blank" rel="noopener noreferrer" className="block w-full sm:inline-block sm:w-auto">
+                        <Button size="sm" variant="outline" className="w-full sm:w-auto h-8 px-3 text-xs bg-white/[0.03] border-white/[0.08] hover:bg-white/[0.1] text-slate-300 flex justify-center items-center">
+                          <Download className="w-3.5 h-3.5 mr-1.5" /><span>Download</span>
+                        </Button>
+                      </a>
+                    </div>
                   )}
                 </div>
               </motion.div>

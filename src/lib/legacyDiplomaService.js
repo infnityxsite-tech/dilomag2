@@ -5,6 +5,7 @@ const LEGACY_DIPLOMA_NAME = 'AI Mastery Group 2';
 
 // ── Cache ──
 let _legacyDiplomaIds = null; // Set<string> of diploma IDs that are legacy
+let _moduleAwareCache = null;  // Set<string> of legacy diploma IDs that have been upgraded to module-aware
 
 /**
  * Check if a diploma is the legacy special-case.
@@ -166,4 +167,42 @@ export const getLegacyNotes = async (diplomaId) => {
     console.error('Error getting legacy notes:', error);
     return [];
   }
+};
+
+/**
+ * Check if a legacy diploma has been upgraded to module-aware navigation.
+ *
+ * Returns true  → the diploma has CRM-created modules and is ready for
+ *                  the Generation B module-card UI.
+ * Returns false → diploma is still flat-tab legacy view.
+ *
+ * Result is cached per session.
+ */
+export const isModuleAwareLegacy = async (diplomaId) => {
+  if (_moduleAwareCache !== null) {
+    return _moduleAwareCache.has(diplomaId);
+  }
+
+  try {
+    const modulesRef = collection(db, 'modules');
+    // Accept modules created by ANY migration source (crm_migration OR strict_migration)
+    // Fall back to a plain diplomaId count if no source matches
+    const snapAll = await getDocs(
+      query(modulesRef, where('diplomaId', '==', diplomaId))
+    );
+    _moduleAwareCache = new Set();
+    // Require at least 2 modules so a single stray module doesn't trigger the upgrade
+    if (snapAll.size >= 2) _moduleAwareCache.add(diplomaId);
+    return _moduleAwareCache.has(diplomaId);
+  } catch (error) {
+    console.error('Error checking module-aware legacy status:', error);
+    return false;
+  }
+};
+
+/**
+ * Bust the isModuleAwareLegacy cache (call after CRM migration completes).
+ */
+export const bustModuleAwareCache = () => {
+  _moduleAwareCache = null;
 };

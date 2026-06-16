@@ -32,7 +32,29 @@ const ModulePage = () => {
         
         if (mod) {
           const lects = await getLecturesByModule(moduleId);
-          setLectures(lects);
+          // Sort by explicit `order` field first (set by strict migration).
+          // Fall back to date-based sort only when order is 0/absent.
+          const sortedLects = [...lects].sort((a, b) => {
+            const ao = a.order || 0;
+            const bo = b.order || 0;
+            if (ao !== bo) return ao - bo;
+
+            // Secondary: date / createdAt
+            const getMs = (item) => {
+              const d = item.date || item.createdAt;
+              if (!d) return Infinity;
+              try {
+                const parsed = d.toDate ? d.toDate()
+                  : typeof d === 'string' ? new Date(d)
+                  : d.seconds ? new Date(d.seconds * 1000)
+                  : new Date(d);
+                const t = parsed.getTime();
+                return isNaN(t) ? Infinity : t;
+              } catch { return Infinity; }
+            };
+            return getMs(a) - getMs(b);
+          });
+          setLectures(sortedLects);
         }
       } catch (error) {
         console.error('Error loading module data:', error);

@@ -25,6 +25,7 @@ const AdminContentStudio = ({ activeTab, diplomas = [], modules = [], onLectureC
   // Edit states
   const [editingItem, setEditingItem] = useState(null);
   const [editForm, setEditForm] = useState({});
+  const [assignLectureSearch, setAssignLectureSearch] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -205,26 +206,75 @@ const AdminContentStudio = ({ activeTab, diplomas = [], modules = [], onLectureC
                     <Textarea placeholder="Description" value={editForm.description} onChange={e => setEditForm({ ...editForm, description: e.target.value })} />
                   )}
                   
-                  {/* Reassignment Logic */}
+                  {/* Assignments Panel — N:M multi-select */}
                   <div className="bg-white p-3 rounded-md border border-gray-200 space-y-3">
-                    <div className="text-xs font-semibold text-gray-500 uppercase">Reassign Context</div>
-                    <div className="flex flex-col gap-2">
-                      <select 
-                        value={editForm.diplomaIds?.[0] || ''} 
-                        onChange={e => setEditForm({ ...editForm, diplomaIds: e.target.value ? [e.target.value] : [] })} 
-                        className="bg-gray-50 border border-gray-300 text-gray-800 rounded-md px-3 py-1.5 text-sm"
-                      >
-                        <option value="">Unassigned Diploma</option>
-                        {diplomas.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
-                      </select>
-                      <select 
-                        value={editForm.moduleIds?.[0] || ''} 
-                        onChange={e => setEditForm({ ...editForm, moduleIds: e.target.value ? [e.target.value] : [] })} 
-                        className="bg-gray-50 border border-gray-300 text-gray-800 rounded-md px-3 py-1.5 text-sm"
-                      >
-                        <option value="">Unassigned Module</option>
-                        {modules.filter(m => !editForm.diplomaIds?.[0] || m.diplomaId === editForm.diplomaIds[0]).map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
-                      </select>
+                    <div className="flex items-center justify-between">
+                      <div className="text-xs font-semibold text-gray-500 uppercase">Assignments</div>
+                      <div className="text-[10px] text-gray-400">
+                        {editForm.diplomaIds?.length || 0}D · {editForm.moduleIds?.length || 0}M · {editForm.lectureIds?.length || 0}L
+                      </div>
+                    </div>
+                    {/* Diplomas */}
+                    <div>
+                      <div className="text-[11px] font-semibold text-indigo-600 uppercase mb-1">Diplomas</div>
+                      <div className="max-h-24 overflow-y-auto space-y-0.5">
+                        {diplomas.map(d => (
+                          <label key={d.id} className="flex items-center gap-2 text-xs text-gray-700 cursor-pointer py-0.5 px-1 rounded hover:bg-indigo-50">
+                            <input type="checkbox"
+                              checked={editForm.diplomaIds?.includes(d.id) || false}
+                              onChange={e => setEditForm({...editForm, diplomaIds: e.target.checked ? [...(editForm.diplomaIds||[]), d.id] : (editForm.diplomaIds||[]).filter(x => x !== d.id)})}
+                              className="accent-indigo-600 w-3 h-3 flex-shrink-0"
+                            />
+                            <span className="truncate">{d.name}</span>
+                          </label>
+                        ))}
+                        {diplomas.length === 0 && <p className="text-xs text-gray-400 italic">No diplomas</p>}
+                      </div>
+                    </div>
+                    {/* Modules */}
+                    <div>
+                      <div className="text-[11px] font-semibold text-purple-600 uppercase mb-1">Modules</div>
+                      <div className="max-h-24 overflow-y-auto space-y-0.5">
+                        {modules.map(m => (
+                          <label key={m.id} className="flex items-center gap-2 text-xs text-gray-700 cursor-pointer py-0.5 px-1 rounded hover:bg-purple-50">
+                            <input type="checkbox"
+                              checked={editForm.moduleIds?.includes(m.id) || false}
+                              onChange={e => setEditForm({...editForm, moduleIds: e.target.checked ? [...(editForm.moduleIds||[]), m.id] : (editForm.moduleIds||[]).filter(x => x !== m.id)})}
+                              className="accent-purple-600 w-3 h-3 flex-shrink-0"
+                            />
+                            <span className="truncate">{m.name}</span>
+                          </label>
+                        ))}
+                        {modules.length === 0 && <p className="text-xs text-gray-400 italic">No modules</p>}
+                      </div>
+                    </div>
+                    {/* Lectures */}
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="text-[11px] font-semibold text-blue-600 uppercase">Lectures</div>
+                        <span className="text-[10px] text-gray-400">{editForm.lectureIds?.length || 0} linked</span>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Search lectures..."
+                        value={assignLectureSearch}
+                        onChange={e => setAssignLectureSearch(e.target.value)}
+                        className="w-full text-xs border border-gray-200 rounded px-2 py-1 mb-1.5 focus:outline-none focus:ring-1 focus:ring-blue-300"
+                      />
+                      <div className="max-h-32 overflow-y-auto space-y-0.5">
+                        {lectures
+                          .filter(l => !assignLectureSearch || l.title?.toLowerCase().includes(assignLectureSearch.toLowerCase()))
+                          .map(l => (
+                            <label key={l.id} className="flex items-center gap-2 text-xs text-gray-700 cursor-pointer py-0.5 px-1 rounded hover:bg-blue-50">
+                              <input type="checkbox"
+                                checked={editForm.lectureIds?.includes(l.id) || false}
+                                onChange={e => setEditForm({...editForm, lectureIds: e.target.checked ? [...(editForm.lectureIds||[]), l.id] : (editForm.lectureIds||[]).filter(x => x !== l.id)})}
+                                className="accent-blue-600 w-3 h-3 flex-shrink-0"
+                              />
+                              <span className="truncate">{l.title}</span>
+                            </label>
+                          ))}
+                      </div>
                     </div>
                   </div>
 
@@ -314,26 +364,45 @@ const AdminContentStudio = ({ activeTab, diplomas = [], modules = [], onLectureC
                         <Input type="date" placeholder="Date" value={editForm.date} onChange={e => setEditForm({ ...editForm, date: e.target.value })} />
                       </div>
                       
-                      {/* Reassignment Logic */}
+                      {/* Assignments Panel — N:M multi-select (diplomas + modules only for lectures) */}
                       <div className="bg-white p-3 rounded-md border border-gray-200 space-y-3">
-                        <div className="text-xs font-semibold text-gray-500 uppercase">Reassign Context</div>
-                        <div className="flex flex-col gap-2">
-                          <select 
-                            value={editForm.diplomaIds?.[0] || ''} 
-                            onChange={e => setEditForm({ ...editForm, diplomaIds: e.target.value ? [e.target.value] : [] })} 
-                            className="bg-gray-50 border border-gray-300 text-gray-800 rounded-md px-3 py-1.5 text-sm"
-                          >
-                            <option value="">Unassigned Diploma</option>
-                            {diplomas.map(d => <option key={d.id} value={d.id}>{d.name}</option>)}
-                          </select>
-                          <select 
-                            value={editForm.moduleIds?.[0] || ''} 
-                            onChange={e => setEditForm({ ...editForm, moduleIds: e.target.value ? [e.target.value] : [] })} 
-                            className="bg-gray-50 border border-gray-300 text-gray-800 rounded-md px-3 py-1.5 text-sm"
-                          >
-                            <option value="">Unassigned Module</option>
-                            {modules.filter(m => !editForm.diplomaIds?.[0] || m.diplomaId === editForm.diplomaIds[0]).map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
-                          </select>
+                        <div className="flex items-center justify-between">
+                          <div className="text-xs font-semibold text-gray-500 uppercase">Assignments</div>
+                          <div className="text-[10px] text-gray-400">
+                            {editForm.diplomaIds?.length || 0} diplomas · {editForm.moduleIds?.length || 0} modules
+                          </div>
+                        </div>
+                        {/* Diplomas */}
+                        <div>
+                          <div className="text-[11px] font-semibold text-indigo-600 uppercase mb-1">Diplomas</div>
+                          <div className="max-h-24 overflow-y-auto space-y-0.5">
+                            {diplomas.map(d => (
+                              <label key={d.id} className="flex items-center gap-2 text-xs text-gray-700 cursor-pointer py-0.5 px-1 rounded hover:bg-indigo-50">
+                                <input type="checkbox"
+                                  checked={editForm.diplomaIds?.includes(d.id) || false}
+                                  onChange={e => setEditForm({...editForm, diplomaIds: e.target.checked ? [...(editForm.diplomaIds||[]), d.id] : (editForm.diplomaIds||[]).filter(x => x !== d.id)})}
+                                  className="accent-indigo-600 w-3 h-3 flex-shrink-0"
+                                />
+                                <span className="truncate">{d.name}</span>
+                              </label>
+                            ))}
+                          </div>
+                        </div>
+                        {/* Modules */}
+                        <div>
+                          <div className="text-[11px] font-semibold text-purple-600 uppercase mb-1">Modules</div>
+                          <div className="max-h-24 overflow-y-auto space-y-0.5">
+                            {modules.map(m => (
+                              <label key={m.id} className="flex items-center gap-2 text-xs text-gray-700 cursor-pointer py-0.5 px-1 rounded hover:bg-purple-50">
+                                <input type="checkbox"
+                                  checked={editForm.moduleIds?.includes(m.id) || false}
+                                  onChange={e => setEditForm({...editForm, moduleIds: e.target.checked ? [...(editForm.moduleIds||[]), m.id] : (editForm.moduleIds||[]).filter(x => x !== m.id)})}
+                                  className="accent-purple-600 w-3 h-3 flex-shrink-0"
+                                />
+                                <span className="truncate">{m.name}</span>
+                              </label>
+                            ))}
+                          </div>
                         </div>
                       </div>
 
